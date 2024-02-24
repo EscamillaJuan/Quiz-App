@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">App</string>
+    <string name="btn_jugar">JUGAR</string>
+    <string name="btn_opciones">OPCIONES</string>
 </resources>
