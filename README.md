@@ -7,7 +7,7 @@ Each time you start a new ToDo, another developer can do the same and merge his 
 You can see this problem in the next figure.
 ![image](https://github.com/EscamillaJuan/Quiz-App/assets/84486053/cb7e82b7-2d7a-488d-87ad-f1bb2a7ad294)  
 
-To avoid this problem, follow the next steps when you start a new ToDo.
+To avoid this problem, follow the next steps when you start a new ToDo. (Create a branch for each ToDo which you are assigned to)
 
 ```
 # 1. Create your branch
