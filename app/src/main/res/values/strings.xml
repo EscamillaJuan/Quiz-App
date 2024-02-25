@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">App</string>
+    <string name="prev_btn_description">previous question</string>
+    <string name="next_btn_description">next question</string>
+    <string name="hint_text">5 Pistas</string>
+    <string name="topic_icon_description">topic icon</string>
 </resources>
