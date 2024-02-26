@@ -30,12 +30,12 @@
 
             <TextView
                 android:id="@+id/question_number"
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="80dp"
                 android:fontFamily="sans-serif-black"
                 android:gravity="center"
-                tools:text="Pregunta 1/10" />
+                tools:text="Pregunta 10/10" />
 
         </LinearLayout>
 
@@ -61,9 +61,9 @@
         <TextView
             android:id="@+id/question"
             android:layout_width="340dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:layout_marginBottom="100dp"
             tools:text="What is your name?" />
     </LinearLayout>
 
@@ -74,6 +74,7 @@
         android:orientation="vertical">
 
         <FrameLayout
+            android:id="@+id/option_1_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -89,6 +90,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/option_2_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -104,6 +106,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/option_3_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -119,6 +122,7 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/option_4_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
