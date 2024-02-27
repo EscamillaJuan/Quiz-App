@@ -7,4 +7,7 @@
     <string name="next_btn_description">next question</string>
     <string name="hint_text">5 Pistas</string>
     <string name="topic_icon_description">topic icon</string>
+    <string name="options_Text">Opciones de juego\n</string>
+    <string name="returnTextButton">Volver</string>
+    <string name="workinprogress_Text">Trabajo en proceso...</string>
 </resources>

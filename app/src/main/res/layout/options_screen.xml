@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.OptionsScreen">
+
+    <TextView
+        android:id="@+id/optionsText"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:layout_gravity="end"
+        android:textSize="32sp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        tools:text="@string/options_Text" />
+    <ImageView
+        android:id="@+id/workinprogress_icon"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="@string/topic_icon_description"
+        tools:src="@drawable/building" />
+
+    <TextView
+        android:id="@+id/workinprogressText"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        tools:text="@string/workinprogress_Text" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/return_options_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="165dp"
+            android:layout_marginEnd="80dp"
+            android:drawablePadding="8dp"
+            android:text="@string/returnTextButton"
+            app:icon="@drawable/baseline_arrow_back_24" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
