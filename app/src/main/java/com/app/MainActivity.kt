@@ -10,8 +10,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var openBtn : Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_menu)
-        openBtn = findViewById(R.id.btn_jugar)
+        setContentView(R.layout.main_activity)
+        openBtn = findViewById(R.id.play_btn)
 
         openBtn.setOnClickListener {
             val intent = Intent(this, GameScreen::class.java)

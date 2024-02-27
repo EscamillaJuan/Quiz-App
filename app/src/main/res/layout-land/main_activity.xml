@@ -14,6 +14,18 @@
         android:layout_height="0dp"
         android:layout_weight="0.5" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/game_name"
+        android:textStyle="bold"
+        android:fontFamily="monospace"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="0.5" />
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,45 +39,56 @@
         android:layout_weight="0.3" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         >
 
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/btn_jugar"
+            android:id="@+id/play_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/btn_jugar"
-           />
+            />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Spinner
+            android:id="@+id/difficulty_spin"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_gravity="center">
+        </Spinner>
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="20dp"/>
+            android:layout_height="20dp"
+            android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/btn_opciones"
+            android:id="@+id/option_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/btn_opciones"
-           />
+            app:icon="@drawable/opciones"
+            app:iconGravity="end"
+            />
 
         <Space
             android:layout_width="wrap_content"
-            android:layout_height="25dp"/>
+            android:layout_height="25dp"
+            android:layout_weight="1"/>
 
-        <Spinner
-            android:id="@+id/spin_dificultad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </Spinner>
 
     </LinearLayout>
 
