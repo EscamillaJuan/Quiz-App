@@ -41,15 +41,15 @@ object QuestionListProvider {
             mapOf("Smeagol" to true)
         ),
         Question(
-            "",
+            "¿Cuántos son los espectros del anillo (Nazgul)?",
             "Cine",
             R.drawable.clapperboard,
             listOf(
-                mapOf("Isildur" to false),
-                mapOf("Galadriel" to false),
-                mapOf("Elrond" to false)
+                mapOf("5" to false),
+                mapOf("8" to false),
+                mapOf("10" to false)
             ),
-            mapOf("Smeagol" to true)
+            mapOf("9" to true)
         ),
         Question(
             "¿Cuál es el nombre de la nave espacial protagonista en la saga Star Wars?",
