@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.GameScreen">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/hint_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="80dp"
+            android:drawablePadding="8dp"
+            android:text="@string/hint_text"
+            app:icon="@drawable/hint_icon" />
+
+        <TextView
+            android:id="@+id/question_number"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            tools:text="Pregunta 1 de 10" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/topic_icon"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:contentDescription="@string/topic_icon_description"
+        tools:src="@drawable/palette" />
+
+    <TextView
+        android:id="@+id/topic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        tools:text="Arte" />
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="340dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        tools:text="What is your name?" />
+
+    <FrameLayout
+        android:id="@+id/option_1_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/option_border">
+
+        <TextView
+            android:id="@+id/option_1"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            tools:text="Opcion 1" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/option_2_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/option_border">
+
+        <TextView
+            android:id="@+id/option_2"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            tools:text="Opcion 2" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/option_3_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/option_border">
+
+        <TextView
+            android:id="@+id/option_3"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            tools:text="Opcion 3" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/option_4_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/option_border">
+
+        <TextView
+            android:id="@+id/option_4"
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="8dp"
+            tools:text="Opcion 4" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/prev_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="100dp"
+            android:background="@null"
+            android:contentDescription="@string/prev_btn_description"
+            android:src="@drawable/previous" />
+
+        <ImageButton
+            android:id="@+id/next_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="100dp"
+            android:background="@null"
+            android:contentDescription="@string/next_btn_description"
+            android:src="@drawable/next" />
+
+    </LinearLayout>
+
+</LinearLayout>
