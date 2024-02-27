@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.GameScreen"></activity>
+        <activity android:name=".view.OptionsScreen"></activity>
     </application>
 
 </manifest>
