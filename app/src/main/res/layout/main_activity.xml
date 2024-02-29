@@ -6,18 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#F9D071"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.5" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background">
+        android:id="@+id/trivioText_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:srcCompat="@mipmap/trivio_text_image" />
+
+
+    <ImageView
+        android:id="@+id/logo_image"
+        android:layout_width="match_parent"
+        android:layout_height="127dp"
+        android:src="@mipmap/ic_logo">
 
     </ImageView>
 
@@ -39,11 +44,11 @@
 
         <Button
             android:id="@+id/play_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/btn_jugar"
-           />
+            android:backgroundTint="#624D1B"
+            android:text="@string/btn_jugar" />
 
         <Space
             android:layout_width="wrap_content"
@@ -51,9 +56,10 @@
 
         <Button
             android:id="@+id/option_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:backgroundTint="#624D1B"
             android:text="@string/btn_opciones"
            />
 
@@ -73,5 +79,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1" />
+
+
 
 </LinearLayout>
