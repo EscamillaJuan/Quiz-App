@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="#F9D071"
     android:orientation="vertical"
     tools:context=".view.OptionsScreen">
 
@@ -44,8 +45,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginStart="150dp"
-            android:layout_marginEnd="80dp"
+            android:layout_marginEnd="40dp"
             android:drawablePadding="8dp"
+            android:backgroundTint="#624D1B"
             android:text="@string/returnTextButton"
             app:icon="@drawable/baseline_arrow_back_24" />
 
