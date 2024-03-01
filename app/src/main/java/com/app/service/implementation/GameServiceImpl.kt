@@ -1,5 +1,7 @@
 package com.app.service.implementation
 
+import android.view.View
+import android.widget.Button
 import com.app.model.QuestionListProvider
 import com.app.model.entity.Question
 import com.app.service.GameService
@@ -21,16 +23,39 @@ class GameServiceImpl : GameService {
 
     override fun getOptions(
         mode: String,
-        options: List<Map<String, Boolean>>,
-        answer: Map<String, Boolean>
-    ): List<Map<String, Boolean>> {
-        var answers: MutableList<Map<String, Boolean>> = mutableListOf()
+        options: List<String>,
+        rightAnswer: String,
+        optionBtn: List<Button>
+    ){
+        val answerOptions = mutableListOf<String>()
         when (mode) {
-            "easy" -> answers.addAll(options.subList(0, 1))
-            "medium" -> answers.addAll(options.subList(0, 2))
-            else -> answers.addAll(options)
+            "easy" -> {
+                answerOptions.addAll(options.shuffled().subList(0, 1))
+                answerOptions.add(rightAnswer)
+                for (i in 0 until 2) {
+                    optionBtn[i].visibility = View.VISIBLE
+                    optionBtn[i].text = answerOptions[i]
+                }
+                for (i in 2 until 4) {
+                    optionBtn[i].visibility = View.GONE
+                }
+            }
+            "medium" -> {
+                answerOptions.addAll(options.shuffled().subList(0, 2))
+                answerOptions.add(rightAnswer)
+                for (i in 0 until 3) {
+                    optionBtn[i].visibility = View.VISIBLE
+                    optionBtn[i].text = answerOptions[i]
+                }
+                optionBtn[3].visibility = View.GONE
+            }
+            else -> {
+                answerOptions.addAll(options.shuffled())
+                for (i in 0 until 4) {
+                    optionBtn[i].visibility = View.VISIBLE
+                    optionBtn[i].text = answerOptions[i]
+                }
+            }
         }
-        answers.add(answer)
-        return answers.shuffled()
     }
 }

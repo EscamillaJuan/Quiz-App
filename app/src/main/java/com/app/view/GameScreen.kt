@@ -1,7 +1,6 @@
 package com.app.view
 
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -21,46 +20,7 @@ class GameScreen : AppCompatActivity() {
     private lateinit var questionsCounter: TextView
     private lateinit var topicText: TextView
     private lateinit var topicIcon: ImageView
-
-    private fun setOptions(mode: String) {
-        val answers = gameModel.getOptions(mode)
-        val options = mutableListOf<TextView>()
-        options.add(findViewById(R.id.option_1))
-        options.add(findViewById(R.id.option_2))
-        options.add(findViewById(R.id.option_3))
-        options.add(findViewById(R.id.option_4))
-        when (mode) {
-            "easy" -> {
-                for (i in 0 until 2) {
-                    options[i].visibility = View.VISIBLE
-                    options[i].visibility = View.VISIBLE
-                    options[i].text = answers[i].keys.first()
-                }
-                for (i in 2 until 4) {
-                    options[i].visibility = View.GONE
-                    options[i].visibility = View.GONE
-                }
-            }
-
-            "medium" -> {
-                for (i in 0 until 3) {
-                    options[i].visibility = View.VISIBLE
-                    options[i].visibility = View.VISIBLE
-                    options[i].text = answers[i].keys.first()
-                }
-                options[3].visibility = View.GONE
-                options[3].visibility = View.GONE
-            }
-
-            else -> {
-                for (i in 0 until 4) {
-                    options[i].visibility = View.VISIBLE
-                    options[i].visibility = View.VISIBLE
-                    options[i].text = answers[i].keys.first()
-                }
-            }
-        }
-    }
+    private val options = mutableListOf<Button>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,13 +33,17 @@ class GameScreen : AppCompatActivity() {
         questionsCounter = findViewById(R.id.question_number)
         topicText = findViewById(R.id.topic)
         topicIcon = findViewById(R.id.topic_icon)
+        options.add(findViewById(R.id.option_1))
+        options.add(findViewById(R.id.option_2))
+        options.add(findViewById(R.id.option_3))
+        options.add(findViewById(R.id.option_4))
 
 
         questionText.text = gameModel.currentQuestionText
         questionsCounter.text = gameModel.counterText
         topicText.text = gameModel.topicText
         topicIcon.setImageResource(gameModel.topicIcon)
-        setOptions(mode)
+        gameModel.getOptions(mode, options)
 
         nextBtn.setOnClickListener {
             gameModel.nextQuestion()
@@ -87,7 +51,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            setOptions(mode)
+            gameModel.getOptions(mode, options)
         }
 
         prevBtn.setOnClickListener {
@@ -96,7 +60,13 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            setOptions(mode)
+            gameModel.getOptions(mode, options)
+        }
+
+        for( i in 0 until options.size - 1) {
+            options[i].setOnClickListener {
+                gameModel.checkAnswer(options[i].text, this)
+            }
         }
     }
 }
