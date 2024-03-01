@@ -1,5 +1,6 @@
 package com.app.service
 
+import android.widget.Button
 import com.app.model.entity.Question
 
 interface GameService {
@@ -8,8 +9,8 @@ interface GameService {
     fun prevQuestions(index: Int, questions: List<Question>): Int
     fun getOptions(
         mode: String,
-        options: List<Map<String, Boolean>>,
-        answer: Map<String, Boolean>
-    ): List<Map<String, Boolean>>
-
+        options: List<String>,
+        answer: String,
+        optionBtn: List<Button>
+    )
 }
