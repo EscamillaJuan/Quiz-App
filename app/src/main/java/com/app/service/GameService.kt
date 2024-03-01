@@ -11,4 +11,5 @@ interface GameService {
         options: List<Map<String, Boolean>>,
         answer: Map<String, Boolean>
     ): List<Map<String, Boolean>>
+
 }

@@ -3,7 +3,9 @@ package com.app
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.Spinner
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
 

@@ -10,9 +10,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.R
 import com.app.model.GameModel
+const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
 
 class GameScreen : AppCompatActivity() {
-    private val mode = "medium"
+
     private val gameModel: GameModel by viewModels()
     private lateinit var nextBtn: ImageButton
     private lateinit var prevBtn: ImageButton
@@ -21,6 +22,7 @@ class GameScreen : AppCompatActivity() {
     private lateinit var questionsCounter: TextView
     private lateinit var topicText: TextView
     private lateinit var topicIcon: ImageView
+    private var mode = "medium"
 
     private fun setOptions(mode: String) {
         val answers = gameModel.getOptions(mode)
@@ -79,6 +81,7 @@ class GameScreen : AppCompatActivity() {
         questionsCounter.text = gameModel.counterText
         topicText.text = gameModel.topicText
         topicIcon.setImageResource(gameModel.topicIcon)
+        mode = intent.getStringExtra(SELECTED_DIFFICULT).toString()
         setOptions(mode)
 
         nextBtn.setOnClickListener {
@@ -98,5 +101,6 @@ class GameScreen : AppCompatActivity() {
             topicIcon.setImageResource(gameModel.topicIcon)
             setOptions(mode)
         }
+
     }
 }
