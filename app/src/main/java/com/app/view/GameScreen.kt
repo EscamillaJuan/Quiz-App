@@ -46,21 +46,19 @@ class GameScreen : AppCompatActivity() {
         gameModel.getOptions(mode, options)
 
         nextBtn.setOnClickListener {
-            gameModel.nextQuestion()
+            gameModel.nextQuestion(mode, options)
             questionText.text = gameModel.currentQuestionText
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            gameModel.getOptions(mode, options)
         }
 
         prevBtn.setOnClickListener {
-            gameModel.prevQuestion()
+            gameModel.prevQuestion(mode, options)
             questionText.text = gameModel.currentQuestionText
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            gameModel.getOptions(mode, options)
         }
 
         for( i in 0 until options.size - 1) {

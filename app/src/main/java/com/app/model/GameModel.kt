@@ -16,7 +16,7 @@ class GameModel : ViewModel() {
     val currentQuestionText: String
         get() = questions[currentQuestionIndex].text
 
-    val currentQuestionAnswer: String
+    private val currentQuestionAnswer: String
         get() = questions[currentQuestionIndex].correctAnswer
     val counterText: String
         get() = "Pregunta ${currentQuestionIndex + 1} de ${questions.size}"
@@ -27,12 +27,14 @@ class GameModel : ViewModel() {
     val topicIcon: Int
         get() = questions[currentQuestionIndex].topicIcon
 
-    fun nextQuestion() {
+    fun nextQuestion(mode: String, optionBtn: List<Button>) {
         currentQuestionIndex = gameService.nextQuestion(currentQuestionIndex, questions)
+        getOptions(mode, optionBtn)
     }
 
-    fun prevQuestion() {
+    fun prevQuestion(mode: String, optionBtn: List<Button>) {
         currentQuestionIndex = gameService.prevQuestions(currentQuestionIndex, questions)
+        getOptions(mode, optionBtn)
     }
 
     fun getOptions(mode: String, optionBtn: List<Button>) {
