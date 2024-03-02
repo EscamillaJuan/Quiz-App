@@ -11,10 +11,14 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.R
 import com.app.model.GameModel
+
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 
 const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
+val ROJO = Color.parseColor("#CC0000")
+val VERDE = Color.parseColor("#99CC00")
+val CAFE = Color.parseColor("#624D1B")
 
 class GameScreen : AppCompatActivity() {
 
@@ -48,7 +52,7 @@ class GameScreen : AppCompatActivity() {
         options.add(findViewById(R.id.option_3))
         options.add(findViewById(R.id.option_4))
 
-
+        hintBtn.text = gameModel.currentHintText
         questionText.text = gameModel.currentQuestionText
         questionsCounter.text = gameModel.counterText
         topicText.text = gameModel.topicText
@@ -63,6 +67,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
+            for (i in 0 until options.size) options[i].setBackgroundColor(CAFE) // COLOR RESET
             gameService.setUserAnswer(
                 gameModel.currentQuestionIsAnswered,
                 gameModel.currentQuestionIsCorrect,
@@ -87,17 +92,18 @@ class GameScreen : AppCompatActivity() {
             )
         }
 
-        for (i in 0 until options.size) {
-            options[i].setOnClickListener {
-                gameModel.checkAnswer(options[i].text, this)
+        hintBtn.setOnClickListener { _ ->
+            gameModel.currentHint(this)
+            hintBtn.text = gameModel.currentHintText
+            gameModel.checkHint(options, mode)
+
+            for (i in 0 until options.size) {
+                options[i].setOnClickListener {
+                    gameModel.checkAnswer(options, i, options[i].text, this)
+
+                }
             }
-            gameService.setUserAnswer(
-                gameModel.currentQuestionIsAnswered,
-                gameModel.currentQuestionIsCorrect,
-                options,
-                gameModel.currentQuestionAnswer,
-                gameModel.currentQuestionOptions
-            )
+
         }
 
     }

@@ -5,7 +5,6 @@
     <string name="game_name">Cuestionados</string>
     <string name="prev_btn_description">previous question</string>
     <string name="next_btn_description">next question</string>
-    <string name="hint_text">5 Pistas</string>
     <string name="topic_icon_description">topic icon</string>
 
     <string-array name="modes_array">
