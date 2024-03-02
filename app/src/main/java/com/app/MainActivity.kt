@@ -10,6 +10,7 @@ import android.widget.Spinner
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
 import com.app.view.SELECTED_DIFFICULT
+import com.app.view.ScoreScreen
 
 val btnColor = Color.parseColor("#624D1B")
 val btnWrong = Color.parseColor("#CC0000")
