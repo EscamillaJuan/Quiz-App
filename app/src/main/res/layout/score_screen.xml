@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F9D071"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".view.ScoreScreen">
+
+
+    <ViewFlipper
+        android:id="@+id/ViewFlipper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/trivioText_image"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:srcCompat="@mipmap/trivio_text_image" />
+
+        <ImageView
+            android:id="@+id/final_scoreImage"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            app:srcCompat="@drawable/marcadorfinal"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/chewy"
+            android:gravity="center"
+            android:text="Ha respondido 5 preguntas correctamente"
+            android:textColor="#4D340D"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/chewy"
+            android:gravity="center"
+            android:text="Ha utilizado 4 pistas"
+            android:textColor="#4D340D"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/chewy"
+            android:text="Le quedaron 3 pistas"
+            android:textColor="#4D340D"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/chewy"
+            android:text="Su puntuacion es de 20 puntos"
+            android:textColor="#4D340D"
+            android:textSize="30sp" />
+
+    </ViewFlipper>
+
+</RelativeLayout>
+

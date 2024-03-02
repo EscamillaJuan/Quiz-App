@@ -9,6 +9,7 @@ import android.widget.Spinner
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
 import com.app.view.SELECTED_DIFFICULT
+import com.app.view.ScoreScreen
 
 class MainActivity : AppCompatActivity() {
     private lateinit var openBtn: Button
@@ -42,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         optionBtn.setOnClickListener {
-            val intentionBtn = Intent(this, OptionsScreen::class.java)
+            val intentionBtn = Intent(this, ScoreScreen::class.java)
             startActivity(intentionBtn)
         }
     }
