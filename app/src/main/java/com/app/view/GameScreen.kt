@@ -58,6 +58,14 @@ class GameScreen : AppCompatActivity() {
         topicIcon.setImageResource(gameModel.topicIcon)
         mode = intent.getStringExtra(SELECTED_DIFFICULT).toString()
         gameModel.getOptions(mode, options)
+        gameService.setUserAnswer(
+            gameModel.currentQuestionIsAnswered,
+            gameModel.currentQuestionIsCorrect,
+            options,
+            gameModel.currentQuestionAnswer,
+            gameModel.currentQuestionOptions,
+            textAnsweredQuestion
+        )
 
 
         nextBtn.setOnClickListener {
@@ -102,7 +110,7 @@ class GameScreen : AppCompatActivity() {
 
         for (i in options.indices) {
             options[i].setOnClickListener {
-                gameModel.checkAnswer(options, i, options[i].text, this)
+                gameModel.checkAnswer(options, i, options[i].text)
                 gameService.setUserAnswer(
                     gameModel.currentQuestionIsAnswered,
                     gameModel.currentQuestionIsCorrect,

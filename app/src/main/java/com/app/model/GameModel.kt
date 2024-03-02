@@ -1,7 +1,6 @@
 package com.app.model
 
 import android.content.Context
-import android.graphics.Color
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -13,7 +12,7 @@ import com.app.service.implementation.GameServiceImpl
 
 class GameModel : ViewModel() {
     private val gameService: IGameService = GameServiceImpl()
-    private val questions = gameService.shuffleQuestions()
+    private var questions = gameService.shuffleQuestions()
     private var currentQuestionIndex: Int = 0
     private var hint: Int = 5
     private var sumCorrectAnswered: Int = 0
@@ -24,16 +23,12 @@ class GameModel : ViewModel() {
         get() = "$hint pistas"
     val currentQuestionOptions: List<String>
         get() = questions[currentQuestionIndex].answerOptions
-    var currentQuestionIsAnswered: Boolean
+    val currentQuestionIsAnswered: Boolean
         get() = questions[currentQuestionIndex].isAnswered
-        set(value) {
-            questions[currentQuestionIndex].isAnswered = value
-        }
-    var currentQuestionIsCorrect: Boolean
+
+    val currentQuestionIsCorrect: Boolean
         get() = questions[currentQuestionIndex].isCorrect
-        set(value) {
-            questions[currentQuestionIndex].isCorrect = value
-        }
+
     val currentQuestionText: String
         get() = questions[currentQuestionIndex].text
     val currentQuestionAnswer: String
@@ -71,20 +66,16 @@ class GameModel : ViewModel() {
         optionBtn: List<Button>,
         currentOptionBtn: Int,
         optionText: CharSequence,
-        context: Context,
     ) {
-        currentQuestionIsAnswered = true
-        var response = "Incorrecto"
+        questions[currentQuestionIndex].isAnswered = true
         if (optionText.toString() == currentQuestionAnswer) {
-            response = "Correcto"
-            currentQuestionIsCorrect = true
+            questions[currentQuestionIndex].isCorrect = true
             optionBtn[currentOptionBtn].setBackgroundColor(btnRight)
             sumCorrectAnswered++
         } else {
             optionBtn[currentOptionBtn].setBackgroundColor(btnWrong)
             sumIncorrectAnswered++
             hintUsedCounter++
-            Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -105,8 +96,8 @@ class GameModel : ViewModel() {
                     if (hintUsedCounter == 1) {
                         if (currentQuestionAnswer == optionBtn[i].text) {
                             optionBtn[i].setBackgroundColor(btnRight)
-                            currentQuestionIsAnswered = true
-                            currentQuestionIsCorrect = true
+                            questions[currentQuestionIndex].isAnswered = true
+                            questions[currentQuestionIndex].isCorrect = true
                             gameService.setUserAnswer(
                                 currentQuestionIsAnswered,
                                 currentQuestionIsCorrect,
@@ -134,8 +125,8 @@ class GameModel : ViewModel() {
                     if (hintUsedCounter == 2) {
                         if (currentQuestionAnswer == optionBtn[i].text) {
                             optionBtn[i].setBackgroundColor(btnRight)
-                            currentQuestionIsAnswered = true
-                            currentQuestionIsCorrect = true
+                            questions[currentQuestionIndex].isAnswered = true
+                            questions[currentQuestionIndex].isCorrect = true
                             gameService.setUserAnswer(
                                 currentQuestionIsAnswered,
                                 currentQuestionIsCorrect,
@@ -160,8 +151,8 @@ class GameModel : ViewModel() {
                     }
                     if (hintUsedCounter == 3 && optionBtn[i].text == currentQuestionAnswer) {
                         optionBtn[i].setBackgroundColor(btnRight)
-                        currentQuestionIsAnswered = true
-                        currentQuestionIsCorrect = true
+                        questions[currentQuestionIndex].isAnswered = true
+                        questions[currentQuestionIndex].isCorrect = true
                         gameService.setUserAnswer(
                             currentQuestionIsAnswered,
                             currentQuestionIsCorrect,
