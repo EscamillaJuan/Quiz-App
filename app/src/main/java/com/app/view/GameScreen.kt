@@ -1,5 +1,6 @@
 package com.app.view
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -10,6 +11,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.R
 import com.app.model.GameModel
+import com.google.android.material.snackbar.Snackbar
 
 class GameScreen : AppCompatActivity() {
     private val mode = "medium"
@@ -21,16 +23,19 @@ class GameScreen : AppCompatActivity() {
     private lateinit var questionsCounter: TextView
     private lateinit var topicText: TextView
     private lateinit var topicIcon: ImageView
-
+    //private var hints = 5
     private fun setOptions(mode: String) {
         val answers = gameModel.getOptions(mode)
         val options = mutableListOf<TextView>()
+
+
         options.add(findViewById(R.id.option_1))
         options.add(findViewById(R.id.option_2))
         options.add(findViewById(R.id.option_3))
         options.add(findViewById(R.id.option_4))
         when (mode) {
             "easy" -> {
+
                 for (i in 0 until 2) {
                     options[i].visibility = View.VISIBLE
                     options[i].visibility = View.VISIBLE
@@ -40,9 +45,12 @@ class GameScreen : AppCompatActivity() {
                     options[i].visibility = View.GONE
                     options[i].visibility = View.GONE
                 }
+
+
             }
 
             "medium" -> {
+
                 for (i in 0 until 3) {
                     options[i].visibility = View.VISIBLE
                     options[i].visibility = View.VISIBLE
@@ -53,6 +61,7 @@ class GameScreen : AppCompatActivity() {
             }
 
             else -> {
+
                 for (i in 0 until 4) {
                     options[i].visibility = View.VISIBLE
                     options[i].visibility = View.VISIBLE
@@ -75,6 +84,7 @@ class GameScreen : AppCompatActivity() {
         topicIcon = findViewById(R.id.topic_icon)
 
 
+        hintBtn.text = gameModel.currentHintText
         questionText.text = gameModel.currentQuestionText
         questionsCounter.text = gameModel.counterText
         topicText.text = gameModel.topicText
@@ -97,6 +107,12 @@ class GameScreen : AppCompatActivity() {
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
             setOptions(mode)
+        }
+        hintBtn.setOnClickListener { _ ->
+            gameModel.currentHint()
+            hintBtn.text = gameModel.currentHintText
+            //hintBtn.setBackgroundColor(Color.rgb(153, 204, 0))//verde
+            //setBackgroundColor(Color.rgb(0, 153, 204))//rojo
         }
     }
 }

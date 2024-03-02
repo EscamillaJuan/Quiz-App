@@ -1,12 +1,12 @@
 package com.app.service.implementation
 
+import android.telecom.StatusHints
 import com.app.model.QuestionListProvider
 import com.app.model.entity.Question
 import com.app.service.GameService
 
 class GameServiceImpl : GameService {
-    private val questions = QuestionListProvider.items
-
+    private val questions   = QuestionListProvider.items
     override fun shuffleQuestions(): List<Question> {
         return questions.shuffled().subList(0, 10)
     }

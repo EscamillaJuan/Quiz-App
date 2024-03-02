@@ -8,8 +8,11 @@ import com.app.service.implementation.GameServiceImpl
 class GameModel : ViewModel() {
     private val gameService: GameService = GameServiceImpl()
     private val questions = gameService.shuffleQuestions()
+    private var hint: Int = 5
     private var currentQuestionIndex: Int = 0
 
+    val currentHintText: String
+        get() = "$hint pistas"
     val currentQuestionText: String
         get() = questions[currentQuestionIndex].text
     val counterText: String
@@ -36,4 +39,10 @@ class GameModel : ViewModel() {
             questions[currentQuestionIndex].correctAnswer
         )
     }
+
+    fun currentHint(){
+        hint = (((hint - 1) % 6) + 6) % 6
+    }
+
+
 }
