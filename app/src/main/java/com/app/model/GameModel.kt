@@ -10,16 +10,16 @@ import com.app.service.implementation.GameServiceImpl
 
 val ROJO = Color.parseColor("#CC0000")
 val VERDE = Color.parseColor("#99CC00")
-val CAFE = Color.parseColor("#624D1B")
+//val CAFE = Color.parseColor("#624D1B")
 
 class GameModel : ViewModel() {
     private val gameService: GameService = GameServiceImpl()
     private val questions = gameService.shuffleQuestions()
     private var currentQuestionIndex: Int = 0
     private var hint: Int = 5
-    private var sumCorrectAnswered = 0
-    private var sumIncorrectAnswered = 0
-    private var currentIncorrectAnswered = 0
+    private var sumCorrectAnswered: Int = 0
+    private var sumIncorrectAnswered: Int = 0
+    private var hintUsedCounter: Int = 0
 
     val currentHintText: String
         get() = "$hint pistas"
@@ -37,7 +37,7 @@ class GameModel : ViewModel() {
     fun nextQuestion(mode: String, optionBtn: List<Button>) {
         currentQuestionIndex = gameService.nextQuestion(currentQuestionIndex, questions)
         getOptions(mode, optionBtn)
-        currentIncorrectAnswered = 0    // flag reset
+        hintUsedCounter = 0    // flag reset
     }
 
     fun prevQuestion(mode: String, optionBtn: List<Button>) {
@@ -70,7 +70,7 @@ class GameModel : ViewModel() {
         } else {
             optionBtn[currentOptionBtn].setBackgroundColor(com.app.view.ROJO)
             sumIncorrectAnswered++
-            currentIncorrectAnswered++
+            hintUsedCounter++
         }
         return optionText.toString() == currentQuestionAnswer
     }
@@ -84,41 +84,52 @@ class GameModel : ViewModel() {
         return hint
     }
 
-    fun checkHint(optionBtn: List<Button>, mode: String) {
+    fun checkHint(optionBtn: List<Button>, mode: String, context: Context) {
 
-        if (mode == "easy") {
-            for (i in optionBtn.indices) {
-                if (currentQuestionAnswer == optionBtn[i].text)
-                    optionBtn[i].setBackgroundColor(VERDE)
-            }
-        }
-        if (mode == "medium") {
-            sumIncorrectAnswered++
-            for (i in optionBtn.indices) {
-                if (currentQuestionAnswer != optionBtn[i].text) {
-                    optionBtn[0].setBackgroundColor(ROJO)
-                    sumIncorrectAnswered
-
-                }
-                if (sumIncorrectAnswered == 2) {
-                    if (currentQuestionAnswer == optionBtn[i].text) optionBtn[i].setBackgroundColor(
-                        VERDE
-                    )
-                }
-            }
-
-        }
-        if (mode == "hard") {
-            sumIncorrectAnswered++
-            for (i in optionBtn.indices) {
-                if (currentQuestionAnswer != optionBtn[i].text) {
-                    optionBtn[sumIncorrectAnswered].setBackgroundColor(ROJO)
-                    if (sumIncorrectAnswered >= 2) sumIncorrectAnswered = 0
-
-                }
-                if (sumIncorrectAnswered == 3) {
-                    if (currentQuestionAnswer == optionBtn[i].text)
+        when(mode){
+            "easy" ->{
+                hintUsedCounter++
+                for (i in optionBtn.indices) {
+                    if (hintUsedCounter == 1){
+                        if (currentQuestionAnswer == optionBtn[i].text)
                         optionBtn[i].setBackgroundColor(VERDE)
+                    }
+                    if (hintUsedCounter>1)Toast.makeText(context, "todo quieres", Toast.LENGTH_SHORT).show()
+
+                 }}
+            "medium" ->{
+                hintUsedCounter++
+                for (i in optionBtn.indices) {
+                    if (currentQuestionAnswer != optionBtn[i].text && hintUsedCounter<2) {
+                        optionBtn[hintUsedCounter].setBackgroundColor(ROJO)
+
+                    }
+                    if (hintUsedCounter== 2) {
+                        if (currentQuestionAnswer == optionBtn[i].text) optionBtn[i].setBackgroundColor(
+                            VERDE
+                        )
+
+                    }
+                    if (hintUsedCounter > 2){
+                        Toast.makeText(context, "todo quieres", Toast.LENGTH_SHORT).show()
+
+                    }
+                }
+            }
+            "hard" ->{
+                hintUsedCounter++
+                for (i in optionBtn.indices) {
+                    if (currentQuestionAnswer != optionBtn[i].text && hintUsedCounter < 3) {
+                        optionBtn[hintUsedCounter].setBackgroundColor(ROJO)
+
+                    }
+                    if (hintUsedCounter == 3 && currentQuestionAnswer == optionBtn[i].text) {
+                            optionBtn[i].setBackgroundColor(VERDE)
+                    }
+                    if (hintUsedCounter>3){
+                        Toast.makeText(context, "xd", Toast.LENGTH_SHORT).show()
+
+                    }
                 }
             }
         }
