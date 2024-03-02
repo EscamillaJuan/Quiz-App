@@ -2,39 +2,50 @@ package com.app.service.implementation
 
 import android.view.View
 import android.widget.Button
+import com.app.model.GameQuestion
 import com.app.model.QuestionListProvider
 import com.app.model.entity.Question
-import com.app.service.GameService
+import com.app.service.IGameService
 
-class GameServiceImpl : GameService {
+class GameServiceImpl : IGameService {
     private val questions = QuestionListProvider.items
 
-    override fun shuffleQuestions(): List<Question> {
-        return questions.shuffled().subList(0, 10)
+    override fun shuffleQuestions(): List<GameQuestion> {
+        return questions.shuffled().subList(0, 10).map {question: Question ->
+            GameQuestion(
+                text = question.text,
+                topic = question.topic,
+                topicIcon = question.topicIcon,
+                answerOptions = question.answerOptions,
+                correctAnswer = question.correctAnswer,
+                isAnswered = false,
+                isCorrect = false
+            )
+        }
     }
 
-    override fun nextQuestion(index: Int, questions: List<Question>): Int {
+    override fun nextQuestion(index: Int, questions: List<GameQuestion>): Int {
         return (index + 1) % questions.size
     }
 
-    override fun prevQuestions(index: Int, questions: List<Question>): Int {
+    override fun prevQuestions(index: Int, questions: List<GameQuestion>): Int {
         return (index - 1 + questions.size) % questions.size
     }
 
     override fun getOptions(
         mode: String,
         options: List<String>,
-        rightAnswer: String,
+        answer: String,
         optionBtn: List<Button>
     ){
         val answerOptions = mutableListOf<String>()
         when (mode) {
             "easy" -> {
                 answerOptions.addAll(options.shuffled().subList(0, 1))
-                answerOptions.add(rightAnswer)
+                answerOptions.add(answer)
                 for (i in 0 until 2) {
                     optionBtn[i].visibility = View.VISIBLE
-                    optionBtn[i].text = answerOptions[i]
+                    optionBtn[i].text = answerOptions.shuffled()[i]
                 }
                 for (i in 2 until 4) {
                     optionBtn[i].visibility = View.GONE
@@ -42,19 +53,19 @@ class GameServiceImpl : GameService {
             }
             "medium" -> {
                 answerOptions.addAll(options.shuffled().subList(0, 2))
-                answerOptions.add(rightAnswer)
+                answerOptions.add(answer)
                 for (i in 0 until 3) {
                     optionBtn[i].visibility = View.VISIBLE
-                    optionBtn[i].text = answerOptions[i]
+                    optionBtn[i].text = answerOptions.shuffled()[i]
                 }
                 optionBtn[3].visibility = View.GONE
             }
             "hard" -> {
                 answerOptions.addAll(options.shuffled())
-                answerOptions.add(rightAnswer)
+                answerOptions.add(answer)
                 for (i in 0 until 4) {
                     optionBtn[i].visibility = View.VISIBLE
-                    optionBtn[i].text = answerOptions[i]
+                    optionBtn[i].text = answerOptions.shuffled()[i]
                 }
             }
         }

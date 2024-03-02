@@ -1,9 +1,13 @@
-package com.app.model.entity
+package com.app.model
 
-data class Question (
+import com.app.model.entity.IQuestion
+
+data class GameQuestion (
     override val text: String,
     override val topic: String,
     override val topicIcon: Int,
     override val answerOptions: List<String>,
     override val correctAnswer: String,
+    val isAnswered: Boolean,
+    val isCorrect: Boolean
 ) : IQuestion

@@ -74,7 +74,7 @@ class GameScreen : AppCompatActivity() {
             topicIcon.setImageResource(gameModel.topicIcon)
         }
 
-        for( i in 0 until options.size - 1) {
+        for( i in 0 until options.size) {
             options[i].setOnClickListener {
                 gameModel.checkAnswer(options[i].text, this)
             }

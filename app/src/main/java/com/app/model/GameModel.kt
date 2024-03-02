@@ -1,15 +1,14 @@
 package com.app.model
 
 import android.content.Context
-import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
-import com.app.service.GameService
+import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 
 class GameModel : ViewModel() {
-    private val gameService: GameService = GameServiceImpl()
+    private val gameService: IGameService = GameServiceImpl()
     private val questions = gameService.shuffleQuestions()
     private var currentQuestionIndex: Int = 0
 
