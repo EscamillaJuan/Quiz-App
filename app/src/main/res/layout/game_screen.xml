@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
@@ -57,6 +58,15 @@
         android:gravity="center"
         android:textStyle="italic"
         tools:text="Arte" />
+
+    <TextView
+        android:id="@+id/text_answered_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/chewy"
+        android:textSize="18sp"
+        tools:text="Tu respuesta fue correcta" />
 
     <TextView
         android:id="@+id/question"
@@ -128,6 +138,5 @@
             android:src="@drawable/next" />
 
     </LinearLayout>
-
 
 </LinearLayout>
