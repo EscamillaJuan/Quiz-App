@@ -13,5 +13,4 @@ interface GameService {
         answer: String,
         optionBtn: List<Button>
     )
-
 }

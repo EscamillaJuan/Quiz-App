@@ -29,7 +29,6 @@ class GameScreen : AppCompatActivity() {
     private val options = mutableListOf<Button>()
     private var mode = "medium"
 
-
     private fun setOptions(mode: String) {
         val options = mutableListOf<TextView>()
         options.add(findViewById(R.id.option_1))
@@ -69,8 +68,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            for( i in 0 until options.size) options[i].setBackgroundColor(CAFE) // COLOR RESET
-
+            for (i in 0 until options.size) options[i].setBackgroundColor(CAFE) // COLOR RESET
         }
 
         prevBtn.setOnClickListener {
@@ -81,20 +79,20 @@ class GameScreen : AppCompatActivity() {
             topicIcon.setImageResource(gameModel.topicIcon)
         }
 
-        hintBtn.setOnClickListener { _->
+        hintBtn.setOnClickListener { _ ->
             gameModel.currentHint(this)
             hintBtn.text = gameModel.currentHintText
             val currentAnswer = gameModel.currentQuestionAnswer
             gameModel.checkHint(options, mode)
 
+            for (i in 0 until options.size) {
+                options[i].setOnClickListener {
+                    gameModel.checkAnswer(options, i, options[i].text, this)
 
-        for( i in 0 until options.size) {
-            options[i].setOnClickListener {
-                gameModel.checkAnswer(options,i, options[i].text, this)
-
+                }
             }
+
         }
-    }
 
     }
 }

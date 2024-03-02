@@ -1,9 +1,7 @@
 package com.app.service.implementation
 
-import android.content.Context
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
 import com.app.model.QuestionListProvider
 import com.app.model.entity.Question
 import com.app.service.GameService
@@ -26,14 +24,14 @@ class GameServiceImpl : GameService {
     override fun getOptions(
         mode: String,
         options: List<String>,
-        rightAnswer: String,
+        answer: String,
         optionBtn: List<Button>
     ){
         val answerOptions = mutableListOf<String>()
         when (mode) {
             "easy" -> {
                 answerOptions.addAll(options.shuffled().subList(0, 1))
-                answerOptions.add(rightAnswer)
+                answerOptions.add(answer)
                 for (i in 0 until 2) {
                     optionBtn[i].visibility = View.VISIBLE
                     optionBtn[i].text = answerOptions[i]
@@ -44,7 +42,7 @@ class GameServiceImpl : GameService {
             }
             "medium" -> {
                 answerOptions.addAll(options.shuffled().subList(0, 2))
-                answerOptions.add(rightAnswer)
+                answerOptions.add(answer)
                 for (i in 0 until 3) {
                     optionBtn[i].visibility = View.VISIBLE
                     optionBtn[i].text = answerOptions[i]
@@ -53,7 +51,7 @@ class GameServiceImpl : GameService {
             }
             "hard" -> {
                 answerOptions.addAll(options.shuffled())
-                answerOptions.add(rightAnswer)
+                answerOptions.add(answer)
                 for (i in 0 until 4) {
                     optionBtn[i].visibility = View.VISIBLE
                     optionBtn[i].text = answerOptions[i]
