@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#F9D071"
+    android:background="@color/orange"
     tools:context=".view.GameScreen">
 
     <LinearLayout
@@ -23,6 +23,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="80dp"
             android:drawablePadding="8dp"
+            android:backgroundTint="@color/brown"
             tools:text="5 pistas"
             app:icon="@drawable/hint_icon" />
 
@@ -67,6 +68,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/brown"
         tools:text="Option 1" />
 
     <Button
@@ -74,6 +76,7 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/brown"
         tools:text="Option 2" />
 
     <Button
@@ -81,12 +84,14 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/brown"
         tools:text="Option 3" />
 
     <Button
         android:id="@+id/option_4"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:backgroundTint="@color/brown"
         tools:text="Option 4" />
 
     <LinearLayout

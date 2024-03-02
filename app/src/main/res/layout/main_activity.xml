@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="#F9D071"
+    android:background="@color/orange"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -47,7 +47,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="#624D1B"
+            android:backgroundTint="@color/brown"
             android:text="@string/btn_jugar" />
 
         <Space
@@ -59,7 +59,7 @@
             android:layout_width="140dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="#624D1B"
+            android:backgroundTint="@color/brown"
             android:text="@string/btn_opciones"
            />
 
