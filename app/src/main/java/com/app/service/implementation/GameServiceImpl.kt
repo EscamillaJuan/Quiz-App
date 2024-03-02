@@ -1,8 +1,10 @@
 package com.app.service.implementation
 
-import android.graphics.Color
 import android.view.View
 import android.widget.Button
+import com.app.btnColor
+import com.app.btnRight
+import com.app.btnWrong
 import com.app.model.GameQuestion
 import com.app.model.QuestionListProvider
 import com.app.model.entity.Question
@@ -87,10 +89,10 @@ class GameServiceImpl : IGameService {
         for (i in optionBtn.indices) {
             if (isAnswered) {
                 optionBtn[i].setBackgroundColor(
-                    if (optionBtn[i].text.toString() == currentQuestionAnswer) Color.GREEN else Color.RED
+                    if (optionBtn[i].text.toString() == currentQuestionAnswer) btnRight else btnWrong
                 )
             } else {
-                optionBtn[i].setBackgroundColor(Color.BLUE)
+                optionBtn[i].setBackgroundColor(btnColor)
             }
         }
     }

@@ -1,6 +1,5 @@
 package com.app.view
 
-import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -10,15 +9,13 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.app.R
+import com.app.btnColor
 import com.app.model.GameModel
 
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 
 const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
-val ROJO = Color.parseColor("#CC0000")
-val VERDE = Color.parseColor("#99CC00")
-val CAFE = Color.parseColor("#624D1B")
 
 class GameScreen : AppCompatActivity() {
 
@@ -67,7 +64,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            for (i in 0 until options.size) options[i].setBackgroundColor(CAFE) // COLOR RESET
+            for (i in 0 until options.size) options[i].setBackgroundColor(btnColor)
             gameService.setUserAnswer(
                 gameModel.currentQuestionIsAnswered,
                 gameModel.currentQuestionIsCorrect,
@@ -96,15 +93,12 @@ class GameScreen : AppCompatActivity() {
             gameModel.currentHint(this)
             hintBtn.text = gameModel.currentHintText
             gameModel.checkHint(options, mode)
-
-            for (i in 0 until options.size) {
-                options[i].setOnClickListener {
-                    gameModel.checkAnswer(options, i, options[i].text, this)
-
-                }
-            }
-
         }
 
+        for (i in 0 until options.size) {
+            options[i].setOnClickListener {
+                gameModel.checkAnswer(options, i, options[i].text, this)
+            }
+        }
     }
 }
