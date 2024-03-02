@@ -1,11 +1,19 @@
 <resources>
-    <string name="app_name">App</string>
+    <string name="app_name">Trivio</string>
     <string name="btn_jugar">JUGAR</string>
     <string name="btn_opciones">OPCIONES</string>
     <string name="game_name">Cuestionados</string>
     <string name="prev_btn_description">previous question</string>
     <string name="next_btn_description">next question</string>
     <string name="topic_icon_description">topic icon</string>
+
+    <string-array name="modes_array">
+        <item>Fácil</item>
+        <item>Medio</item>
+        <item>Dificil</item>
+    </string-array>
+
+
     <string name="options_Text">Opciones de juego\n</string>
     <string name="returnTextButton">Volver</string>
     <string name="workinprogress_Text">Trabajo en proceso...</string>
