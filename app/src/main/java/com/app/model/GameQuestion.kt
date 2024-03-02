@@ -8,6 +8,6 @@ data class GameQuestion (
     override val topicIcon: Int,
     override val answerOptions: List<String>,
     override val correctAnswer: String,
-    val isAnswered: Boolean,
-    val isCorrect: Boolean
+    var isAnswered: Boolean,
+    var isCorrect: Boolean
 ) : IQuestion

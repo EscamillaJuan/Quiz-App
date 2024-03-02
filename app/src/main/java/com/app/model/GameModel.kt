@@ -12,18 +12,26 @@ class GameModel : ViewModel() {
     private val questions = gameService.shuffleQuestions()
     private var currentQuestionIndex: Int = 0
 
-
+    val currentQuestionOptions: List<String>
+        get() =questions[currentQuestionIndex].answerOptions
+    var currentQuestionIsAnswered: Boolean
+        get() = questions[currentQuestionIndex].isAnswered
+        set(value) {
+            questions[currentQuestionIndex].isAnswered = value
+        }
+    var currentQuestionIsCorrect: Boolean
+        get() = questions[currentQuestionIndex].isCorrect
+        set(value) {
+            questions[currentQuestionIndex].isCorrect = value
+        }
     val currentQuestionText: String
         get() = questions[currentQuestionIndex].text
-
-    private val currentQuestionAnswer: String
+    val currentQuestionAnswer: String
         get() = questions[currentQuestionIndex].correctAnswer
     val counterText: String
         get() = "Pregunta ${currentQuestionIndex + 1} de ${questions.size}"
-
     val topicText: String
         get() = questions[currentQuestionIndex].topic
-
     val topicIcon: Int
         get() = questions[currentQuestionIndex].topicIcon
 
@@ -45,8 +53,14 @@ class GameModel : ViewModel() {
             optionBtn
         )
     }
+
     fun checkAnswer(option: CharSequence, context: Context) {
-        val response = if(option.toString() == currentQuestionAnswer) "Correcto" else "Incorrecto"
+        currentQuestionIsAnswered = true
+        var response = "Incorrecto"
+        if (option.toString() == currentQuestionAnswer) {
+            response = "Correcto"
+            currentQuestionIsCorrect = true
+        }
         Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
     }
 }
