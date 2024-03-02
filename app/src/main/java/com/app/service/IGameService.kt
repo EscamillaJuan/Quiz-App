@@ -1,6 +1,7 @@
 package com.app.service
 
 import android.widget.Button
+import com.app.btnRight
 import com.app.model.GameQuestion
 
 interface IGameService {
@@ -13,5 +14,11 @@ interface IGameService {
         answer: String,
         optionBtn: List<Button>
     )
-    fun setUserAnswer(isAnswered: Boolean, isCorrect: Boolean, optionBtn: List<Button>, currentQuestionAnswer: String, options: List<String>)
+    fun setUserAnswer(
+        isAnswered: Boolean,
+        isCorrect: Boolean,
+        optionBtn: List<Button>,
+        currentQuestionAnswer: String,
+        options: List<String>
+    )
 }

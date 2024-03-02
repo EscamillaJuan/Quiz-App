@@ -5,9 +5,9 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange"
     android:gravity="center"
     android:orientation="horizontal"
-    android:background="@color/orange"
     tools:context=".view.GameScreen">
 
     <LinearLayout
@@ -26,10 +26,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="40dp"
-                android:drawablePadding="8dp"
                 android:backgroundTint="@color/brown"
-                tools:text="5 pistas"
-                app:icon="@drawable/hint_icon" />
+                android:drawablePadding="8dp"
+                app:icon="@drawable/hint_icon"
+                tools:text="5 pistas" />
 
             <TextView
                 android:id="@+id/question_number"
@@ -80,8 +80,8 @@
             android:id="@+id/option_1"
             android:layout_width="200dp"
             android:layout_height="50dp"
-            android:backgroundTint="@color/brown"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/brown"
             tools:text="Option 1" />
 
         <Button
@@ -103,8 +103,8 @@
         <Button
             android:id="@+id/option_4"
             android:layout_width="200dp"
-            android:backgroundTint="@color/brown"
             android:layout_height="50dp"
+            android:backgroundTint="@color/brown"
             tools:text="Option 4" />
 
         <LinearLayout

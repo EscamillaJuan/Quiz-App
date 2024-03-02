@@ -5,9 +5,9 @@
     android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/orange"
     tools:context=".view.GameScreen">
 
     <LinearLayout
@@ -23,10 +23,10 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="80dp"
-            android:drawablePadding="8dp"
             android:backgroundTint="@color/brown"
-            tools:text="5 pistas"
-            app:icon="@drawable/hint_icon" />
+            android:drawablePadding="8dp"
+            app:icon="@drawable/hint_icon"
+            tools:text="5 pistas" />
 
         <TextView
             android:id="@+id/question_number"

@@ -71,24 +71,19 @@ class GameModel : ViewModel() {
         currentOptionBtn: Int,
         optionText: CharSequence,
         context: Context,
-    ): Boolean {
+    ) {
         currentQuestionIsAnswered = true
         var response = "Incorrecto"
         if (optionText.toString() == currentQuestionAnswer) {
             response = "Correcto"
             currentQuestionIsCorrect = true
-        }
-        Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
-
-        if (optionText.toString() == currentQuestionAnswer) {
             optionBtn[currentOptionBtn].setBackgroundColor(btnRight)
             sumCorrectAnswered++
-        } else {
-            optionBtn[currentOptionBtn].setBackgroundColor(btnWrong)
-            sumIncorrectAnswered++
-            currentIncorrectAnswered++
         }
-        return optionText.toString() == currentQuestionAnswer
+        optionBtn[currentOptionBtn].setBackgroundColor(btnWrong)
+        sumIncorrectAnswered++
+        currentIncorrectAnswered++
+        Toast.makeText(context, response, Toast.LENGTH_SHORT).show()
     }
 
     fun currentHint(context: Context): Int {
@@ -101,38 +96,42 @@ class GameModel : ViewModel() {
     }
 
     fun checkHint(optionBtn: List<Button>, mode: String) {
-        if (mode == "easy") {
-            for (i in optionBtn.indices) {
-                if (currentQuestionAnswer == optionBtn[i].text)
-                    optionBtn[i].setBackgroundColor(btnRight)
-            }
-        }
-        if (mode == "medium") {
-            sumIncorrectAnswered++
-            for (i in optionBtn.indices) {
-                if (currentQuestionAnswer != optionBtn[i].text) {
-                    optionBtn[0].setBackgroundColor(btnWrong)
-                    sumIncorrectAnswered
-
-                }
-                if (sumIncorrectAnswered == 2) {
-                    if (currentQuestionAnswer == optionBtn[i].text) optionBtn[i].setBackgroundColor(
-                        btnRight
-                    )
-                }
-            }
-        }
-        if (mode == "hard") {
-            sumIncorrectAnswered++
-            for (i in optionBtn.indices) {
-                if (currentQuestionAnswer != optionBtn[i].text) {
-                    optionBtn[sumIncorrectAnswered].setBackgroundColor(btnWrong)
-                    if (sumIncorrectAnswered >= 2) sumIncorrectAnswered = 0
-
-                }
-                if (sumIncorrectAnswered == 3) {
+        when (mode) {
+            "easy" -> {
+                for (i in optionBtn.indices) {
                     if (currentQuestionAnswer == optionBtn[i].text)
                         optionBtn[i].setBackgroundColor(btnRight)
+                }
+            }
+
+            "medium" -> {
+                sumIncorrectAnswered++
+                for (i in optionBtn.indices) {
+                    if (currentQuestionAnswer != optionBtn[i].text) {
+                        optionBtn[0].setBackgroundColor(btnWrong)
+                        sumIncorrectAnswered
+
+                    }
+                    if (sumIncorrectAnswered == 2) {
+                        if (currentQuestionAnswer == optionBtn[i].text) optionBtn[i].setBackgroundColor(
+                            btnRight
+                        )
+                    }
+                }
+            }
+
+            "hard" -> {
+                sumIncorrectAnswered++
+                for (i in optionBtn.indices) {
+                    if (currentQuestionAnswer != optionBtn[i].text) {
+                        optionBtn[sumIncorrectAnswered].setBackgroundColor(btnWrong)
+                        if (sumIncorrectAnswered >= 2) sumIncorrectAnswered = 0
+
+                    }
+                    if (sumIncorrectAnswered == 3) {
+                        if (currentQuestionAnswer == optionBtn[i].text)
+                            optionBtn[i].setBackgroundColor(btnRight)
+                    }
                 }
             }
         }
