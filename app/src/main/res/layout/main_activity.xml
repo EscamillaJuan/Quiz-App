@@ -47,6 +47,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/brown"
+            android:fontFamily="@font/chewy"
             android:text="@string/btn_jugar" />
 
         <Space
@@ -59,6 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/brown"
+            android:fontFamily="@font/chewy"
             android:text="@string/btn_opciones" />
 
         <Space
@@ -68,7 +70,8 @@
         <Spinner
             android:id="@+id/difficulty_spin"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></Spinner>
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/chewy" />
 
     </LinearLayout>
 
