@@ -14,6 +14,7 @@ interface IGameService {
         answer: String,
         optionBtn: List<Button>
     )
+
     fun setUserAnswer(
         isAnswered: Boolean,
         isCorrect: Boolean,
@@ -22,4 +23,6 @@ interface IGameService {
         options: List<String>,
         textAnsweredQuestion: TextView
     )
+
+    fun scoreCounter(mode: String, usedHints: Int, score: Int): Int
 }

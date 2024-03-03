@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F9D071"
+    android:background="@color/orange"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".view.ScoreScreen">
@@ -13,63 +13,69 @@
     <ViewFlipper
         android:id="@+id/ViewFlipper"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:ignore="UselessParent">
 
         <ImageView
             android:id="@+id/trivioText_image"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            app:srcCompat="@mipmap/trivio_text_image" />
+            android:contentDescription="@string/trivio_logo_description"
+            android:src="@mipmap/trivio_text_image" />
 
         <ImageView
             android:id="@+id/final_scoreImage"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
-            app:srcCompat="@drawable/marcadorfinal"
-            tools:ignore="MissingConstraints" />
+            android:contentDescription="@string/score_final_image_description"
+            android:src="@drawable/marcadorfinal" />
 
         <TextView
+            android:id="@+id/total_correct_answers"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/chewy"
             android:gravity="center"
-            android:text="Ha respondido 5 preguntas correctamente"
             android:textColor="@color/brown"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:text="Ha respondido 5 preguntas correctamente" />
 
 
         <TextView
+            android:id="@+id/total_used_hints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/chewy"
             android:gravity="center"
-            android:text="Ha utilizado 4 pistas"
             android:textColor="@color/brown"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:text="Ha utilizado 4 pistas" />
 
 
         <TextView
+            android:id="@+id/total_unused_hints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/chewy"
             android:gravity="center"
-            android:text="Le quedaron 3 pistas"
             android:textColor="@color/brown"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:text="Le quedaron 3 pistas" />
 
 
         <TextView
+            android:id="@+id/total_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/chewy"
             android:gravity="center"
-            android:text="Su puntuacion es de 20 puntos"
             android:textColor="@color/brown"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            tools:text="Su puntuacion es de 20 puntos" />
 
     </ViewFlipper>
 

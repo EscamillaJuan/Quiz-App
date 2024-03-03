@@ -18,7 +18,20 @@ class GameModel : ViewModel() {
     private var sumCorrectAnswered: Int = 0
     private var sumIncorrectAnswered: Int = 0
     private var hintUsedCounter: Int = 0
+    private var questionCounter = 0
+    private var usedHintsPerGame: Int = 0
+    private var score = 0
 
+    val totalScore
+        get() = score
+    val usedHintsCounter
+        get() = usedHintsPerGame
+    val answeredQuestionCounter
+        get() = questionCounter
+    val unusedHintsCounter
+        get() = hint
+    val correctAnswersCounter
+        get() = sumCorrectAnswered
     val currentHintText: String
         get() = "$hint pistas"
     val currentQuestionOptions: List<String>
@@ -45,12 +58,13 @@ class GameModel : ViewModel() {
     fun nextQuestion(mode: String, optionBtn: List<Button>) {
         currentQuestionIndex = gameService.nextQuestion(currentQuestionIndex, questions)
         getOptions(mode, optionBtn)
-        hintUsedCounter = 0    // flag reset
+        hintUsedCounter = 0
     }
 
     fun prevQuestion(mode: String, optionBtn: List<Button>) {
         currentQuestionIndex = gameService.prevQuestions(currentQuestionIndex, questions)
         getOptions(mode, optionBtn)
+        hintUsedCounter = 0
     }
 
     fun getOptions(mode: String, optionBtn: List<Button>) {
@@ -68,6 +82,7 @@ class GameModel : ViewModel() {
         optionText: CharSequence,
     ) {
         questions[currentQuestionIndex].isAnswered = true
+        questionCounter++
         if (optionText.toString() == currentQuestionAnswer) {
             questions[currentQuestionIndex].isCorrect = true
             optionBtn[currentOptionBtn].setBackgroundColor(btnRight)
@@ -88,7 +103,13 @@ class GameModel : ViewModel() {
         return hint
     }
 
-    fun checkHint(optionBtn: List<Button>, mode: String, context: Context, textAnsweredQuestion: TextView) {
+    fun checkHint(
+        optionBtn: List<Button>,
+        mode: String,
+        context: Context,
+        textAnsweredQuestion: TextView
+    ) {
+        usedHintsPerGame += 1
         when (mode) {
             "easy" -> {
                 hintUsedCounter++
@@ -98,6 +119,8 @@ class GameModel : ViewModel() {
                             optionBtn[i].setBackgroundColor(btnRight)
                             questions[currentQuestionIndex].isAnswered = true
                             questions[currentQuestionIndex].isCorrect = true
+                            questionCounter++
+                            scoreCounter(mode)
                             gameService.setUserAnswer(
                                 currentQuestionIsAnswered,
                                 currentQuestionIsCorrect,
@@ -127,6 +150,8 @@ class GameModel : ViewModel() {
                             optionBtn[i].setBackgroundColor(btnRight)
                             questions[currentQuestionIndex].isAnswered = true
                             questions[currentQuestionIndex].isCorrect = true
+                            questionCounter++
+                            scoreCounter(mode)
                             gameService.setUserAnswer(
                                 currentQuestionIsAnswered,
                                 currentQuestionIsCorrect,
@@ -153,6 +178,8 @@ class GameModel : ViewModel() {
                         optionBtn[i].setBackgroundColor(btnRight)
                         questions[currentQuestionIndex].isAnswered = true
                         questions[currentQuestionIndex].isCorrect = true
+                        questionCounter++
+                        scoreCounter(mode)
                         gameService.setUserAnswer(
                             currentQuestionIsAnswered,
                             currentQuestionIsCorrect,
@@ -169,5 +196,10 @@ class GameModel : ViewModel() {
                 }
             }
         }
+    }
+
+    fun scoreCounter(mode: String) {
+        if (!currentQuestionIsCorrect) return
+        score = gameService.scoreCounter(mode, hintUsedCounter, score)
     }
 }
