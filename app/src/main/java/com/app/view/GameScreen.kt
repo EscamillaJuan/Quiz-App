@@ -1,5 +1,6 @@
 package com.app.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageButton
@@ -11,9 +12,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.app.R
 import com.app.btnColor
 import com.app.model.GameModel
-
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
 
@@ -102,7 +106,7 @@ class GameScreen : AppCompatActivity() {
         }
 
         hintBtn.setOnClickListener { _ ->
-            if (gameModel.currentQuestionIsAnswered) return@setOnClickListener
+            if (gameModel.currentQuestionIsAnswered || gameModel.unusedHintsCounter == 0) return@setOnClickListener
             gameModel.currentHint(this)
             hintBtn.text = gameModel.currentHintText
             gameModel.checkHint(options, mode, this, textAnsweredQuestion)
@@ -119,9 +123,25 @@ class GameScreen : AppCompatActivity() {
                     gameModel.currentQuestionOptions,
                     textAnsweredQuestion
                 )
+                gameModel.scoreCounter(mode);
+                if (gameModel.answeredQuestionCounter == 10) {
+                    val intent = Intent(this, ScoreScreen::class.java)
+                    intent.putExtra(SCORE, gameModel.totalScore)
+                    intent.putExtra(TOTAL_USED_HINTS, gameModel.usedHintsCounter)
+                    intent.putExtra(TOTAL_UNUSED_HINTS, gameModel.unusedHintsCounter)
+                    intent.putExtra(TOTAL_ANSWERS, gameModel.correctAnswersCounter)
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(1000)
+                        startActivity(intent)
+                    }
+                } else {
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(1000)
+                        nextBtn.performClick()
+                    }
+                }
+
             }
-
         }
-
     }
 }

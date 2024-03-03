@@ -104,4 +104,14 @@ class GameServiceImpl : IGameService {
             }
         }
     }
+
+    override fun scoreCounter(mode: String, usedHints: Int, score: Int): Int {
+        val points = when (mode) {
+            "easy" -> 2 - usedHints
+            "medium" -> 4 - usedHints
+            "hard" -> 6 - usedHints
+            else -> 2
+        }
+        return score + points
+    }
 }

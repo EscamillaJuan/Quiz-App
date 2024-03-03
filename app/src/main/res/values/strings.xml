@@ -17,4 +17,10 @@
     <string name="options_Text">Opciones de juego\n</string>
     <string name="returnTextButton">Volver</string>
     <string name="workinprogress_Text">Trabajo en proceso...</string>
+    <string name="score_final_image_description">Score final image</string>
+    <string name="trivio_logo_description">trivio logo</string>
+    <string name="total_answers_text">Haz respondido %1$s preguntas correctamente</string>
+    <string name="used_hints_text">Haz utilizado %1$s pistas</string>
+    <string name="unused_hints_text">Te quedaron %1$s pistas</string>
+    <string name="final_score_text">Tu puntaje final es de %1$s puntos</string>
 </resources>
