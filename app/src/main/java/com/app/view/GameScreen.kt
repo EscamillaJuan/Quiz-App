@@ -35,6 +35,7 @@ class GameScreen : AppCompatActivity() {
     private lateinit var topicText: TextView
     private lateinit var topicIcon: ImageView
     private val options = mutableListOf<Button>()
+    
     private var mode = "medium"
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -24,6 +24,7 @@ class GameModel : ViewModel() {
     private var prevAnswerIsCorrect: Boolean = false
     private var currentAnswerIsCorrect: Boolean = false
     private var currentAnsweredWithHint: Boolean = false
+    private val correctQuestionIndex = mutableListOf<Int>()
 
 
     val totalScore
@@ -88,14 +89,16 @@ class GameModel : ViewModel() {
         questions[currentQuestionIndex].isAnswered = true
         questionCounter++
         if (optionText.toString() == currentQuestionAnswer) {
-            if (currentQuestionIndex > 0 && !currentAnsweredWithHint) {
+            if (hintUsedCounter==0){currentAnsweredWithHint = false}
+            if (!currentAnsweredWithHint) {
+                correctQuestionIndex.add(currentQuestionIndex)
+                if(correctQuestionIndex.size == 2){
                 prevAnswerIsCorrect =
-                    questions[currentQuestionIndex - 1].isAnswered && questions[currentQuestionIndex - 1].isCorrect
+                    questions[correctQuestionIndex[0]].isAnswered && questions[correctQuestionIndex[0]].isCorrect}
             }
             questions[currentQuestionIndex].isCorrect = true
             optionBtn[currentOptionBtn].setBackgroundColor(btnRight)
             currentAnswerIsCorrect  = true
-            if (hintUsedCounter==0){currentAnsweredWithHint = false}
 
             sumCorrectAnswered++
 
@@ -112,6 +115,7 @@ class GameModel : ViewModel() {
             currentAnswerIsCorrect = false
             prevAnswerIsCorrect = false
             currentAnsweredWithHint = true
+            correctQuestionIndex.clear()
             if (hint > 5) {
                 hint = 5
                 Toast.makeText(context, "No hay más pistas extras disponibles", Toast.LENGTH_SHORT).show()
