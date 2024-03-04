@@ -14,8 +14,7 @@ object QuestionListProvider {
                 "Leonardo DiCaprio",
                 "Will Smith"
             ),
-            "Keanu Reeves",
-            false
+            "Keanu Reeves"
         ),
         Question(
             "¿Cuál es la película ganadora del Óscar a la Mejor Película en 1994 dirigida por Steven Spielberg y protagonizada por Tom Hanks?",
@@ -26,8 +25,7 @@ object QuestionListProvider {
                 "La terminal",
                 "Náufrago"
             ),
-            "Forrest Gump",
-            false
+            "Forrest Gump"
         ),
         Question(
             "¿Cuál era el nombre original de Gollum en El Señor de los Anillos?",
@@ -38,8 +36,7 @@ object QuestionListProvider {
                 "Galadriel",
                 "Elrond"
             ),
-            "Smeagol",
-            false
+            "Smeagol"
         ),
         Question(
             "¿Cuántos son los espectros del anillo (Nazgul)?",
@@ -50,8 +47,7 @@ object QuestionListProvider {
                 "8",
                 "10"
             ),
-            "9",
-            false
+            "9"
         ),
         Question(
             "¿Cuál es el nombre de la nave espacial protagonista en la saga Star Wars?",
@@ -62,8 +58,7 @@ object QuestionListProvider {
                 "Serenity",
                 "Discovery"
             ),
-            "Millennium Falcon",
-            false
+            "Millennium Falcon"
         ),
         Question(
             "¿Qué famoso pintor fue conocido por su estilo surrealista y sus pinturas como La persistencia de la memoria?",
@@ -74,8 +69,7 @@ object QuestionListProvider {
                 "Vincent van Gogh",
                 "Claude Monet"
             ),
-            "Salvador Dalí",
-            false
+            "Salvador Dalí"
         ),
         Question(
             "¿Quién pintó la famosa obra La noche estrellada?",
@@ -86,8 +80,7 @@ object QuestionListProvider {
                 "Michelangelo Buonarroti",
                 "Johannes Vermeer"
             ),
-            "Vincent van Gogh",
-            false
+            "Vincent van Gogh"
         ),
         Question(
             "¿Cuál es el nombre de la pintura renacentista creada por Leonardo da Vinci que representa a una mujer misteriosa con una sonrisa enigmática?",
@@ -98,8 +91,7 @@ object QuestionListProvider {
                 "El nacimiento de Venus",
                 "La Venus del espejo"
             ),
-            "La Gioconda (Mona Lisa)",
-            false
+            "La Gioconda (Mona Lisa)"
         ),
         Question(
             "¿Cuál de estas obras es una escultura del artista griego clásico Fidias?",
@@ -110,8 +102,7 @@ object QuestionListProvider {
                 "El David",
                 "El Moisés"
             ),
-            "El Discóbolo",
-            false
+            "El Discóbolo"
         ),
         Question(
             "¿Qué movimiento artístico se caracteriza por su enfoque en la representación de la vida cotidiana y la clase trabajadora?",
@@ -122,8 +113,7 @@ object QuestionListProvider {
                 "Cubismo",
                 "Surrealismo"
             ),
-            "Realismo",
-            false
+            "Realismo"
         ),
         Question(
             "¿Quién fue el primer presidente de Estados Unidos?",
@@ -134,8 +124,7 @@ object QuestionListProvider {
                 "Thomas Jefferson",
                 "John F. Kennedy"
             ),
-            "George Washington",
-            false
+            "George Washington"
         ),
         Question(
             "¿Cuál de las siguientes civilizaciones antiguas construyó las pirámides de Giza?",
@@ -146,8 +135,7 @@ object QuestionListProvider {
                 "Egipcia",
                 "Persa"
             ),
-            "Babilonia",
-            false
+            "Babilonia"
         ),
         Question(
             "¿Quién fue el líder de la Revolución Rusa en 1917?",
@@ -158,8 +146,7 @@ object QuestionListProvider {
                 "Leon Trotsky",
                 "Nicholas II"
             ),
-            "Vladimir Lenin",
-            false
+            "Vladimir Lenin"
         ),
         Question(
             "¿Qué evento histórico marcó el final de la Segunda Guerra Mundial en Europa?",
@@ -170,8 +157,7 @@ object QuestionListProvider {
                 "El desembarco de Normandía",
                 "La rendición de Alemania nazi"
             ),
-            "El bombardeo de Hiroshima y Nagasaki",
-            false
+            "El bombardeo de Hiroshima y Nagasaki"
         ),
         Question(
             "¿Cuál de las siguientes civilizaciones es conocida por su código de leyes grabado en piedra?",
@@ -182,8 +168,7 @@ object QuestionListProvider {
                 "China",
                 "Egipto"
             ),
-            "Babilonia",
-            false
+            "Babilonia"
         ),
         Question(
             "¿Cuál de estos instrumentos es de viento?",
@@ -194,8 +179,7 @@ object QuestionListProvider {
                 "Piano",
                 "Batería"
             ),
-            "Trompeta",
-            false
+            "Trompeta"
         ),
         Question(
             "¿Qué banda británica es conocida como los Cuatro Fabulosos?",
@@ -206,8 +190,7 @@ object QuestionListProvider {
                 "Led Zeppelin",
                 "Queen"
             ),
-            "The Beatles",
-            false
+            "The Beatles"
         ),
         Question(
             "¿Quién es conocido como el Rey del Pop?",
@@ -218,8 +201,7 @@ object QuestionListProvider {
                 "Prince",
                 "Stevie Wonder"
             ),
-            "Michael Jackson",
-            false
+            "Michael Jackson"
         ),
         Question(
             "¿Cuál es el género musical que se originó en Jamaica y se caracteriza por su ritmo distintivo y letras sociales o políticas?",
@@ -230,8 +212,7 @@ object QuestionListProvider {
                 "Hip-hop",
                 "Blues"
             ),
-            "Reggae",
-            false
+            "Reggae"
         ),
         Question(
             "¿Quién es el compositor de la famosa obra El Bolero de Ravel?",
@@ -242,8 +223,7 @@ object QuestionListProvider {
                 "Wolfgang Amadeus Mozart",
                 "Johann Sebastian Bach"
             ),
-            "Maurice Ravel",
-            false
+            "Maurice Ravel"
         ),
         Question(
             "¿Cuál es la fórmula química del agua?",
@@ -254,8 +234,7 @@ object QuestionListProvider {
                 "NaCl",
                 "C6H12O6"
             ),
-            "H2O",
-            false
+            "H2O"
         ),
         Question(
             "¿Cuál es la unidad básica de la estructura de los seres vivos?",
@@ -266,8 +245,7 @@ object QuestionListProvider {
                 "ADN",
                 "Gen"
             ),
-            "Célula",
-            false
+            "Célula"
         ),
         Question(
             "¿Cuál de las siguientes es una ley fundamental de la física que describe la relación entre la masa y la energía?",
@@ -278,8 +256,7 @@ object QuestionListProvider {
                 "Ley de la gravedad",
                 "Ley de la relatividad"
             ),
-            "Ley de la relatividad",
-            false
+            "Ley de la relatividad"
         ),
         Question(
             "¿Qué científico propuso la teoría de la evolución por selección natural?",
@@ -290,8 +267,7 @@ object QuestionListProvider {
                 "Albert Einstein",
                 "Louis Pasteur"
             ),
-            "Charles Darwin",
-            false
+            "Charles Darwin"
         ),
         Question(
             "¿Cuál es la capa más externa de la Tierra?",
@@ -302,8 +278,7 @@ object QuestionListProvider {
                 "Manto",
                 "Atmósfera"
             ),
-            "Corteza",
-            false
+            "Corteza"
         )
     )
 }

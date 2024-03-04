@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -14,13 +15,6 @@
         android:layout_height="0dp"
         android:layout_weight="0.5" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/game_name"
-        android:textStyle="bold"
-        android:fontFamily="monospace"/>
-
     <Space
         android:layout_width="wrap_content"
         android:layout_height="0dp"
@@ -29,7 +23,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background">
+        android:src="@mipmap/trivio_text_image">
 
     </ImageView>
 
@@ -41,8 +35,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:orientation="horizontal">
 
         <Space
             android:layout_width="0dp"
@@ -54,8 +47,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/btn_jugar"
-            />
+            android:fontFamily="@font/chewy"
+            android:text="@string/btn_jugar" />
 
         <Space
             android:layout_width="0dp"
@@ -66,28 +59,25 @@
             android:id="@+id/difficulty_spin"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_gravity="center">
-        </Spinner>
+            android:layout_gravity="center"></Spinner>
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="20dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/option_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/btn_opciones"
-            app:icon="@drawable/opciones"
-            app:iconGravity="end"
-            />
+            android:fontFamily="@font/chewy"
+            android:text="@string/btn_opciones" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="25dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
 
     </LinearLayout>

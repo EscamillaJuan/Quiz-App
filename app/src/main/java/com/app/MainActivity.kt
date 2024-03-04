@@ -1,6 +1,7 @@
 package com.app
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -9,6 +10,10 @@ import android.widget.Spinner
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
 import com.app.view.SELECTED_DIFFICULT
+
+val btnColor = Color.parseColor("#624D1B")
+val btnWrong = Color.parseColor("#CC0000")
+val btnRight = Color.parseColor("#99CC00")
 
 class MainActivity : AppCompatActivity() {
     private lateinit var openBtn: Button

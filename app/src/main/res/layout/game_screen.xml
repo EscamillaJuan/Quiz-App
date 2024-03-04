@@ -2,11 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/orange"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="#F9D071"
     tools:context=".view.GameScreen">
 
     <LinearLayout
@@ -22,17 +23,20 @@
             android:layout_gravity="center"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="80dp"
+            android:backgroundTint="@color/brown"
             android:drawablePadding="8dp"
-            android:text="@string/hint_text"
-            app:icon="@drawable/hint_icon" />
+            android:fontFamily="@font/chewy"
+            app:icon="@drawable/hint_icon"
+            tools:text="5 pistas" />
 
         <TextView
             android:id="@+id/question_number"
             android:layout_width="120dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
-            android:fontFamily="sans-serif-black"
+            android:fontFamily="@font/chewy"
             android:gravity="center"
+            android:textStyle="bold"
             tools:text="Pregunta 1 de 10" />
 
     </LinearLayout>
@@ -50,15 +54,26 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:layout_marginBottom="30dp"
-        android:fontFamily="sans-serif-medium"
+        android:fontFamily="@font/chewy"
         android:gravity="center"
+        android:textStyle="italic"
         tools:text="Arte" />
+
+    <TextView
+        android:id="@+id/text_answered_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/chewy"
+        android:textSize="18sp"
+        tools:text="Tu respuesta fue correcta" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="340dp"
         android:layout_height="50dp"
         android:layout_weight="1"
+        android:fontFamily="@font/chewy"
         android:gravity="center"
         tools:text="What is your name?" />
 
@@ -67,6 +82,8 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/brown"
+        android:fontFamily="@font/chewy"
         tools:text="Option 1" />
 
     <Button
@@ -74,6 +91,8 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/brown"
+        android:fontFamily="@font/chewy"
         tools:text="Option 2" />
 
     <Button
@@ -81,12 +100,16 @@
         android:layout_width="300dp"
         android:layout_height="50dp"
         android:layout_marginBottom="10dp"
+        android:backgroundTint="@color/brown"
+        android:fontFamily="@font/chewy"
         tools:text="Option 3" />
 
     <Button
         android:id="@+id/option_4"
         android:layout_width="300dp"
         android:layout_height="50dp"
+        android:backgroundTint="@color/brown"
+        android:fontFamily="@font/chewy"
         tools:text="Option 4" />
 
     <LinearLayout
