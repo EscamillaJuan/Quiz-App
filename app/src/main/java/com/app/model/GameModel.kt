@@ -21,6 +21,10 @@ class GameModel : ViewModel() {
     private var questionCounter = 0
     private var usedHintsPerGame: Int = 0
     private var score = 0
+    private var prevAnswerIsCorrect: Boolean = false
+    private var currentAnswerIsCorrect: Boolean = false
+    private var currentAnsweredWithHint: Boolean = false
+
 
     val totalScore
         get() = score
@@ -84,21 +88,48 @@ class GameModel : ViewModel() {
         questions[currentQuestionIndex].isAnswered = true
         questionCounter++
         if (optionText.toString() == currentQuestionAnswer) {
+            if (currentQuestionIndex > 0 && !currentAnsweredWithHint) {
+                prevAnswerIsCorrect =
+                    questions[currentQuestionIndex - 1].isAnswered && questions[currentQuestionIndex - 1].isCorrect
+            }
             questions[currentQuestionIndex].isCorrect = true
             optionBtn[currentOptionBtn].setBackgroundColor(btnRight)
+            currentAnswerIsCorrect  = true
+            if (hintUsedCounter==0){currentAnsweredWithHint = false}
+
             sumCorrectAnswered++
+
         } else {
             optionBtn[currentOptionBtn].setBackgroundColor(btnWrong)
             sumIncorrectAnswered++
+            currentAnswerIsCorrect  = false
             hintUsedCounter++
         }
     }
+    fun extraHint(context: Context):Int {
+        if (currentAnswerIsCorrect && prevAnswerIsCorrect) {
+            hint++
+            currentAnswerIsCorrect = false
+            prevAnswerIsCorrect = false
+            currentAnsweredWithHint = true
+            if (hint > 5) {
+                hint = 5
+                Toast.makeText(context, "No hay más pistas extras disponibles", Toast.LENGTH_SHORT).show()
+            }
+            else{
+                Toast.makeText(context, "Tiene una pista extra", Toast.LENGTH_SHORT).show()
+            }
+
+        }
+
+        return hint
+    }
 
     fun currentHint(context: Context): Int {
-        hint -= 1
+        hint--
         if (hint < 0) {
             hint = 0
-            Toast.makeText(context, "No hay más pistas", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "No hay más pistas disponibles", Toast.LENGTH_SHORT).show()
         }
         return hint
     }
@@ -119,6 +150,8 @@ class GameModel : ViewModel() {
                             optionBtn[i].setBackgroundColor(btnRight)
                             questions[currentQuestionIndex].isAnswered = true
                             questions[currentQuestionIndex].isCorrect = true
+                            prevAnswerIsCorrect = false
+                            currentAnsweredWithHint = true
                             questionCounter++
                             scoreCounter(mode)
                             gameService.setUserAnswer(
@@ -133,7 +166,7 @@ class GameModel : ViewModel() {
                     }
                     if (hintUsedCounter > 1) Toast.makeText(
                         context,
-                        "todo quieres",
+                        "Pista no disponible",
                         Toast.LENGTH_SHORT
                     ).show()
                 }
@@ -144,12 +177,15 @@ class GameModel : ViewModel() {
                 for (i in optionBtn.indices) {
                     if (currentQuestionAnswer != optionBtn[i].text && hintUsedCounter < 2) {
                         optionBtn[hintUsedCounter].setBackgroundColor(btnWrong)
+                        currentAnsweredWithHint = true
                     }
                     if (hintUsedCounter == 2) {
                         if (currentQuestionAnswer == optionBtn[i].text) {
                             optionBtn[i].setBackgroundColor(btnRight)
                             questions[currentQuestionIndex].isAnswered = true
                             questions[currentQuestionIndex].isCorrect = true
+                            currentAnsweredWithHint = true
+                            prevAnswerIsCorrect = false
                             questionCounter++
                             scoreCounter(mode)
                             gameService.setUserAnswer(
@@ -163,7 +199,7 @@ class GameModel : ViewModel() {
                         }
                     }
                     if (hintUsedCounter > 2) {
-                        Toast.makeText(context, "todo quieres", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "pista no disponible", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
@@ -178,6 +214,8 @@ class GameModel : ViewModel() {
                         optionBtn[i].setBackgroundColor(btnRight)
                         questions[currentQuestionIndex].isAnswered = true
                         questions[currentQuestionIndex].isCorrect = true
+                        currentAnsweredWithHint = true
+                        prevAnswerIsCorrect = false
                         questionCounter++
                         scoreCounter(mode)
                         gameService.setUserAnswer(
@@ -190,7 +228,7 @@ class GameModel : ViewModel() {
                         )
                     }
                     if (hintUsedCounter > 3) {
-                        Toast.makeText(context, "xd", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Pista no disponible", Toast.LENGTH_SHORT).show()
 
                     }
                 }
