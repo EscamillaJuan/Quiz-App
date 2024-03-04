@@ -115,6 +115,8 @@ class GameScreen : AppCompatActivity() {
         for (i in options.indices) {
             options[i].setOnClickListener {
                 gameModel.checkAnswer(options, i, options[i].text)
+                gameModel.extraHint(this)
+                hintBtn.text = gameModel.currentHintText
                 gameService.setUserAnswer(
                     gameModel.currentQuestionIsAnswered,
                     gameModel.currentQuestionIsCorrect,
