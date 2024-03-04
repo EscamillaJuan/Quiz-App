@@ -76,7 +76,17 @@ class GameScreen : AppCompatActivity() {
 
         for( i in 0 until options.size - 1) {
             options[i].setOnClickListener {
-                gameModel.checkAnswer(options[i].text, this)
+                gameModel.checkAnswer(options, i, options[i].text)
+                gameModel.extraHint(this)
+                hintBtn.text = gameModel.currentHintText
+                gameService.setUserAnswer(
+                    gameModel.currentQuestionIsAnswered,
+                    gameModel.currentQuestionIsCorrect,
+                    options,
+                    gameModel.currentQuestionAnswer,
+                    gameModel.currentQuestionOptions,
+                    textAnsweredQuestion
+                )
             }
         }
 
