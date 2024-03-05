@@ -72,6 +72,9 @@ class GameScreen : AppCompatActivity() {
             gameModel.currentQuestionOptions,
             textAnsweredQuestion
         )
+        gameModel.incorrectButtonIndexList(options,false,mode)
+
+
 
 
         nextBtn.setOnClickListener {
@@ -80,7 +83,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            //for (i in 0 until options.size) options[i].setBackgroundColor(btnColor)
+            gameModel.incorrectButtonIndexList(options,false,mode)
             gameService.setUserAnswer(
                 gameModel.currentQuestionIsAnswered,
                 gameModel.currentQuestionIsCorrect,
@@ -97,6 +100,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
+            gameModel.incorrectButtonIndexList(options,false,mode)
             gameService.setUserAnswer(
                 gameModel.currentQuestionIsAnswered,
                 gameModel.currentQuestionIsCorrect,
@@ -109,10 +113,11 @@ class GameScreen : AppCompatActivity() {
 
         hintBtn.setOnClickListener { _ ->
             if (gameModel.currentQuestionIsAnswered || gameModel.unusedHintsCounter == 0) return@setOnClickListener
-            gameModel.incorrectButtonIndexList(options)
             gameModel.currentHint(this)
             hintBtn.text = gameModel.currentHintText
             gameModel.checkHint(options, mode, this, textAnsweredQuestion)
+            gameModel.incorrectButtonIndexList(options,true, mode)
+
         }
 
         for (i in options.indices) {
