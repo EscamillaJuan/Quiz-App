@@ -145,9 +145,9 @@ class GameModel : ViewModel() {
             if (currentQuestionAnswer != optionBtn[i].text) {
                 incorrectButtonIndex.add(i)
                if (!isShuffled) incorrectButtonIndex = incorrectButtonIndex.shuffled().toMutableList()
-                isShuffled = true
             }
         }
+                isShuffled = true
 
 
     }
