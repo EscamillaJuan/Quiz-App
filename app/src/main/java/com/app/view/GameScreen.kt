@@ -35,6 +35,7 @@ class GameScreen : AppCompatActivity() {
     private lateinit var topicText: TextView
     private lateinit var topicIcon: ImageView
     private val options = mutableListOf<Button>()
+
     
     private var mode = "medium"
 
@@ -79,7 +80,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            for (i in 0 until options.size) options[i].setBackgroundColor(btnColor)
+            //for (i in 0 until options.size) options[i].setBackgroundColor(btnColor)
             gameService.setUserAnswer(
                 gameModel.currentQuestionIsAnswered,
                 gameModel.currentQuestionIsCorrect,
@@ -108,6 +109,7 @@ class GameScreen : AppCompatActivity() {
 
         hintBtn.setOnClickListener { _ ->
             if (gameModel.currentQuestionIsAnswered || gameModel.unusedHintsCounter == 0) return@setOnClickListener
+            gameModel.incorrectButtonIndexList(options)
             gameModel.currentHint(this)
             hintBtn.text = gameModel.currentHintText
             gameModel.checkHint(options, mode, this, textAnsweredQuestion)

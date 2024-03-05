@@ -254,7 +254,7 @@ object QuestionListProvider {
             listOf(
                 "Ley de Boyle",
                 "Ley de la gravedad",
-                "Ley de la relatividad"
+                "Primera ley de Newton"
             ),
             "Ley de la relatividad"
         ),
