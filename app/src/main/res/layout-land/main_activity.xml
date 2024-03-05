@@ -56,6 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/chewy"
+            android:backgroundTint="@color/brown"
             android:text="@string/btn_jugar" />
 
         <Space
@@ -66,8 +67,10 @@
         <Spinner
             android:id="@+id/difficulty_spin"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center"/>
+            android:popupBackground="@color/brown"
+            android:layout_height="48dp"
+            android:layout_gravity="center" />
+
 
         <Space
             android:layout_width="wrap_content"
@@ -80,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:fontFamily="@font/chewy"
+            android:backgroundTint="@color/brown"
             android:text="@string/btn_opciones" />
 
         <Space

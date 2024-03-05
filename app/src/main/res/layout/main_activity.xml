@@ -69,8 +69,11 @@
 
         <Spinner
             android:id="@+id/difficulty_spin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_width="140dp"
+            android:layout_height="48dp"
+            android:popupBackground="@color/brown"
+            android:dropDownVerticalOffset="40dp"
             android:fontFamily="@font/chewy" />
 
     </LinearLayout>
