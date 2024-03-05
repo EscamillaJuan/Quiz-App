@@ -20,12 +20,20 @@
         android:layout_height="0dp"
         android:layout_weight="0.5" />
 
-    <ImageView
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/trivio_text_image">
+        android:src="@mipmap/trivio_text_image"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@mipmap/ic_logo"/>
 
-    </ImageView>
+    </LinearLayout>
 
     <Space
         android:layout_width="wrap_content"
@@ -60,9 +68,9 @@
             android:id="@+id/difficulty_spin"
             android:layout_width="wrap_content"
             android:popupBackground="@color/brown"
-
             android:layout_height="48dp"
             android:layout_gravity="center" />
+
 
         <Space
             android:layout_width="wrap_content"
