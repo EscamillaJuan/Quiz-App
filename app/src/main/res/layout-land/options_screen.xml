@@ -15,7 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:textSize="32sp"
-        android:fontFamily="sans-serif-black"
+        android:fontFamily="@font/chewy"
+        android:textColor="@color/brown"
         android:gravity="center"
         android:text="@string/options_Text" />
     <ImageView
@@ -31,6 +32,8 @@
         android:layout_height="4dp"
         android:layout_weight="1"
         android:gravity="center"
+        android:fontFamily="@font/chewy"
+        android:textColor="@color/brown"
         android:text="@string/workinprogress_Text" />
 
     <LinearLayout
@@ -46,6 +49,8 @@
             android:layout_gravity="center"
             android:drawablePadding="8dp"
             android:layout_marginStart="600dp"
+            android:fontFamily="@font/chewy"
+            android:backgroundTint="@color/brown"
             android:text="@string/returnTextButton"
             app:icon="@drawable/baseline_arrow_back_24" />
 

@@ -132,10 +132,10 @@ object QuestionListProvider {
             R.drawable.book,
             listOf(
                 "Griega",
-                "Egipcia",
+                "Babilonia",
                 "Persa"
             ),
-            "Babilonia"
+            "Egipcia"
         ),
         Question(
             "¿Quién fue el líder de la Revolución Rusa en 1917?",
