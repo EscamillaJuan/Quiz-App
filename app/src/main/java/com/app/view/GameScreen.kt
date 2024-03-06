@@ -36,7 +36,7 @@ class GameScreen : AppCompatActivity() {
     private lateinit var topicIcon: ImageView
     private val options = mutableListOf<Button>()
 
-    
+
     private var mode = "medium"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,6 +63,7 @@ class GameScreen : AppCompatActivity() {
         topicText.text = gameModel.topicText
         topicIcon.setImageResource(gameModel.topicIcon)
         mode = intent.getStringExtra(SELECTED_DIFFICULT).toString()
+        gameModel.getAnswerOptions(mode)
         gameModel.getOptions(mode, options)
         gameService.setUserAnswer(
             gameModel.currentQuestionIsAnswered,
@@ -72,10 +73,7 @@ class GameScreen : AppCompatActivity() {
             gameModel.currentQuestionOptions,
             textAnsweredQuestion
         )
-        gameModel.incorrectButtonIndexList(options,false,mode)
-
-
-
+        gameModel.incorrectButtonIndexList(options, false, mode)
 
         nextBtn.setOnClickListener {
             gameModel.nextQuestion(mode, options)
@@ -83,7 +81,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            gameModel.incorrectButtonIndexList(options,false,mode)
+            gameModel.incorrectButtonIndexList(options, false, mode)
             gameService.setUserAnswer(
                 gameModel.currentQuestionIsAnswered,
                 gameModel.currentQuestionIsCorrect,
@@ -100,7 +98,7 @@ class GameScreen : AppCompatActivity() {
             questionsCounter.text = gameModel.counterText
             topicText.text = gameModel.topicText
             topicIcon.setImageResource(gameModel.topicIcon)
-            gameModel.incorrectButtonIndexList(options,false,mode)
+            gameModel.incorrectButtonIndexList(options, false, mode)
             gameService.setUserAnswer(
                 gameModel.currentQuestionIsAnswered,
                 gameModel.currentQuestionIsCorrect,
@@ -116,7 +114,7 @@ class GameScreen : AppCompatActivity() {
             gameModel.currentHint(this)
             hintBtn.text = gameModel.currentHintText
             gameModel.checkHint(options, mode, this, textAnsweredQuestion)
-            gameModel.incorrectButtonIndexList(options,true, mode)
+            gameModel.incorrectButtonIndexList(options, true, mode)
 
         }
 
@@ -134,7 +132,7 @@ class GameScreen : AppCompatActivity() {
                     textAnsweredQuestion
                 )
                 gameModel.scoreCounter(mode);
-                if (gameModel.answeredQuestionCounter == 10) {
+                if (gameModel.answeredQuestionCounter > 9) {
                     val intent = Intent(this, ScoreScreen::class.java)
                     intent.putExtra(SCORE, gameModel.totalScore)
                     intent.putExtra(TOTAL_USED_HINTS, gameModel.usedHintsCounter)
@@ -150,7 +148,6 @@ class GameScreen : AppCompatActivity() {
                         nextBtn.performClick()
                     }
                 }
-
             }
         }
     }

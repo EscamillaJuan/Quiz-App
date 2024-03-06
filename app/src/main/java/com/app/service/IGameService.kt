@@ -10,8 +10,7 @@ interface IGameService {
     fun prevQuestions(index: Int, questions: List<GameQuestion>): Int
     fun getOptions(
         mode: String,
-        options: List<String>,
-        answer: String,
+        answerOptions: List<String>,
         optionBtn: List<Button>
     )
 
@@ -25,4 +24,5 @@ interface IGameService {
     )
 
     fun scoreCounter(mode: String, usedHints: Int, score: Int): Int
+    fun getAnswers(mode: String, options: List<String>, answer: String): List<String>
 }

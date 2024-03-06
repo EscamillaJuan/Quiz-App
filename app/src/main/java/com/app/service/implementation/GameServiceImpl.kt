@@ -38,16 +38,11 @@ class GameServiceImpl : IGameService {
 
     override fun getOptions(
         mode: String,
-        options: List<String>,
-        answer: String,
+        answerOptions: List<String>,
         optionBtn: List<Button>
     ) {
-        var answerOptions = mutableListOf<String>()
         when (mode) {
             "easy" -> {
-                answerOptions.addAll(options.subList(0, 1))
-                answerOptions.add(answer)
-                answerOptions = answerOptions.shuffled().toMutableList()
                 for (i in 0 until 2) {
                     optionBtn[i].visibility = View.VISIBLE
                     optionBtn[i].text = answerOptions[i]
@@ -58,9 +53,6 @@ class GameServiceImpl : IGameService {
             }
 
             "medium" -> {
-                answerOptions.addAll(options.subList(0, 2))
-                answerOptions.add(answer)
-                answerOptions = answerOptions.shuffled().toMutableList()
                 for (i in 0 until 3) {
                     optionBtn[i].visibility = View.VISIBLE
                     optionBtn[i].text = answerOptions[i]
@@ -69,9 +61,6 @@ class GameServiceImpl : IGameService {
             }
 
             "hard" -> {
-                answerOptions.addAll(options)
-                answerOptions.add(answer)
-                answerOptions = answerOptions.shuffled().toMutableList()
                 for (i in 0 until 4) {
                     optionBtn[i].visibility = View.VISIBLE
                     optionBtn[i].text = answerOptions[i]
@@ -113,5 +102,30 @@ class GameServiceImpl : IGameService {
             else -> 2
         }
         return score + points
+    }
+
+    override fun getAnswers(
+        mode: String,
+        options: List<String>,
+        answer: String
+    ): List<String> {
+        var newOptions = mutableListOf<String>()
+        when (mode) {
+            "easy" -> {
+                newOptions = options.subList(0, 1).toMutableList()
+                newOptions.add(answer)
+            }
+
+            "medium" -> {
+                newOptions = options.subList(0, 2).toMutableList()
+                newOptions.add(answer)
+            }
+
+            "hard" -> {
+                newOptions = options.subList(0, 3).toMutableList()
+                newOptions.add(answer)
+            }
+        }
+        return newOptions.shuffled()
     }
 }

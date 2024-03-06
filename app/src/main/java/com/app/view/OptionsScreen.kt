@@ -14,7 +14,6 @@ import com.app.R
 import com.app.model.GameModel
 
 class OptionsScreen : AppCompatActivity()  {
-
         private lateinit var opText: TextView
         private lateinit var prevBtn: Button
         private lateinit var workText: TextView
@@ -31,8 +30,7 @@ class OptionsScreen : AppCompatActivity()  {
 
 
             prevBtn.setOnClickListener {
-                val intentprevBtn = Intent(this, MainActivity::class.java)
-                startActivity(intentprevBtn)
+                finish()
             }
 
 

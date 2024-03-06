@@ -13,6 +13,7 @@ import com.app.service.implementation.GameServiceImpl
 class GameModel : ViewModel() {
     private val gameService: IGameService = GameServiceImpl()
     private var questions = gameService.shuffleQuestions()
+    private var answerOptions = mutableListOf<List<String>>()
     private var currentQuestionIndex: Int = 0
     private var hint: Int = 5
     private var sumCorrectAnswered: Int = 0
@@ -26,7 +27,6 @@ class GameModel : ViewModel() {
     private var currentAnsweredWithHint: Boolean = false
     private val correctQuestionIndex = mutableListOf<Int>()
     private var incorrectButtonIndex = mutableListOf<Int>()
-
 
     val totalScore
         get() = score
@@ -61,6 +61,14 @@ class GameModel : ViewModel() {
     val topicIcon: Int
         get() = questions[currentQuestionIndex].topicIcon
 
+    fun getAnswerOptions(mode: String) {
+        for (i in questions.indices) {
+            val answers =
+                gameService.getAnswers(mode, questions[i].answerOptions, questions[i].correctAnswer)
+            answerOptions.add(answers)
+        }
+    }
+
     fun nextQuestion(mode: String, optionBtn: List<Button>) {
         currentQuestionIndex = gameService.nextQuestion(currentQuestionIndex, questions)
         getOptions(mode, optionBtn)
@@ -78,8 +86,7 @@ class GameModel : ViewModel() {
     fun getOptions(mode: String, optionBtn: List<Button>) {
         gameService.getOptions(
             mode,
-            questions[currentQuestionIndex].answerOptions,
-            questions[currentQuestionIndex].correctAnswer,
+            answerOptions[currentQuestionIndex],
             optionBtn
         )
     }
@@ -92,27 +99,29 @@ class GameModel : ViewModel() {
         questions[currentQuestionIndex].isAnswered = true
         questionCounter++
         if (optionText.toString() == currentQuestionAnswer) {
-            if (hintUsedCounter==0){currentAnsweredWithHint = false}
+            if (hintUsedCounter == 0) {
+                currentAnsweredWithHint = false
+            }
             if (!currentAnsweredWithHint) {
                 correctQuestionIndex.add(currentQuestionIndex)
-                if(correctQuestionIndex.size == 2){
-                prevAnswerIsCorrect =
-                    questions[correctQuestionIndex[0]].isAnswered && questions[correctQuestionIndex[0]].isCorrect}
+                if (correctQuestionIndex.size == 2) {
+                    prevAnswerIsCorrect =
+                        questions[correctQuestionIndex[0]].isAnswered && questions[correctQuestionIndex[0]].isCorrect
+                }
             }
             questions[currentQuestionIndex].isCorrect = true
             optionBtn[currentOptionBtn].setBackgroundColor(btnRight)
-            currentAnswerIsCorrect  = true
+            currentAnswerIsCorrect = true
             sumCorrectAnswered++
-
         } else {
             optionBtn[currentOptionBtn].setBackgroundColor(btnWrong)
             sumIncorrectAnswered++
-            currentAnswerIsCorrect  = false
+            currentAnswerIsCorrect = false
             hintUsedCounter++
         }
-
     }
-    fun extraHint(context: Context):Int {
+
+    fun extraHint(context: Context): Int {
         if (currentAnswerIsCorrect && prevAnswerIsCorrect) {
             hint++
             currentAnswerIsCorrect = false
@@ -121,15 +130,13 @@ class GameModel : ViewModel() {
             correctQuestionIndex.clear()
             if (hint > 5) {
                 hint = 5
-                Toast.makeText(context, "No hay más pistas extras disponibles", Toast.LENGTH_SHORT).show()
-            }
-            else{
+                Toast.makeText(context, "No hay más pistas extras disponibles", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
                 Toast.makeText(context, "Tiene una pista extra", Toast.LENGTH_SHORT).show()
             }
 
         }
-
-
         return hint
     }
 
@@ -141,9 +148,14 @@ class GameModel : ViewModel() {
         }
         return hint
     }
-    fun incorrectButtonIndexList(optionBtn: List<Button>, isShuffled:Boolean, mode: String): Boolean {
-        if (!isShuffled){
-            when(mode){
+
+    fun incorrectButtonIndexList(
+        optionBtn: List<Button>,
+        isShuffled: Boolean,
+        mode: String
+    ): Boolean {
+        if (!isShuffled) {
+            when (mode) {
                 "medium" -> {
                     for (i in 0 until 3) {
                         if (currentQuestionAnswer != optionBtn[i].text) {
@@ -153,20 +165,17 @@ class GameModel : ViewModel() {
                     }
                 }
 
-                    "hard" -> {
-                        for (i in optionBtn.indices) {
-                            if (currentQuestionAnswer != optionBtn[i].text) {
+                "hard" -> {
+                    for (i in optionBtn.indices) {
+                        if (currentQuestionAnswer != optionBtn[i].text) {
                             incorrectButtonIndex.add(i)
                             incorrectButtonIndex = incorrectButtonIndex.shuffled().toMutableList()
                         }
                     }
                 }
             }
-
         }
-
         return isShuffled
-
     }
 
     fun checkHint(
@@ -197,6 +206,7 @@ class GameModel : ViewModel() {
                                 currentQuestionOptions,
                                 textAnsweredQuestion
                             )
+                            if (questionCounter > 9) optionBtn[i].performClick()
                         }
                     }
                     if (hintUsedCounter > 1) Toast.makeText(
@@ -209,12 +219,12 @@ class GameModel : ViewModel() {
 
             "medium" -> {
                 for (i in optionBtn.indices) {
-
                     if (currentQuestionAnswer != optionBtn[i].text && hintUsedCounter < 2) {
-                       optionBtn[incorrectButtonIndex[hintUsedCounter-1]].setBackgroundColor(btnWrong)
+                        optionBtn[incorrectButtonIndex[hintUsedCounter - 1]].setBackgroundColor(
+                            btnWrong
+                        )
                         currentAnsweredWithHint = true
-                   }
-                    else if (currentQuestionAnswer == optionBtn[i].text && hintUsedCounter == 2) {
+                    } else if (currentQuestionAnswer == optionBtn[i].text && hintUsedCounter == 2) {
                         optionBtn[i].setBackgroundColor(btnRight)
                         questions[currentQuestionIndex].isAnswered = true
                         questions[currentQuestionIndex].isCorrect = true
@@ -230,22 +240,21 @@ class GameModel : ViewModel() {
                             currentQuestionOptions,
                             textAnsweredQuestion
                         )
-                    } else if (hintUsedCounter > 2)
-                    {
+                        if (questionCounter > 9) optionBtn[i].performClick()
+                    } else if (hintUsedCounter > 2) {
                         Toast.makeText(context, "pista no disponible", Toast.LENGTH_SHORT).show()
                     }
-
                 }
             }
 
             "hard" -> {
                 for (i in optionBtn.indices) {
-
                     if (currentQuestionAnswer != optionBtn[i].text && hintUsedCounter < 3) {
-                        optionBtn[incorrectButtonIndex[hintUsedCounter-1]].setBackgroundColor(btnWrong)
+                        optionBtn[incorrectButtonIndex[hintUsedCounter - 1]].setBackgroundColor(
+                            btnWrong
+                        )
                         currentAnsweredWithHint = true
-                    }
-                    else if (hintUsedCounter == 3 && optionBtn[i].text == currentQuestionAnswer) {
+                    } else if (hintUsedCounter == 3 && optionBtn[i].text == currentQuestionAnswer) {
                         optionBtn[i].setBackgroundColor(btnRight)
                         questions[currentQuestionIndex].isAnswered = true
                         questions[currentQuestionIndex].isCorrect = true
@@ -261,16 +270,15 @@ class GameModel : ViewModel() {
                             currentQuestionOptions,
                             textAnsweredQuestion
                         )
-                    }
-                    else if (hintUsedCounter > 3) {
+                        if (questionCounter > 9) optionBtn[i].performClick()
+                    } else if (hintUsedCounter > 3) {
                         Toast.makeText(context, "Pista no disponible", Toast.LENGTH_SHORT).show()
-
                     }
                 }
             }
 
         }
-       // incorrectButtonIndex.clear()
+        // incorrectButtonIndex.clear()
 
     }
 
