@@ -23,4 +23,5 @@
     <string name="used_hints_text">Haz utilizado %1$s pistas</string>
     <string name="unused_hints_text">Te quedaron %1$s pistas</string>
     <string name="final_score_text">Tu puntaje final es de %1$s puntos</string>
+    <string name="btn_difficult">Puntuaciones</string>
 </resources>

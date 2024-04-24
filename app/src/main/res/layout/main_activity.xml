@@ -43,11 +43,12 @@
 
         <Button
             android:id="@+id/play_btn"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/brown"
             android:fontFamily="@font/chewy"
+            app:icon="@drawable/baseline_arrow_right_24"
             android:text="@string/btn_jugar" />
 
         <Space
@@ -56,25 +57,27 @@
 
         <Button
             android:id="@+id/option_btn"
-            android:layout_width="140dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="@color/brown"
             android:fontFamily="@font/chewy"
+            app:icon="@drawable/baseline_build_24"
             android:text="@string/btn_opciones" />
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="25dp" />
+        <Button
+            android:id="@+id/score_btn"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/brown"
+            android:fontFamily="@font/chewy"
+            app:icon="@drawable/baseline_castle_24"
+            android:text="@string/btn_difficult" />
 
-        <Spinner
-            android:id="@+id/difficulty_spin"
-            android:gravity="center"
-            android:layout_width="140dp"
-            android:layout_height="48dp"
-            android:popupBackground="@color/brown"
-            android:dropDownVerticalOffset="40dp"
-            android:fontFamily="@font/chewy" />
 
     </LinearLayout>
 
