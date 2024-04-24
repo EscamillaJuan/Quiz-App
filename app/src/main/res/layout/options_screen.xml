@@ -25,6 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/chewy"
         android:gravity="center"
         android:text="Seleccione los temas deseados en la partida"
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="0dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/chewy"
             android:text="Categoria 1">
 
@@ -52,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="54dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/Theme1CheckBox"
             android:fontFamily="@font/chewy"
@@ -65,11 +66,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="54dp"
+            android:layout_marginStart="35dp"
             android:layout_toEndOf="@+id/Theme2CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 3">
+            android:text="Categoria 3"
+            android:layout_marginEnd="10dp">
 
         </CheckBox>
 
@@ -80,6 +81,7 @@
             android:layout_below="@id/Theme1CheckBox"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/chewy"
+            android:layout_marginStart="10dp"
             android:text="Categoria 4">
 
         </CheckBox>
@@ -89,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Theme2CheckBox"
-            android:layout_marginStart="54dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@+id/Theme1CheckBox"
             android:fontFamily="@font/chewy"
@@ -102,23 +104,53 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Theme3CheckBox"
-            android:layout_marginStart="54dp"
+            android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@+id/Theme5CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 6">
-        </CheckBox>
+            android:text="Categoria 6"
+            android:layout_marginEnd="10dp">
 
+        </CheckBox>
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/Questiontext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/chewy"
+        android:text="Selecciona el numero de preguntas deseadas">
+
+    </TextView>
 
     <com.google.android.material.slider.Slider
         android:id="@+id/QuestionsSlider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:max="10"
         android:stepSize="1"
         android:valueFrom="5"
         android:valueTo="10">
+
     </com.google.android.material.slider.Slider>
+
+    <TextView
+        android:id="@+id/DificultadText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/chewy"
+        android:gravity="center"
+        android:text="Seleccione la dificultad"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
 
     <Spinner
         android:id="@+id/difficulty_spin"
@@ -146,7 +178,6 @@
             android:fontFamily="@font/chewy"
             android:text="@string/returnTextButton"
             app:icon="@drawable/baseline_arrow_back_24" />
-
     </LinearLayout>
 
 </LinearLayout>
