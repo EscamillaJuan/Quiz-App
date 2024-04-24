@@ -12,36 +12,129 @@
     <TextView
         android:id="@+id/optionsText"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="150dp"
         android:layout_gravity="end"
         android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
         android:gravity="center"
         android:text="@string/options_Text"
+        android:textColor="@color/brown"
         android:textSize="32sp" />
 
-    <ImageView
-        android:id="@+id/workinprogress_icon"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
-        android:contentDescription="@string/topic_icon_description"
-        android:src="@drawable/building" />
-
     <TextView
-        android:id="@+id/workinprogressText"
+        android:id="@+id/TemasText"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
         android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
         android:gravity="center"
-        android:text="@string/workinprogress_Text" />
+        android:text="Seleccione los temas deseados en la partida"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:id="@+id/Theme1CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="0dp"
+            android:fontFamily="@font/chewy"
+            android:text="Categoria 1">
+
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/Theme2CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="0dp"
+            android:layout_toEndOf="@+id/Theme1CheckBox"
+            android:fontFamily="@font/chewy"
+            android:text="Categoria 2">
+
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/Theme3CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="54dp"
+            android:layout_toEndOf="@+id/Theme2CheckBox"
+            android:fontFamily="@font/chewy"
+            android:text="Categoria 3">
+
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/Theme4CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Theme1CheckBox"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/chewy"
+            android:text="Categoria 4">
+
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/Theme5CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Theme2CheckBox"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/Theme1CheckBox"
+            android:fontFamily="@font/chewy"
+            android:text="Categoria 5">
+
+        </CheckBox>
+
+        <CheckBox
+            android:id="@+id/Theme6CheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Theme3CheckBox"
+            android:layout_marginStart="54dp"
+            android:layout_marginTop="15dp"
+            android:layout_toEndOf="@+id/Theme5CheckBox"
+            android:fontFamily="@font/chewy"
+            android:text="Categoria 6">
+        </CheckBox>
+
+    </RelativeLayout>
+
+    <com.google.android.material.slider.Slider
+        android:id="@+id/QuestionsSlider"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:stepSize="1"
+        android:valueFrom="5"
+        android:valueTo="10">
+    </com.google.android.material.slider.Slider>
+
+    <Spinner
+        android:id="@+id/difficulty_spin"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:dropDownVerticalOffset="40dp"
+        android:fontFamily="@font/chewy"
+        android:gravity="center"
+        android:popupBackground="@color/brown" />
+
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
@@ -49,8 +142,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/brown"
-            android:fontFamily="@font/chewy"
             android:drawablePadding="8dp"
+            android:fontFamily="@font/chewy"
             android:text="@string/returnTextButton"
             app:icon="@drawable/baseline_arrow_back_24" />
 
