@@ -18,16 +18,16 @@ val btnRight = Color.parseColor("#99CC00")
 class MainActivity : AppCompatActivity() {
     private lateinit var openBtn: Button
     private lateinit var optionBtn: Button
-    private lateinit var modeSp: Spinner
+    //private lateinit var modeSp: Spinner
     private var mode = "medium"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
         openBtn = findViewById(R.id.play_btn)
-        modeSp = findViewById(R.id.difficulty_spin)
+        //modeSp = findViewById(R.id.difficulty_spin)
         optionBtn = findViewById(R.id.option_btn)
 
-        ArrayAdapter.createFromResource(
+        /*ArrayAdapter.createFromResource(
             this,
             R.array.modes_array,
             android.R.layout.simple_spinner_item
@@ -35,12 +35,13 @@ class MainActivity : AppCompatActivity() {
             it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             modeSp.adapter = it
         }
+        */
         openBtn.setOnClickListener {
-            when (modeSp.selectedItem.toString()) {
+            /*when (modeSp.selectedItem.toString()) {
                 "Fácil" -> mode = "easy"
                 "Medio" -> mode = "medium"
                 "Dificil" -> mode = "hard"
-            }
+            }*/
             val intent = Intent(this, GameScreen::class.java)
             intent.putExtra(SELECTED_DIFFICULT, mode)
             startActivity(intent)
