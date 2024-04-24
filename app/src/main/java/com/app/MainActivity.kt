@@ -30,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         optionBtn = findViewById(R.id.option_btn)
         scoreBtn = findViewById(R.id.score_btn)
 /*
-        ArrayAdapter.createFromResource(
+    ArrayAdapter.createFromResource(
             this,
             R.array.modes_array,
             android.R.layout.simple_spinner_item
@@ -40,14 +40,15 @@ class MainActivity : AppCompatActivity() {
         }
 
  */
+    
+  
         openBtn.setOnClickListener {
-          /* when (modeSp.selectedItem.toString()) {
+            /*when (modeSp.selectedItem.toString()) {
                 "Fácil" -> mode = "easy"
                 "Medio" -> mode = "medium"
                 "Dificil" -> mode = "hard"
-            }
+            }*/
 
-           */
             val intent = Intent(this, GameScreen::class.java)
             intent.putExtra(SELECTED_DIFFICULT, mode)
             startActivity(intent)
