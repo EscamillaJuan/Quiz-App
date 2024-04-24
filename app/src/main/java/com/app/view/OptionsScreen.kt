@@ -61,6 +61,7 @@ class OptionsScreen : AppCompatActivity()  {
             //Creo el slider
 
 
+
             prevBtn.setOnClickListener {
                 finish()
             }

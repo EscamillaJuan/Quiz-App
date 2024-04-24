@@ -67,10 +67,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_marginStart="35dp"
+            android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/Theme2CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 3"
-            android:layout_marginEnd="10dp">
+            android:text="Categoria 3">
 
         </CheckBox>
 
@@ -79,9 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Theme1CheckBox"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/chewy"
-            android:layout_marginStart="10dp"
             android:text="Categoria 4">
 
         </CheckBox>
@@ -106,10 +106,10 @@
             android:layout_below="@id/Theme3CheckBox"
             android:layout_marginStart="35dp"
             android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
             android:layout_toEndOf="@+id/Theme5CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 6"
-            android:layout_marginEnd="10dp">
+            android:text="Categoria 6">
 
         </CheckBox>
     </RelativeLayout>
@@ -134,7 +134,11 @@
         android:max="10"
         android:stepSize="1"
         android:valueFrom="5"
-        android:valueTo="10">
+        android:valueTo="10"
+        app:thumbColor="@color/brown"
+        app:tickColorActive="@color/black"
+        app:tickColorInactive="@color/brown"
+        app:tickVisible="false" >
 
     </com.google.android.material.slider.Slider>
 
@@ -143,13 +147,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/chewy"
         android:gravity="center"
         android:text="Seleccione la dificultad"
         android:textColor="@color/black"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+        android:textSize="15sp" />
 
 
     <Spinner
@@ -173,6 +177,7 @@
             android:id="@+id/return_options_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
             android:backgroundTint="@color/brown"
             android:drawablePadding="8dp"
             android:fontFamily="@font/chewy"
