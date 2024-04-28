@@ -9,11 +9,13 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.app.R
-import com.app.btnColor
+import com.app.database.AppDatabase
 import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
+import com.app.utils.ViewModelFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,8 +24,13 @@ import kotlinx.coroutines.launch
 const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
 
 class GameScreen : AppCompatActivity() {
+    private lateinit var gameModel: GameModel
+    private lateinit var db: AppDatabase
 
-    private val gameModel: GameModel by viewModels()
+//    private val db = AppDatabase.get(this)
+//    private val topicDao = db.topicDao()
+//    private val gameModel: GameModel by viewModels()
+
     private val gameService: IGameService = GameServiceImpl()
     private lateinit var rootLayout: LinearLayout
     private lateinit var textAnsweredQuestion: TextView
@@ -43,6 +50,11 @@ class GameScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
 
+        db = AppDatabase.get(this)
+
+        gameModel = ViewModelProvider(this, ViewModelFactory(db)).get(GameModel::class.java)
+
+
         rootLayout = findViewById(R.id.root_layout)
         textAnsweredQuestion = findViewById(R.id.text_answered_question)
         nextBtn = findViewById(R.id.next_btn)
@@ -56,6 +68,9 @@ class GameScreen : AppCompatActivity() {
         options.add(findViewById(R.id.option_2))
         options.add(findViewById(R.id.option_3))
         options.add(findViewById(R.id.option_4))
+
+//        val dbQuestions = topicDao.getTopicWithQuestions(10)
+//        gameModel.questions = gameService.shuffleQuestions(dbQuestions)
 
         hintBtn.text = gameModel.currentHintText
         questionText.text = gameModel.currentQuestionText

@@ -7,12 +7,15 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import com.app.btnRight
 import com.app.btnWrong
+import com.app.database.AppDatabase
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 
-class GameModel : ViewModel() {
+class GameModel(db: AppDatabase) : ViewModel() {
+    private val topicDao = db.topicDao()
+    private val questionsDb = topicDao.getTopicWithQuestions(10)
     private val gameService: IGameService = GameServiceImpl()
-    private var questions = gameService.shuffleQuestions()
+    private val questions =gameService.shuffleQuestions(questionsDb)
     private var answerOptions = mutableListOf<List<String>>()
     private var currentQuestionIndex: Int = 0
     private var hint: Int = 5

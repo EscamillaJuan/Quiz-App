@@ -4,9 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.Spinner
+import com.app.database.AppDatabase
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
 import com.app.view.SELECTED_DIFFICULT
@@ -24,11 +23,13 @@ class MainActivity : AppCompatActivity() {
     private var mode = "medium"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppDatabase.get(this)
         setContentView(R.layout.main_activity)
         openBtn = findViewById(R.id.play_btn)
         //modeSp = findViewById(R.id.difficulty_spin)
         optionBtn = findViewById(R.id.option_btn)
         scoreBtn = findViewById(R.id.score_btn)
+
 /*
     ArrayAdapter.createFromResource(
             this,
@@ -62,5 +63,6 @@ class MainActivity : AppCompatActivity() {
             val intentionBtn = Intent(this, ScoreScreen::class.java)
             startActivity(intentionBtn)
         }
+        val db = AppDatabase.get(this)
     }
 }

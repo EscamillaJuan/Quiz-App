@@ -6,33 +6,41 @@ import android.widget.TextView
 import com.app.btnColor
 import com.app.btnRight
 import com.app.btnWrong
-import com.app.model.GameQuestion
-import com.app.model.QuestionListProvider
-import com.app.model.entity.Question
+import com.app.database.entity.Topic
+import com.app.utils.GameQuestionModel
+import com.app.database.entity.Question
 import com.app.service.IGameService
 
 class GameServiceImpl : IGameService {
-    private val questions = QuestionListProvider.items
-
-    override fun shuffleQuestions(): List<GameQuestion> {
-        return questions.shuffled().subList(0, 10).map { question: Question ->
-            GameQuestion(
-                text = question.text,
-                topic = question.topic,
-                topicIcon = question.topicIcon,
-                answerOptions = question.answerOptions,
-                correctAnswer = question.correctAnswer,
-                isAnswered = false,
-                isCorrect = false
-            )
+    override fun shuffleQuestions(topicWithQuestions: Map<Topic, List<Question>>): List<GameQuestionModel> {
+        val gameQuestions = mutableListOf<GameQuestionModel>()
+        topicWithQuestions.forEach { (topic, questions) ->
+            questions.forEach { question ->
+                gameQuestions.add(
+                    GameQuestionModel(
+                        text = question.text,
+                        topic = topic.title,
+                        topicIcon = topic.icon,
+                        answerOptions = listOf(
+                            question.option1,
+                            question.option2,
+                            question.option3,
+                        ),
+                        correctAnswer = question.answer,
+                        isAnswered = false,
+                        isCorrect = false,
+                    )
+                )
+            }
         }
+        return gameQuestions
     }
 
-    override fun nextQuestion(index: Int, questions: List<GameQuestion>): Int {
+    override fun nextQuestion(index: Int, questions: List<GameQuestionModel>): Int {
         return (index + 1) % questions.size
     }
 
-    override fun prevQuestions(index: Int, questions: List<GameQuestion>): Int {
+    override fun prevQuestions(index: Int, questions: List<GameQuestionModel>): Int {
         return (index - 1 + questions.size) % questions.size
     }
 
