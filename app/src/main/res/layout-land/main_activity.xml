@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
@@ -23,15 +24,17 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/trivio_text_image"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/trivio_text_image" />
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:src="@mipmap/ic_logo"/>
+            android:src="@mipmap/ic_logo" />
 
     </LinearLayout>
 
@@ -55,8 +58,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/chewy"
             android:backgroundTint="@color/brown"
+            android:fontFamily="@font/chewy"
             android:text="@string/btn_jugar" />
 
         <Space
@@ -67,9 +70,9 @@
         <Spinner
             android:id="@+id/difficulty_spin"
             android:layout_width="wrap_content"
-            android:popupBackground="@color/brown"
             android:layout_height="48dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:popupBackground="@color/brown" />
 
 
         <Space
@@ -82,8 +85,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="@font/chewy"
             android:backgroundTint="@color/brown"
+            android:fontFamily="@font/chewy"
             android:text="@string/btn_opciones" />
 
         <Space

@@ -1,88 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
-    
-    <ImageView
-        android:id="@+id/trivioText_image"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        app:srcCompat="@mipmap/trivio_text_image" />
-
-
-    <ImageView
-        android:id="@+id/logo_image"
-        android:layout_width="match_parent"
-        android:layout_height="127dp"
-        android:src="@mipmap/ic_logo">
-
-    </ImageView>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="0.3" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/orange"
+        android:gravity="center"
         android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/trivioText_image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:srcCompat="@mipmap/trivio_text_image" />
+
+
+        <ImageView
+            android:id="@+id/logo_image"
+            android:layout_width="match_parent"
+            android:layout_height="127dp"
+            android:src="@mipmap/ic_logo">
+
+        </ImageView>
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.3" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/play_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/brown"
+                android:fontFamily="@font/chewy"
+                android:text="@string/btn_jugar"
+                app:icon="@drawable/baseline_arrow_right_24" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <Button
+                android:id="@+id/option_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/brown"
+                android:fontFamily="@font/chewy"
+                android:text="@string/btn_opciones"
+                app:icon="@drawable/baseline_build_24" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="25dp" />
+
+            <Button
+                android:id="@+id/score_btn"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/brown"
+                android:fontFamily="@font/chewy"
+                android:text="@string/btn_difficult"
+                app:icon="@drawable/baseline_castle_24" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/play_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/brown"
-            android:fontFamily="@font/chewy"
-            app:icon="@drawable/baseline_arrow_right_24"
-            android:text="@string/btn_jugar" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="20dp" />
-
-        <Button
-            android:id="@+id/option_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/brown"
-            android:fontFamily="@font/chewy"
-            app:icon="@drawable/baseline_build_24"
-            android:text="@string/btn_opciones" />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="25dp" />
-        <Button
-            android:id="@+id/score_btn"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/brown"
-            android:fontFamily="@font/chewy"
-            app:icon="@drawable/baseline_castle_24"
-            android:text="@string/btn_difficult" />
-
-
     </LinearLayout>
-
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="1" />
-
-</LinearLayout>
+</FrameLayout>

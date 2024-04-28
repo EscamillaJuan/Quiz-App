@@ -4,8 +4,13 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import com.app.database.AppDatabase
+import com.app.usecases.NewGame
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
 import com.app.view.SELECTED_DIFFICULT
@@ -18,9 +23,13 @@ val btnRight = Color.parseColor("#99CC00")
 class MainActivity : AppCompatActivity() {
     private lateinit var openBtn: Button
     private lateinit var optionBtn: Button
+
     //private lateinit var modeSp: Spinner
-    private lateinit var scoreBtn : Button
+    private lateinit var scoreBtn: Button
+
     private var mode = "medium"
+    var doubleBackToExitPressedOnce = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AppDatabase.get(this)
@@ -30,39 +39,54 @@ class MainActivity : AppCompatActivity() {
         optionBtn = findViewById(R.id.option_btn)
         scoreBtn = findViewById(R.id.score_btn)
 
-/*
-    ArrayAdapter.createFromResource(
-            this,
-            R.array.modes_array,
-            android.R.layout.simple_spinner_item
-        ).also {
-            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            modeSp.adapter = it
-        }
 
- */
-    
-  
+
+        onBackPressedDispatcher.addCallback(
+            this@MainActivity,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (supportFragmentManager.backStackEntryCount > 0) {
+                        return
+                    } else {
+                        if (doubleBackToExitPressedOnce) {
+                            finish()
+                        } else {
+                            doubleBackToExitPressedOnce = true
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Press again to exit",
+                                Toast.LENGTH_SHORT
+                            ).show()
+
+                            Handler(Looper.getMainLooper()).postDelayed({
+                                doubleBackToExitPressedOnce = false
+                            }, 2000)
+                        }
+                    }
+                }
+            })
+
+
         openBtn.setOnClickListener {
-            /*when (modeSp.selectedItem.toString()) {
-                "Fácil" -> mode = "easy"
-                "Medio" -> mode = "medium"
-                "Dificil" -> mode = "hard"
-            }*/
 
-            val intent = Intent(this, GameScreen::class.java)
-            intent.putExtra(SELECTED_DIFFICULT, mode)
-            startActivity(intent)
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val newGameFragment = NewGame()
+            val bundle = Bundle()
+            bundle.putString(SELECTED_DIFFICULT, mode)
+            newGameFragment.arguments = bundle
+            fragmentTransaction.add(R.id.root_layout, newGameFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
         }
 
         optionBtn.setOnClickListener {
             val intentionBtn = Intent(this, OptionsScreen::class.java)
             startActivity(intentionBtn)
         }
-        scoreBtn.setOnClickListener{
+        scoreBtn.setOnClickListener {
             val intentionBtn = Intent(this, ScoreScreen::class.java)
             startActivity(intentionBtn)
         }
-        val db = AppDatabase.get(this)
     }
 }

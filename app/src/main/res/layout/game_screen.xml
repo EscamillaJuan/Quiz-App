@@ -137,6 +137,7 @@
             android:contentDescription="@string/next_btn_description"
             android:src="@drawable/next" />
 
+
     </LinearLayout>
 
 </LinearLayout>

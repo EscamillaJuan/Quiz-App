@@ -2,11 +2,16 @@ package com.app.view
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import android.window.OnBackInvokedDispatcher
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -16,6 +21,7 @@ import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 import com.app.utils.ViewModelFactory
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -26,10 +32,8 @@ const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
 class GameScreen : AppCompatActivity() {
     private lateinit var gameModel: GameModel
     private lateinit var db: AppDatabase
-
-//    private val db = AppDatabase.get(this)
-//    private val topicDao = db.topicDao()
-//    private val gameModel: GameModel by viewModels()
+    private var backPressedTime: Long = 0
+    private val doublePressInterval: Long = 2000
 
     private val gameService: IGameService = GameServiceImpl()
     private lateinit var rootLayout: LinearLayout
@@ -45,11 +49,30 @@ class GameScreen : AppCompatActivity() {
 
 
     private var mode = "medium"
+    var doubleBackToExitPressedOnce = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
 
+        onBackPressedDispatcher.addCallback(this@GameScreen, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (doubleBackToExitPressedOnce) {
+                    finish()
+                }
+                this@GameScreen.doubleBackToExitPressedOnce = true
+                supportFragmentManager.popBackStack()
+                Toast.makeText(
+                    this@GameScreen,
+                    "Presiona de nuevo para salir",
+                    Toast.LENGTH_SHORT
+                ).show()
+                Handler(Looper.getMainLooper()).postDelayed({
+                    doubleBackToExitPressedOnce = false
+                }, 2000)
+            }
+        })
         db = AppDatabase.get(this)
 
         gameModel = ViewModelProvider(this, ViewModelFactory(db)).get(GameModel::class.java)
@@ -69,9 +92,6 @@ class GameScreen : AppCompatActivity() {
         options.add(findViewById(R.id.option_3))
         options.add(findViewById(R.id.option_4))
 
-//        val dbQuestions = topicDao.getTopicWithQuestions(10)
-//        gameModel.questions = gameService.shuffleQuestions(dbQuestions)
-
         hintBtn.text = gameModel.currentHintText
         questionText.text = gameModel.currentQuestionText
         questionsCounter.text = gameModel.counterText
@@ -89,6 +109,7 @@ class GameScreen : AppCompatActivity() {
             textAnsweredQuestion
         )
         gameModel.incorrectButtonIndexList(options, false, mode)
+
 
         nextBtn.setOnClickListener {
             gameModel.nextQuestion(mode, options)
