@@ -2,8 +2,10 @@ package com.app.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ListView
 import android.widget.TextView
 import android.widget.ViewFlipper
+import androidx.recyclerview.widget.RecyclerView
 import com.app.R
 import com.app.database.AppDatabase
 
@@ -18,6 +20,8 @@ class ScoreScreen : AppCompatActivity() {
     private lateinit var totalUsedHints: TextView
     private lateinit var totalUnusedHints: TextView
     private lateinit var totalScore: TextView
+    private lateinit var listViewScore: ListView
+
 
     private var score = 0
     private var correctAnswers = 0
@@ -31,10 +35,12 @@ class ScoreScreen : AppCompatActivity() {
         totalUsedHints = findViewById(R.id.total_used_hints)
         totalUnusedHints = findViewById(R.id.total_unused_hints)
         totalScore = findViewById(R.id.total_score)
+        listViewScore = findViewById(R.id.listViewScore)
 
         viewFlipper.flipInterval = 2000
         viewFlipper.isAutoStart = true
         viewFlipper.startFlipping()
+
 
         score = intent.getIntExtra(SCORE, 0)
         correctAnswers = intent.getIntExtra(TOTAL_ANSWERS, 0)
@@ -44,5 +50,11 @@ class ScoreScreen : AppCompatActivity() {
         totalCorrectAnswers.text = getString(R.string.total_answers_text, correctAnswers.toString())
         totalUsedHints.text = getString(R.string.used_hints_text, usedHints.toString())
         totalUnusedHints.text = getString(R.string.unused_hints_text, unusedHints.toString())
+
+
+
+
+
+
     }
 }
