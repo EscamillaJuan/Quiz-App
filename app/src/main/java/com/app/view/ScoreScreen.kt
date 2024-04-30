@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 import android.widget.ViewFlipper
 import com.app.R
+import com.app.database.AppDatabase
 
 const val SCORE = "SCORE"
 const val TOTAL_ANSWERS = "TOTAL_ANSWERS"

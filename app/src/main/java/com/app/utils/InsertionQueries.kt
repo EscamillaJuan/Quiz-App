@@ -48,4 +48,6 @@ class InsertionQueries {
         "INSERT INTO question(_id, topic_id, text, answer, option_1, option_2, option_3) VALUES(28, 5, '¿Cuál de las siguientes es una base de datos relacional ampliamente utilizada?', 'MySQL', 'PostgreSQL', 'SQLite', 'MySQL')",
         "INSERT INTO question(_id, topic_id, text, answer, option_1, option_2, option_3) VALUES(29, 5, '¿Qué protocolo se utiliza para transferir páginas web a través de Internet?', 'HTTP', 'HTTPS', 'FTP', 'HTTP')"
     )
+
+    val gameSessionInsert = "INSERT INTO game_session(_id, mode, question_qty, done) VALUES(0, 'medium', 10, 1)"
 }

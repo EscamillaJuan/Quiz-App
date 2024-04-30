@@ -5,14 +5,20 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModel
+import androidx.room.ColumnInfo
+import androidx.room.PrimaryKey
 import com.app.btnRight
 import com.app.btnWrong
 import com.app.database.AppDatabase
+import com.app.database.dao.GameSessionQuestionDao
+import com.app.database.entity.GameSessionQuestion
+import com.app.database.entity.Question
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 
 class GameModel(db: AppDatabase) : ViewModel() {
     private val topicDao = db.topicDao()
+    private val gameSessionQuestionDao = db.gameSessionQuestionsDao()
     private val questionsDb = topicDao.getTopicWithQuestions(10)
     private val gameService: IGameService = GameServiceImpl()
     private val questions =gameService.shuffleQuestions(questionsDb)
@@ -101,7 +107,17 @@ class GameModel(db: AppDatabase) : ViewModel() {
     ) {
         questions[currentQuestionIndex].isAnswered = true
         questionCounter++
-        if (optionText.toString() == currentQuestionAnswer) {
+        val isCorrect = optionText.toString() == currentQuestionAnswer
+        gameSessionQuestionDao.updateQuestion(
+            GameSessionQuestion(
+                id = questionCounter,
+                questionId = questions[currentQuestionIndex].id,
+                gameSessionId = 0,
+                isAnswered = true,
+                isCorrect= isCorrect,
+            )
+        )
+        if (isCorrect) {
             if (hintUsedCounter == 0) {
                 currentAnsweredWithHint = false
             }

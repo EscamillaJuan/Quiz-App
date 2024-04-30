@@ -18,6 +18,7 @@ class GameServiceImpl : IGameService {
             questions.forEach { question ->
                 gameQuestions.add(
                     GameQuestionModel(
+                        id = question.id,
                         text = question.text,
                         topic = topic.title,
                         topicIcon = topic.icon,

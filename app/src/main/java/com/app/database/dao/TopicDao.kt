@@ -1,12 +1,7 @@
 package com.app.database.dao
 
 import androidx.room.Dao
-import androidx.room.DatabaseView
-import androidx.room.Embedded
-import androidx.room.Ignore
 import androidx.room.Query
-import androidx.room.Relation
-import com.app.database.entity.Option
 import com.app.database.entity.Question
 import com.app.database.entity.Topic
 

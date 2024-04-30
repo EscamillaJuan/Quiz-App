@@ -1,6 +1,7 @@
 package com.app.utils
 
 data class GameQuestionModel(
+    val id: Int,
     val text: String,
     val topic: String,
     val topicIcon: Int,

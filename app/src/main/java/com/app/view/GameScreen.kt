@@ -31,9 +31,8 @@ const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
 
 class GameScreen : AppCompatActivity() {
     private lateinit var gameModel: GameModel
-    private lateinit var db: AppDatabase
-    private var backPressedTime: Long = 0
-    private val doublePressInterval: Long = 2000
+    private val db = AppDatabase.get(this)
+    private val gameSessionDao = db.gameSessionDao()
 
     private val gameService: IGameService = GameServiceImpl()
     private lateinit var rootLayout: LinearLayout
@@ -59,6 +58,7 @@ class GameScreen : AppCompatActivity() {
         onBackPressedDispatcher.addCallback(this@GameScreen, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (doubleBackToExitPressedOnce) {
+                    gameSessionDao.saveGameSession(false)
                     finish()
                 }
                 this@GameScreen.doubleBackToExitPressedOnce = true
@@ -73,10 +73,8 @@ class GameScreen : AppCompatActivity() {
                 }, 2000)
             }
         })
-        db = AppDatabase.get(this)
 
-        gameModel = ViewModelProvider(this, ViewModelFactory(db)).get(GameModel::class.java)
-
+        gameModel = ViewModelProvider(this, ViewModelFactory(db))[GameModel::class.java]
 
         rootLayout = findViewById(R.id.root_layout)
         textAnsweredQuestion = findViewById(R.id.text_answered_question)
@@ -175,7 +173,9 @@ class GameScreen : AppCompatActivity() {
                     intent.putExtra(TOTAL_UNUSED_HINTS, gameModel.unusedHintsCounter)
                     intent.putExtra(TOTAL_ANSWERS, gameModel.correctAnswersCounter)
                     CoroutineScope(Dispatchers.Main).launch {
+                        gameSessionDao.saveGameSession(true)
                         delay(1000)
+                        finish()
                         startActivity(intent)
                     }
                 } else {
