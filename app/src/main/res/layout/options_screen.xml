@@ -39,77 +39,80 @@
 
         <CheckBox
             android:id="@+id/Theme1CheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 1">
+            android:text="Cine">
 
         </CheckBox>
 
         <CheckBox
             android:id="@+id/Theme2CheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/Theme1CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 2">
+            android:text="Arte">
 
         </CheckBox>
 
         <CheckBox
             android:id="@+id/Theme3CheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginEnd="20dp"
             android:layout_toEndOf="@+id/Theme2CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 3">
+            android:layout_alignParentEnd="true"
+            android:text="Historia">
 
         </CheckBox>
 
         <CheckBox
             android:id="@+id/Theme4CheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/Theme1CheckBox"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
+            android:layout_alignParentStart="true"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 4">
+            android:text="Musica">
 
         </CheckBox>
 
         <CheckBox
             android:id="@+id/Theme5CheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/Theme2CheckBox"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@+id/Theme1CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 5">
+            android:text="Ciencia">
 
         </CheckBox>
 
         <CheckBox
             android:id="@+id/Theme6CheckBox"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/Theme3CheckBox"
-            android:layout_marginStart="35dp"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="20dp"
             android:layout_toEndOf="@+id/Theme5CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Categoria 6">
+            android:text="Tecnología"
+            android:layout_alignParentEnd="true">
 
         </CheckBox>
     </RelativeLayout>
