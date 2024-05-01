@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.CheckBox
@@ -36,20 +37,20 @@ class OptionsScreen : AppCompatActivity() {
     private lateinit var themeText: TextView
     private lateinit var questionTxt: TextView
     private lateinit var questionSlider: Slider
-    private lateinit var checkbx1: CheckBox
-    private lateinit var checkbx2: CheckBox
-    private lateinit var checkbx3: CheckBox
-    private lateinit var checkbx4: CheckBox
-    private lateinit var checkbx5: CheckBox
-    private lateinit var checkbx6: CheckBox
-    private lateinit var prevBtn: Button
     private lateinit var modeSp: Spinner
     private lateinit var dificultadtxt: TextView
     private lateinit var hintstxt: TextView
-    private lateinit var hintstw: Switch
-    private lateinit var selectedthemes: MutableList<String>
-    private lateinit var setOptions: GameOption
+    private lateinit var hintswt: Switch
+    private val checkBox = mutableListOf<CheckBox>()
 
+    val topicThemes = listOf(
+        "Cine",
+        "Arte",
+        "Historia",
+        "Música",
+        "Ciencia",
+        "Tecnología"
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -57,23 +58,22 @@ class OptionsScreen : AppCompatActivity() {
         setContentView(R.layout.options_screen)
 
         //Inicializacion de los elementos del layout
-        prevBtn = findViewById(R.id.return_options_btn)
         modeSp = findViewById(R.id.difficulty_spin)
         opText = findViewById(R.id.optionsText)
         themeText = findViewById(R.id.TemasText)
         questionTxt = findViewById(R.id.Questiontext)
-        checkbx1 = findViewById(R.id.Theme1CheckBox)
-        checkbx2 = findViewById(R.id.Theme2CheckBox)
-        checkbx3 = findViewById(R.id.Theme3CheckBox)
-        checkbx4 = findViewById(R.id.Theme4CheckBox)
-        checkbx5 = findViewById(R.id.Theme5CheckBox)
-        checkbx6 = findViewById(R.id.Theme6CheckBox)
+        checkBox.add(findViewById(R.id.Theme1CheckBox))
+        checkBox.add(findViewById(R.id.Theme2CheckBox))
+        checkBox.add(findViewById(R.id.Theme3CheckBox))
+        checkBox.add(findViewById(R.id.Theme4CheckBox))
+        checkBox.add(findViewById(R.id.Theme5CheckBox))
+        checkBox.add(findViewById(R.id.Theme6CheckBox))
+
         questionSlider = findViewById(R.id.QuestionsSlider)
         dificultadtxt = findViewById(R.id.DificultadText)
-        hintstw = findViewById(R.id.hint_stw)
+        hintswt = findViewById(R.id.hint_stw)
         hintstxt = findViewById(R.id.hints_txt)
 
-        //Creacion del adaptador para el spinner
         ArrayAdapter.createFromResource(
             this,
             R.array.modes_array,
@@ -83,55 +83,79 @@ class OptionsScreen : AppCompatActivity() {
             modeSp.adapter = it
         }
 
-        //Inicializacion de los elementos del layout con los valores de la base de datos
         val gameOption = gameOptionDao.getGameOption()
-        checkbx1.isChecked = gameOption.cine
-        checkbx2.isChecked = gameOption.arte
-        checkbx3.isChecked = gameOption.historia
-        checkbx4.isChecked = gameOption.musica
-        checkbx5.isChecked = gameOption.ciencia
-        checkbx6.isChecked = gameOption.tecnologia
-        hintstw.isChecked = gameOption.hint
+        val topics = listOf(
+            gameOption.cine,
+            gameOption.arte,
+            gameOption.historia,
+            gameOption.musica,
+            gameOption.ciencia,
+            gameOption.tecnologia
+        )
+        for (i in checkBox.indices) {
+            checkBox[i].isChecked = topics[i]
+        }
+
+        hintswt.isChecked = gameOption.hint
         questionSlider.value = gameOption.questionQty.toFloat()
         modeSp.setSelection(gameOption.mode)
 
-        //Creo el slider
-        questionSlider.addOnChangeListener { slider, value, fromUser ->
+        questionSlider.addOnChangeListener { _, value, _ ->
+            val updatedGameOption = gameOption.copy(questionQty = value.toInt())
+            gameOptionDao.updateGameOption(updatedGameOption)
         }
 
-        //Agrego listener de los checkboxes
-
-
-        /*if (checkbx1.isChecked){ selectedthemes.add(checkbx1.text.toString())}
-        if (checkbx2.isChecked){ selectedthemes.add(checkbx2.text.toString())}
-        if (checkbx3.isChecked){ selectedthemes.add(checkbx3.text.toString())}
-        if (checkbx4.isChecked){ selectedthemes.add(checkbx4.text.toString())}
-        if (checkbx5.isChecked){ selectedthemes.add(checkbx5.text.toString())}
-        if (checkbx6.isChecked){ selectedthemes.add(checkbx6.text.toString())}*/
-
-        //Funcionamiento del switch
-        hintstw.setOnCheckedChangeListener { buttonView, isChecked ->
+        hintswt.setOnCheckedChangeListener { _, isChecked ->
+            val updatedGameOption = gameOption.copy(hint = isChecked)
+            gameOptionDao.updateGameOption(updatedGameOption)
+            hintstxt.text = if (isChecked) "Usaras pistas" else "No usaras pistas"
         }
 
-        //Agrego los cambios a la base de datos al cerrar el activity
-        prevBtn.setOnClickListener {
-            gameOptionDao.updateGameOption(
-                GameOption(
-                    0,
-                    modeSp.selectedItemId.toInt(),
-                    questionSlider.value.toInt(),
-                    hintstw.isChecked,
-                    checkbx1.isChecked,
-                    checkbx2.isChecked,
-                    checkbx3.isChecked,
-                    checkbx4.isChecked,
-                    checkbx5.isChecked,
-                    checkbx6.isChecked,
-                )
-            )
-            finish()
+        checkBox[0].setOnCheckedChangeListener { _, isChecked ->
+            checkBox[0].isChecked = isChecked
+            val updatedGameOption = gameOption.copy(cine = isChecked)
+            gameOptionDao.updateGameOption(updatedGameOption)
+        }
+        checkBox[1].setOnCheckedChangeListener { _, isChecked ->
+            checkBox[1].isChecked = isChecked
+            val updatedGameOption = gameOption.copy(arte = isChecked)
+            gameOptionDao.updateGameOption(updatedGameOption)
+        }
+        checkBox[2].setOnCheckedChangeListener { _, isChecked ->
+            checkBox[2].isChecked = isChecked
+            val updatedGameOption = gameOption.copy(historia = isChecked)
+            gameOptionDao.updateGameOption(updatedGameOption)
+        }
+        checkBox[3].setOnCheckedChangeListener { _, isChecked ->
+            checkBox[3].isChecked = isChecked
+            val updatedGameOption = gameOption.copy(musica = isChecked)
+            gameOptionDao.updateGameOption(updatedGameOption)
+        }
+        checkBox[4].setOnCheckedChangeListener { _, isChecked ->
+            checkBox[4].isChecked = isChecked
+            val updatedGameOption = gameOption.copy(ciencia = isChecked)
+            gameOptionDao.updateGameOption(updatedGameOption)
+        }
+        checkBox[5].setOnCheckedChangeListener { _, isChecked ->
+            checkBox[5].isChecked = isChecked
+            val updatedGameOption = gameOption.copy(tecnologia = isChecked)
+            gameOptionDao.updateGameOption(updatedGameOption)
         }
 
+        modeSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = parent?.getItemAtPosition(position).toString()
+                val updatedGameOption = gameOption.copy(mode = position)
+                gameOptionDao.updateGameOption(updatedGameOption)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
     }
 }
 
