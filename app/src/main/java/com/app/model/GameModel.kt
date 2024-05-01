@@ -16,10 +16,10 @@ import com.app.database.entity.Question
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 
-class GameModel(db: AppDatabase) : ViewModel() {
+class GameModel(db: AppDatabase, numberOfQuestions: Int, selectedTopicsId: List<Int>) : ViewModel() {
     private val topicDao = db.topicDao()
     private val gameSessionQuestionDao = db.gameSessionQuestionsDao()
-    private val questionsDb = topicDao.getTopicWithQuestions(10)
+    private val questionsDb = topicDao.getTopicWithQuestions(numberOfQuestions, selectedTopicsId)
     private val gameService: IGameService = GameServiceImpl()
     private val questions =gameService.shuffleQuestions(questionsDb)
     private var answerOptions = mutableListOf<List<String>>()

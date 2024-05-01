@@ -101,45 +101,55 @@ class OptionsScreen : AppCompatActivity() {
         modeSp.setSelection(gameOption.mode)
 
         questionSlider.addOnChangeListener { _, value, _ ->
-            val updatedGameOption = gameOption.copy(questionQty = value.toInt())
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(questionQty = value.toInt())
+            )
         }
 
         hintswt.setOnCheckedChangeListener { _, isChecked ->
-            val updatedGameOption = gameOption.copy(hint = isChecked)
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(hint = isChecked)
+            )
             hintstxt.text = if (isChecked) "Usaras pistas" else "No usaras pistas"
         }
 
         checkBox[0].setOnCheckedChangeListener { _, isChecked ->
-            checkBox[0].isChecked = isChecked
-            val updatedGameOption = gameOption.copy(cine = isChecked)
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(cine = isChecked)
+            )
         }
         checkBox[1].setOnCheckedChangeListener { _, isChecked ->
-            checkBox[1].isChecked = isChecked
-            val updatedGameOption = gameOption.copy(arte = isChecked)
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(arte = isChecked)
+            )
         }
         checkBox[2].setOnCheckedChangeListener { _, isChecked ->
-            checkBox[2].isChecked = isChecked
-            val updatedGameOption = gameOption.copy(historia = isChecked)
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(historia = isChecked)
+            )
         }
         checkBox[3].setOnCheckedChangeListener { _, isChecked ->
-            checkBox[3].isChecked = isChecked
-            val updatedGameOption = gameOption.copy(musica = isChecked)
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(musica = isChecked)
+            )
         }
         checkBox[4].setOnCheckedChangeListener { _, isChecked ->
-            checkBox[4].isChecked = isChecked
-            val updatedGameOption = gameOption.copy(ciencia = isChecked)
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(ciencia = isChecked)
+            )
         }
         checkBox[5].setOnCheckedChangeListener { _, isChecked ->
-            checkBox[5].isChecked = isChecked
-            val updatedGameOption = gameOption.copy(tecnologia = isChecked)
-            gameOptionDao.updateGameOption(updatedGameOption)
+            val option = gameOptionDao.getGameOption()
+            gameOptionDao.updateGameOption(
+                option.copy(tecnologia = isChecked)
+            )
         }
 
         modeSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -149,9 +159,10 @@ class OptionsScreen : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val selectedItem = parent?.getItemAtPosition(position).toString()
-                val updatedGameOption = gameOption.copy(mode = position)
-                gameOptionDao.updateGameOption(updatedGameOption)
+                val option = gameOptionDao.getGameOption()
+                gameOptionDao.updateGameOption(
+                    option.copy(mode = position)
+                )
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }

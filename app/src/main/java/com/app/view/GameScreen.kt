@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.R
 import com.app.database.AppDatabase
+import com.app.database.entity.GameOption
 import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
@@ -27,12 +29,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-const val SELECTED_DIFFICULT = "SELECTED_DIFFICULT"
+const val NEW_GAME = "NEW_GAME"
 
 class GameScreen : AppCompatActivity() {
     private lateinit var gameModel: GameModel
     private val db = AppDatabase.get(this)
     private val gameSessionDao = db.gameSessionDao()
+    private val gameOptionDao = db.gameOptionDao()
 
     private val gameService: IGameService = GameServiceImpl()
     private lateinit var rootLayout: LinearLayout
@@ -47,13 +50,36 @@ class GameScreen : AppCompatActivity() {
     private val options = mutableListOf<Button>()
 
 
-    private var mode = "medium"
+    private var newGame = true
     var doubleBackToExitPressedOnce = false
+    private val modes = listOf(
+        "easy",
+        "medium",
+        "hard"
+    )
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
+
+        newGame = intent.getStringExtra(NEW_GAME).toBoolean()
+        val gameOption = gameOptionDao.getGameOption()
+        val mode = modes[gameOption.mode]
+        val selectedTopics = listOf(
+            gameOption.cine,
+            gameOption.arte,
+            gameOption.historia,
+            gameOption.musica,
+            gameOption.ciencia,
+            gameOption.tecnologia
+            )
+        val selectedTopicIds = mutableListOf<Int>()
+        for (i in selectedTopics.indices) {
+            if (selectedTopics[i]) {
+                selectedTopicIds.add(i)
+            }
+        }
 
         onBackPressedDispatcher.addCallback(this@GameScreen, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -74,7 +100,7 @@ class GameScreen : AppCompatActivity() {
             }
         })
 
-        gameModel = ViewModelProvider(this, ViewModelFactory(db))[GameModel::class.java]
+        gameModel = ViewModelProvider(this, ViewModelFactory(db, gameOption.questionQty, selectedTopicIds))[GameModel::class.java]
 
         rootLayout = findViewById(R.id.root_layout)
         textAnsweredQuestion = findViewById(R.id.text_answered_question)
@@ -90,12 +116,17 @@ class GameScreen : AppCompatActivity() {
         options.add(findViewById(R.id.option_3))
         options.add(findViewById(R.id.option_4))
 
+        if (!gameOption.hint) {
+            hintBtn.visibility = View.GONE
+        }
+
         hintBtn.text = gameModel.currentHintText
         questionText.text = gameModel.currentQuestionText
         questionsCounter.text = gameModel.counterText
         topicText.text = gameModel.topicText
         topicIcon.setImageResource(gameModel.topicIcon)
-        mode = intent.getStringExtra(SELECTED_DIFFICULT).toString()
+
+
         gameModel.getAnswerOptions(mode)
         gameModel.getOptions(mode, options)
         gameService.setUserAnswer(
