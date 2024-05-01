@@ -20,6 +20,4 @@ interface TopicDao {
             "LIMIT :count")
     fun getTopicWithQuestions(count: Int, selectedTopicIds: List<Int>): Map<Topic, List<Question>>
 
-//    @Query()
-//    fun getPreviousGame(gameOption: GameOption)
 }

@@ -66,25 +66,15 @@ class GameScreen : AppCompatActivity() {
         newGame = intent.getStringExtra(NEW_GAME).toBoolean()
         val gameOption = gameOptionDao.getGameOption()
         val mode = modes[gameOption.mode]
-        val selectedTopics = listOf(
-            gameOption.cine,
-            gameOption.arte,
-            gameOption.historia,
-            gameOption.musica,
-            gameOption.ciencia,
-            gameOption.tecnologia
-            )
-        val selectedTopicIds = mutableListOf<Int>()
-        for (i in selectedTopics.indices) {
-            if (selectedTopics[i]) {
-                selectedTopicIds.add(i)
-            }
-        }
+
 
         onBackPressedDispatcher.addCallback(this@GameScreen, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (doubleBackToExitPressedOnce) {
-                    gameSessionDao.saveGameSession(false)
+                    val gameSession = gameSessionDao.getGameSession()
+                    gameSessionDao.updateGameSession(
+                        gameSession.copy(done = false)
+                    )
                     finish()
                 }
                 this@GameScreen.doubleBackToExitPressedOnce = true
@@ -100,7 +90,7 @@ class GameScreen : AppCompatActivity() {
             }
         })
 
-        gameModel = ViewModelProvider(this, ViewModelFactory(db, gameOption.questionQty, selectedTopicIds))[GameModel::class.java]
+        gameModel = ViewModelProvider(this, ViewModelFactory(db, newGame))[GameModel::class.java]
 
         rootLayout = findViewById(R.id.root_layout)
         textAnsweredQuestion = findViewById(R.id.text_answered_question)
@@ -204,7 +194,10 @@ class GameScreen : AppCompatActivity() {
                     intent.putExtra(TOTAL_UNUSED_HINTS, gameModel.unusedHintsCounter)
                     intent.putExtra(TOTAL_ANSWERS, gameModel.correctAnswersCounter)
                     CoroutineScope(Dispatchers.Main).launch {
-                        gameSessionDao.saveGameSession(true)
+                        val gameSession = gameSessionDao.getGameSession()
+                        gameSessionDao.updateGameSession(
+                            gameSession.copy(done = true)
+                        )
                         delay(1000)
                         finish()
                         startActivity(intent)

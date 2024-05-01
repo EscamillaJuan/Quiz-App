@@ -6,35 +6,97 @@ import android.widget.TextView
 import com.app.btnColor
 import com.app.btnRight
 import com.app.btnWrong
-import com.app.database.entity.Topic
+import com.app.database.AppDatabase
+import com.app.database.entity.GameSessionQuestion
 import com.app.utils.GameQuestionModel
-import com.app.database.entity.Question
 import com.app.service.IGameService
 
 class GameServiceImpl : IGameService {
-    override fun shuffleQuestions(topicWithQuestions: Map<Topic, List<Question>>): List<GameQuestionModel> {
-        val gameQuestions = mutableListOf<GameQuestionModel>()
-        topicWithQuestions.forEach { (topic, questions) ->
-            questions.forEach { question ->
-                gameQuestions.add(
-                    GameQuestionModel(
-                        id = question.id,
-                        text = question.text,
-                        topic = topic.title,
-                        topicIcon = topic.icon,
-                        answerOptions = listOf(
-                            question.option1,
-                            question.option2,
-                            question.option3,
-                        ),
-                        correctAnswer = question.answer,
-                        isAnswered = false,
-                        isCorrect = false,
-                    )
-                )
+
+    override fun getGameQuestions(db: AppDatabase, newGame: Boolean): List<GameQuestionModel> {
+        val topicDao = db.topicDao()
+        val gameSessionDao = db.gameSessionDao()
+        val gameOptionDao = db.gameOptionDao()
+        val gameSessionQuestionDao = db.gameSessionQuestionsDao()
+        val gameOption = gameOptionDao.getGameOption()
+        val selectedTopics = listOf(
+            gameOption.cine,
+            gameOption.arte,
+            gameOption.historia,
+            gameOption.musica,
+            gameOption.ciencia,
+            gameOption.tecnologia
+        )
+        val selectedTopicIds = mutableListOf<Int>()
+        for (i in selectedTopics.indices) {
+            if (selectedTopics[i]) {
+                selectedTopicIds.add(i)
             }
         }
-        return gameQuestions
+        if (newGame) {
+            gameSessionQuestionDao.deleteAllQuestions()
+            val topicWithQuestions =
+                topicDao.getTopicWithQuestions(gameOption.questionQty, selectedTopicIds)
+            val gameQuestions = mutableListOf<GameQuestionModel>()
+            var index = 0;
+
+            topicWithQuestions.forEach { (topic, questions) ->
+                questions.forEach { question ->
+                    gameQuestions.add(
+                        GameQuestionModel(
+                            id = question.id,
+                            text = question.text,
+                            topic = topic.title,
+                            topicIcon = topic.icon,
+                            answerOptions = listOf(
+                                question.option1,
+                                question.option2,
+                                question.option3,
+                            ),
+                            correctAnswer = question.answer,
+                            isAnswered = false,
+                            isCorrect = false,
+                        )
+                    )
+                    gameSessionQuestionDao.insertGameQuestion(
+                        GameSessionQuestion(
+                            id = index++,
+                            questionId = question.id,
+                            gameSessionId = 0,
+                            isAnswered = false,
+                            isCorrect = false
+                        )
+                    )
+                }
+            }
+            return gameQuestions
+        } else {
+            val topicWithQuestions =
+                gameSessionDao.getGameSessionQuestions()
+            val gameQuestions = mutableListOf<GameQuestionModel>()
+
+            topicWithQuestions.forEach { (topic, gameSessionQuestions) ->
+                gameSessionQuestions.forEach { gameSessionQuestion ->
+                    gameQuestions.add(
+                        GameQuestionModel(
+                            id = gameSessionQuestion.id,
+                            text = gameSessionQuestion.question.text,
+                            topic = topic.title,
+                            topicIcon = topic.icon,
+                            answerOptions = listOf(
+                                gameSessionQuestion.question.option1,
+                                gameSessionQuestion.question.option2,
+                                gameSessionQuestion.question.option3,
+                            ),
+                            correctAnswer = gameSessionQuestion.question.answer,
+                            isAnswered = gameSessionQuestion.isAnswered,
+                            isCorrect = gameSessionQuestion.isCorrect,
+                        )
+                    )
+                }
+            }
+            return gameQuestions
+        }
     }
 
     override fun nextQuestion(index: Int, questions: List<GameQuestionModel>): Int {

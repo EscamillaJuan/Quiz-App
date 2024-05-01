@@ -50,11 +50,5 @@ class ScoreScreen : AppCompatActivity() {
         totalCorrectAnswers.text = getString(R.string.total_answers_text, correctAnswers.toString())
         totalUsedHints.text = getString(R.string.used_hints_text, usedHints.toString())
         totalUnusedHints.text = getString(R.string.unused_hints_text, unusedHints.toString())
-
-
-
-
-
-
     }
 }

@@ -43,14 +43,6 @@ class OptionsScreen : AppCompatActivity() {
     private lateinit var hintswt: Switch
     private val checkBox = mutableListOf<CheckBox>()
 
-    val topicThemes = listOf(
-        "Cine",
-        "Arte",
-        "Historia",
-        "Música",
-        "Ciencia",
-        "Tecnología"
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
