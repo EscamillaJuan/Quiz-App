@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -14,7 +13,6 @@ import com.app.database.AppDatabase
 import com.app.usecases.NewGame
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
-import com.app.view.SELECTED_DIFFICULT
 import com.app.view.ScoreScreen
 
 val btnColor = Color.parseColor("#624D1B")
@@ -26,10 +24,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var openBtn: Button
     private lateinit var optionBtn: Button
 
-    //private lateinit var modeSp: Spinner
     private lateinit var scoreBtn: Button
 
-    private var mode = "medium"
     var doubleBackToExitPressedOnce = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         db = AppDatabase.get(this)
         setContentView(R.layout.main_activity)
         openBtn = findViewById(R.id.play_btn)
-        //modeSp = findViewById(R.id.difficulty_spin)
         optionBtn = findViewById(R.id.option_btn)
         scoreBtn = findViewById(R.id.score_btn)
 
@@ -71,15 +66,11 @@ class MainActivity : AppCompatActivity() {
             val gameSession = db.gameSessionDao().getGameSession()
             if (gameSession.done) {
                 val intent = Intent(this, GameScreen::class.java)
-                intent.putExtra(SELECTED_DIFFICULT, mode)
                 startActivity(intent)
             } else {
                 val fragmentManager = supportFragmentManager
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 val newGameFragment = NewGame()
-                val bundle = Bundle()
-                bundle.putString(SELECTED_DIFFICULT, mode)
-                newGameFragment.arguments = bundle
                 fragmentTransaction.add(R.id.root_layout, newGameFragment)
                 fragmentTransaction.addToBackStack(null)
                 fragmentTransaction.commit()

@@ -5,27 +5,33 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.app.database.dao.GameOptionDao
 import com.app.database.dao.GameSessionDao
 import com.app.database.dao.GameSessionQuestionDao
 import com.app.database.dao.QuestionDao
 import com.app.database.dao.TopicDao
+import com.app.database.entity.GameOption
 import com.app.database.entity.GameSession
 import com.app.database.entity.GameSessionQuestion
 import com.app.database.entity.Question
 import com.app.database.entity.Topic
 import com.app.utils.InsertionQueries
 
-@Database(entities = [Topic::class, Question::class, GameSession::class, GameSessionQuestion::class], version = 1)
+@Database(
+    entities = [Topic::class, Question::class, GameSession::class, GameSessionQuestion::class, GameOption::class],
+    version = 1
+)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun topicDao(): TopicDao
     abstract fun questionDao(): QuestionDao
     abstract fun gameSessionDao(): GameSessionDao
     abstract fun gameSessionQuestionsDao(): GameSessionQuestionDao
+    abstract fun gameOptionDao(): GameOptionDao
 
 
     companion object {
         @Volatile
-        private var INSTANCE: AppDatabase ? = null
+        private var INSTANCE: AppDatabase? = null
         private val queries = InsertionQueries()
 
         fun get(context: Context): AppDatabase {
@@ -43,6 +49,8 @@ abstract class AppDatabase : RoomDatabase() {
                             db.execSQL(query)
                         }
                         db.execSQL(queries.gameSessionInsert)
+
+                        db.execSQL(queries.gameOptionInsert)
                     }
                 }).build()
                 INSTANCE = instance

@@ -32,4 +32,12 @@
     <string name="new_game_question">¿Deseas continuarla?</string>
     <string name="continue_btn_text">Continuar</string>
     <string name="new_game_btn_text">Nueva partida</string>
+    <string name="ThemeText">Seleccione los temas deseados en la partida</string>
+    <string name="string_cine">Cine</string>
+    <string name="string_arte">Arte</string>
+    <string name="string_historia">Historia</string>
+    <string name="string_musica">Musica</string>
+    <string name="string_ciencia">Ciencia</string>
+    <string name="string_tecnologia">Tecnología</string>
+    <string name="seleccione_la_dificultad">Seleccione la dificultad</string>
 </resources>

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -28,91 +29,94 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/chewy"
         android:gravity="center"
-        android:text="Seleccione los temas deseados en la partida"
+        android:text="@string/ThemeText"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/Theme1CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/chewy"
+                    android:text="@string/string_cine">
 
-        <CheckBox
-            android:id="@+id/Theme1CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_marginStart="10dp"
-            android:fontFamily="@font/chewy"
-            android:text="Categoria 1">
+                </CheckBox>
 
-        </CheckBox>
+                <CheckBox
+                    android:id="@+id/Theme2CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_toEndOf="@+id/Theme1CheckBox"
+                    android:fontFamily="@font/chewy"
+                    android:text="@string/string_arte">
 
-        <CheckBox
-            android:id="@+id/Theme2CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="0dp"
-            android:layout_toEndOf="@+id/Theme1CheckBox"
-            android:fontFamily="@font/chewy"
-            android:text="Categoria 2">
+                </CheckBox>
 
-        </CheckBox>
+                <CheckBox
+                    android:id="@+id/Theme3CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginStart="40dp"
+                    android:layout_toEndOf="@+id/Theme2CheckBox"
+                    android:fontFamily="@font/chewy"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/string_historia">
 
-        <CheckBox
-            android:id="@+id/Theme3CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="35dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toEndOf="@+id/Theme2CheckBox"
-            android:fontFamily="@font/chewy"
-            android:text="Categoria 3">
+                </CheckBox>
 
-        </CheckBox>
+                <CheckBox
+                    android:id="@+id/Theme4CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Theme1CheckBox"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_alignParentStart="true"
+                    android:fontFamily="@font/chewy"
+                    android:text="@string/string_musica">
 
-        <CheckBox
-            android:id="@+id/Theme4CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Theme1CheckBox"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/chewy"
-            android:text="Categoria 4">
+                </CheckBox>
 
-        </CheckBox>
+                <CheckBox
+                    android:id="@+id/Theme5CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Theme2CheckBox"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toEndOf="@+id/Theme1CheckBox"
+                    android:fontFamily="@font/chewy"
+                    android:text="@string/string_ciencia">
 
-        <CheckBox
-            android:id="@+id/Theme5CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Theme2CheckBox"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="15dp"
-            android:layout_toEndOf="@+id/Theme1CheckBox"
-            android:fontFamily="@font/chewy"
-            android:text="Categoria 5">
+                </CheckBox>
 
-        </CheckBox>
-
-        <CheckBox
-            android:id="@+id/Theme6CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/Theme3CheckBox"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:layout_toEndOf="@+id/Theme5CheckBox"
-            android:fontFamily="@font/chewy"
-            android:text="Categoria 6">
-
-        </CheckBox>
-    </RelativeLayout>
+                <CheckBox
+                    android:id="@+id/Theme6CheckBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Theme3CheckBox"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_toEndOf="@+id/Theme5CheckBox"
+                    android:fontFamily="@font/chewy"
+                    android:text="@string/string_tecnologia"
+                    android:layout_alignParentEnd="true">
+                </CheckBox>
+            </RelativeLayout>
+    </HorizontalScrollView>
 
     <TextView
         android:id="@+id/Questiontext"
@@ -120,7 +124,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/chewy"
-        android:text="Selecciona el numero de preguntas deseadas">
+        tools:text="Selecciona el numero de preguntas deseadas">
 
     </TextView>
 
@@ -151,7 +155,7 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/chewy"
         android:gravity="center"
-        android:text="Seleccione la dificultad"
+        android:text="@string/seleccione_la_dificultad"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
@@ -163,26 +167,27 @@
         android:dropDownVerticalOffset="40dp"
         android:fontFamily="@font/chewy"
         android:gravity="center"
-        android:popupBackground="@color/brown" />
+        android:popupBackground="@color/brown"
+        android:layout_marginBottom="10dp"/>
 
+    <TextView
+        android:id="@+id/hints_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/chewy"
+        android:gravity="center"
+        tools:text= "No usaras pistas"
+        android:textColor="@color/black"
+        android:textSize="15sp" />
 
-    <LinearLayout
+    <Switch
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/return_options_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:backgroundTint="@color/brown"
-            android:drawablePadding="8dp"
-            android:fontFamily="@font/chewy"
-            android:text="@string/returnTextButton"
-            app:icon="@drawable/baseline_arrow_back_24" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:id="@+id/hint_stw"
+        android:paddingTop="5dp">
+    </Switch>
 
 </LinearLayout>
