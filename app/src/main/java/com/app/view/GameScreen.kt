@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -63,7 +64,7 @@ class GameScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
 
-        newGame = intent.getStringExtra(NEW_GAME).toBoolean()
+        newGame = intent.getBooleanExtra(NEW_GAME, false)
         val gameOption = gameOptionDao.getGameOption()
         val mode = modes[gameOption.mode]
 

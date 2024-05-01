@@ -33,11 +33,11 @@ class GameServiceImpl : IGameService {
                 selectedTopicIds.add(i)
             }
         }
+        val gameQuestions = mutableListOf<GameQuestionModel>()
         if (newGame) {
             gameSessionQuestionDao.deleteAllQuestions()
             val topicWithQuestions =
                 topicDao.getTopicWithQuestions(gameOption.questionQty, selectedTopicIds)
-            val gameQuestions = mutableListOf<GameQuestionModel>()
             var index = 0;
 
             topicWithQuestions.forEach { (topic, questions) ->
@@ -69,11 +69,9 @@ class GameServiceImpl : IGameService {
                     )
                 }
             }
-            return gameQuestions
         } else {
             val topicWithQuestions =
                 gameSessionDao.getGameSessionQuestions()
-            val gameQuestions = mutableListOf<GameQuestionModel>()
 
             topicWithQuestions.forEach { (topic, gameSessionQuestions) ->
                 gameSessionQuestions.forEach { gameSessionQuestion ->
@@ -95,8 +93,8 @@ class GameServiceImpl : IGameService {
                     )
                 }
             }
-            return gameQuestions
         }
+        return gameQuestions
     }
 
     override fun nextQuestion(index: Int, questions: List<GameQuestionModel>): Int {
