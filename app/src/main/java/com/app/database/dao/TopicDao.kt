@@ -14,4 +14,5 @@ interface TopicDao {
 
     @Query("SELECT * FROM topic t INNER JOIN question q on (t._id == q.topic_id) ORDER BY RANDOM() LIMIT :count")
     fun getTopicWithQuestions(count: Int): Map<Topic, List<Question>>
+
 }
