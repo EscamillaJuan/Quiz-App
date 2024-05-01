@@ -56,3 +56,4 @@ class InsertionQueries {
         "INSERT INTO game_option(_id, mode, question_qty, hint, cine, arte, historia, musica, ciencia, tecnologia)" +
                 " VALUES(0, 1, 10, 1, 0, 0, 0, 0, 0, 0)"
 }
+

@@ -22,4 +22,5 @@ interface TopicDao {
 
 //    @Query()
 //    fun getPreviousGame(gameOption: GameOption)
+
 }

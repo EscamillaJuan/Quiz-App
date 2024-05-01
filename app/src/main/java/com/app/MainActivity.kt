@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intentionBtn)
         }
         scoreBtn.setOnClickListener {
-            val intentionBtn = Intent(this, ScoreScreen::class.java)
+            val intentionBtn = Intent(this, Activity5::class.java)
             startActivity(intentionBtn)
         }
     }
