@@ -27,7 +27,7 @@
         android:layout_marginBottom="20dp"
         android:fontFamily="@font/chewy"
         android:gravity="center"
-        android:text="Seleccione los temas deseados en la partida"
+        android:text="@string/ThemeText"
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold" />
@@ -45,7 +45,7 @@
             android:layout_alignParentStart="true"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/chewy"
-            android:text="Cine">
+            android:text="@string/string_cine">
 
         </CheckBox>
 
@@ -58,7 +58,7 @@
             android:layout_marginTop="0dp"
             android:layout_toEndOf="@+id/Theme1CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Arte">
+            android:text="@string/string_arte">
 
         </CheckBox>
 
@@ -71,7 +71,7 @@
             android:layout_marginEnd="20dp"
             android:layout_toEndOf="@+id/Theme2CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Historia">
+            android:text="@string/string_historia">
 
         </CheckBox>
 
@@ -84,7 +84,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="15dp"
             android:fontFamily="@font/chewy"
-            android:text="Musica">
+            android:text="@string/string_musica">
 
         </CheckBox>
 
@@ -97,7 +97,7 @@
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@+id/Theme1CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Ciencia">
+            android:text="@string/string_ciencia">
 
         </CheckBox>
 
@@ -110,7 +110,7 @@
             android:layout_marginTop="15dp"
             android:layout_toEndOf="@+id/Theme5CheckBox"
             android:fontFamily="@font/chewy"
-            android:text="Tecnología">
+            android:text="@string/string_tecnologia">
 
         </CheckBox>
 
@@ -135,7 +135,7 @@
             android:layout_marginVertical="25dp"
             android:layout_marginEnd="100dp"
             android:fontFamily="@font/chewy"
-            android:text="No usaras pistas"
+            tools:text="No usaras pistas"
             android:textColor="@color/black"
             android:textSize="15sp" />
 
@@ -147,7 +147,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:fontFamily="@font/chewy"
-        android:text="Selecciona el numero de preguntas deseadas">
+        tools:text="Selecciona el numero de preguntas deseadas">
 
     </TextView>
 
@@ -176,7 +176,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/chewy"
             android:gravity="center"
-            android:text="Seleccione la dificultad"
+            android:text="@string/seleccione_la_dificultad"
             android:textColor="@color/black"
             android:textSize="15sp" />
 

@@ -1,34 +1,22 @@
 package com.app.view
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Button
 import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.SeekBar
 import android.widget.Spinner
 import android.widget.Switch
 import android.widget.TextView
-import androidx.activity.viewModels
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SwitchCompat
-import androidx.room.RoomDatabase
-import androidx.room.RoomSQLiteQuery
-import com.app.MainActivity
 import com.app.R
 import com.app.database.AppDatabase
-import com.app.database.dao.GameSessionDao
-import com.app.database.entity.GameOption
-import com.app.database.entity.GameSession
-import com.app.model.GameModel
 import com.google.android.material.slider.Slider
-import com.google.android.material.switchmaterial.SwitchMaterial
-import java.util.Objects
+
+
 
 class OptionsScreen : AppCompatActivity() {
     private val db: AppDatabase = AppDatabase.get(this)
@@ -42,6 +30,7 @@ class OptionsScreen : AppCompatActivity() {
     private lateinit var hintstxt: TextView
     private lateinit var hintswt: Switch
     private val checkBox = mutableListOf<CheckBox>()
+    private var selectedthemes: Int = 0
 
     val topicThemes = listOf(
         "Cine",
@@ -94,18 +83,17 @@ class OptionsScreen : AppCompatActivity() {
         )
         for (i in checkBox.indices) {
             checkBox[i].isChecked = topics[i]
+            if (checkBox[i].isChecked){selectedthemes++}
         }
 
+        //Para incializar el texto de las hints
         hintswt.isChecked = gameOption.hint
+        hintstxt.text = if (hintswt.isChecked) "Usaras pistas" else "No usaras pistas"
+        //Para inicializar el numero de preguntas
+        questionTxt.text = "Habrá ${gameOption.questionQty} preguntas en juego"
         questionSlider.value = gameOption.questionQty.toFloat()
         modeSp.setSelection(gameOption.mode)
 
-        questionSlider.addOnChangeListener { _, value, _ ->
-            val option = gameOptionDao.getGameOption()
-            gameOptionDao.updateGameOption(
-                option.copy(questionQty = value.toInt())
-            )
-        }
 
         hintswt.setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
@@ -120,38 +108,89 @@ class OptionsScreen : AppCompatActivity() {
             gameOptionDao.updateGameOption(
                 option.copy(cine = isChecked)
             )
+            if (isChecked) {
+                selectedthemes++
+            } else {
+                selectedthemes--
+            }
         }
         checkBox[1].setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
             gameOptionDao.updateGameOption(
                 option.copy(arte = isChecked)
             )
+            if (isChecked) {
+                selectedthemes++
+            } else {
+                selectedthemes--
+            }
         }
         checkBox[2].setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
             gameOptionDao.updateGameOption(
                 option.copy(historia = isChecked)
             )
+            if (isChecked) {
+                selectedthemes++
+            } else {
+                selectedthemes--
+            }
         }
         checkBox[3].setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
             gameOptionDao.updateGameOption(
                 option.copy(musica = isChecked)
             )
+            if (isChecked) {
+                selectedthemes++
+            } else {
+                selectedthemes--
+            }
         }
         checkBox[4].setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
             gameOptionDao.updateGameOption(
                 option.copy(ciencia = isChecked)
             )
+            if (isChecked) {
+                selectedthemes++
+            } else {
+                selectedthemes--
+            }
         }
         checkBox[5].setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
             gameOptionDao.updateGameOption(
                 option.copy(tecnologia = isChecked)
             )
+            if (isChecked) {
+                selectedthemes++
+            } else {
+                selectedthemes--
+            }
         }
 
+        questionSlider.addOnChangeListener { _, value, _ ->
+
+            val option = gameOptionDao.getGameOption()
+            Log.v("V",selectedthemes.toString())
+            if (value.toInt() <= selectedthemes * 5) {
+                questionTxt.text = "Habrá ${value.toInt()} preguntas en juego"
+                gameOptionDao.updateGameOption(
+                    option.copy(questionQty = value.toInt())
+                )
+            } else {
+                questionSlider.value = 5.toFloat()
+                gameOptionDao.updateGameOption(
+                    option.copy(questionQty = questionSlider.value.toInt())
+                )
+                Toast.makeText(
+                    this,
+                    "No puede haber mas de 5 preguntas",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
         modeSp.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -164,6 +203,7 @@ class OptionsScreen : AppCompatActivity() {
                     option.copy(mode = position)
                 )
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
