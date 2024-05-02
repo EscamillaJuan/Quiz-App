@@ -11,19 +11,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.R
 import com.app.database.AppDatabase
-import com.app.database.entity.GameOption
 import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 import com.app.utils.ViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -63,28 +59,26 @@ class GameScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
 
-        newGame = intent.getStringExtra(NEW_GAME).toBoolean()
+        newGame = intent.getBooleanExtra(NEW_GAME, true)
         val gameOption = gameOptionDao.getGameOption()
+        val gameSession = gameSessionDao.getGameSession()
         val mode = modes[gameOption.mode]
-        val selectedTopics = listOf(
-            gameOption.cine,
-            gameOption.arte,
-            gameOption.historia,
-            gameOption.musica,
-            gameOption.ciencia,
-            gameOption.tecnologia
-            )
-        val selectedTopicIds = mutableListOf<Int>()
-        for (i in selectedTopics.indices) {
-            if (selectedTopics[i]) {
-                selectedTopicIds.add(i)
-            }
-        }
+        var questionQuantity = gameOption.questionQty
+
 
         onBackPressedDispatcher.addCallback(this@GameScreen, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (doubleBackToExitPressedOnce) {
-                    gameSessionDao.saveGameSession(false)
+                    gameSessionDao.updateGameSession(
+                        gameSession.copy(
+                            questionQty = questionQuantity,
+                            finished = false,
+                            hintEnable = gameOption.hint,
+                            hintQty = gameModel.unusedHintsCounter,
+                            score = gameModel.totalScore,
+                            answeredQuestionsQty = gameModel.answeredQuestionCounter
+                        )
+                    )
                     finish()
                 }
                 this@GameScreen.doubleBackToExitPressedOnce = true
@@ -100,7 +94,7 @@ class GameScreen : AppCompatActivity() {
             }
         })
 
-        gameModel = ViewModelProvider(this, ViewModelFactory(db, gameOption.questionQty, selectedTopicIds))[GameModel::class.java]
+        gameModel = ViewModelProvider(this, ViewModelFactory(db, newGame))[GameModel::class.java]
 
         rootLayout = findViewById(R.id.root_layout)
         textAnsweredQuestion = findViewById(R.id.text_answered_question)
@@ -120,11 +114,22 @@ class GameScreen : AppCompatActivity() {
             hintBtn.visibility = View.GONE
         }
 
+        if(!newGame) {
+            gameModel.hint = gameSession.hintQty
+            gameModel.score = gameSession.score
+            questionQuantity = gameSession.questionQty
+            gameModel.questionCounter = gameSession.answeredQuestionsQty
+            if(!gameSession.hintEnable) {
+                hintBtn.visibility = View.GONE
+            }
+        }
+
         hintBtn.text = gameModel.currentHintText
         questionText.text = gameModel.currentQuestionText
         questionsCounter.text = gameModel.counterText
         topicText.text = gameModel.topicText
         topicIcon.setImageResource(gameModel.topicIcon)
+
 
 
         gameModel.getAnswerOptions(mode)
@@ -196,15 +201,24 @@ class GameScreen : AppCompatActivity() {
                     gameModel.currentQuestionOptions,
                     textAnsweredQuestion
                 )
-                gameModel.scoreCounter(mode);
-                if (gameModel.answeredQuestionCounter > 9) {
+                gameModel.scoreCounter(mode)
+                if (gameModel.answeredQuestionCounter > questionQuantity - 1) {
                     val intent = Intent(this, ScoreScreen::class.java)
                     intent.putExtra(SCORE, gameModel.totalScore)
                     intent.putExtra(TOTAL_USED_HINTS, gameModel.usedHintsCounter)
                     intent.putExtra(TOTAL_UNUSED_HINTS, gameModel.unusedHintsCounter)
                     intent.putExtra(TOTAL_ANSWERS, gameModel.correctAnswersCounter)
                     CoroutineScope(Dispatchers.Main).launch {
-                        gameSessionDao.saveGameSession(true)
+                        gameSessionDao.updateGameSession(
+                            gameSession.copy(
+                                questionQty = questionQuantity,
+                                finished = true,
+                                hintEnable = gameOption.hint,
+                                hintQty = gameModel.unusedHintsCounter,
+                                score = gameModel.totalScore,
+                                answeredQuestionsQty = gameModel.answeredQuestionCounter
+                            )
+                        )
                         delay(1000)
                         finish()
                         startActivity(intent)

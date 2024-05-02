@@ -32,14 +32,6 @@ class OptionsScreen : AppCompatActivity() {
     private val checkBox = mutableListOf<CheckBox>()
     private var selectedthemes: Int = 0
 
-    val topicThemes = listOf(
-        "Cine",
-        "Arte",
-        "Historia",
-        "Música",
-        "Ciencia",
-        "Tecnología"
-    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -86,7 +78,6 @@ class OptionsScreen : AppCompatActivity() {
             if (checkBox[i].isChecked){selectedthemes++}
         }
 
-        //Para incializar el texto de las hints
         hintswt.isChecked = gameOption.hint
         hintstxt.text = if (hintswt.isChecked) "Usaras pistas" else "No usaras pistas"
         //Para inicializar el numero de preguntas
@@ -173,7 +164,6 @@ class OptionsScreen : AppCompatActivity() {
         questionSlider.addOnChangeListener { _, value, _ ->
 
             val option = gameOptionDao.getGameOption()
-            Log.v("V",selectedthemes.toString())
             if (value.toInt() <= selectedthemes * 5) {
                 questionTxt.text = "Habrá ${value.toInt()} preguntas en juego"
                 gameOptionDao.updateGameOption(

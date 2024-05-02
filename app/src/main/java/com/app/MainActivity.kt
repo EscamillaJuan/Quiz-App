@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -64,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         openBtn.setOnClickListener {
             val gameSession = db.gameSessionDao().getGameSession()
-            if (gameSession.done) {
+            if (gameSession.finished) {
                 val intent = Intent(this, GameScreen::class.java)
                 startActivity(intent)
             } else {
