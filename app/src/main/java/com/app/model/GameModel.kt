@@ -17,13 +17,22 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
     private val questions = gameService.getGameQuestions(db, newGame)
     private var answerOptions = mutableListOf<List<String>>()
     private var currentQuestionIndex: Int = 0
-    private var hint: Int = 5
+    var hint: Int = 3
+        set(value) {
+            field = if (value >= 0) value else 3
+        }
     private var sumCorrectAnswered: Int = 0
     private var sumIncorrectAnswered: Int = 0
     private var hintUsedCounter: Int = 0
-    private var questionCounter = 0
+    var questionCounter = 0
+        set(value) {
+            field = if(value >= 0) value else 0
+        }
     private var usedHintsPerGame: Int = 0
-    private var score = 0
+    var score = 0
+        set(value) {
+            field = if(value >= 0) value else 0
+        }
     private var prevAnswerIsCorrect: Boolean = false
     private var currentAnswerIsCorrect: Boolean = false
     private var currentAnsweredWithHint: Boolean = false
@@ -105,9 +114,10 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
         gameSessionQuestionDao.updateGameQuestions(
             question.copy(
                 isCorrect = isCorrect,
-                isAnswered = true
+                isAnswered = true,
             )
         )
+
         if (isCorrect) {
             if (hintUsedCounter == 0) {
                 currentAnsweredWithHint = false

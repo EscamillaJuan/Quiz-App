@@ -89,6 +89,7 @@ class OptionsScreen : AppCompatActivity() {
         }
 
         hintswt.isChecked = gameOption.hint
+        hintstxt.text = "Usaras pistas"
         questionSlider.value = gameOption.questionQty.toFloat()
         modeSp.setSelection(gameOption.mode)
 

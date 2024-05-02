@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
         openBtn.setOnClickListener {
             val gameSession = db.gameSessionDao().getGameSession()
-            if (gameSession.done) {
+            if (gameSession.finished) {
                 val intent = Intent(this, GameScreen::class.java)
                 startActivity(intent)
             } else {

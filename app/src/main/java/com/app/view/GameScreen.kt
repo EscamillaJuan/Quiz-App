@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
@@ -12,19 +11,15 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
-import android.window.OnBackInvokedDispatcher
 import androidx.activity.OnBackPressedCallback
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.R
 import com.app.database.AppDatabase
-import com.app.database.entity.GameOption
 import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
 import com.app.utils.ViewModelFactory
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -64,17 +59,25 @@ class GameScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_screen)
 
-        newGame = intent.getBooleanExtra(NEW_GAME, false)
+        newGame = intent.getBooleanExtra(NEW_GAME, true)
         val gameOption = gameOptionDao.getGameOption()
+        val gameSession = gameSessionDao.getGameSession()
         val mode = modes[gameOption.mode]
+        var questionQuantity = gameOption.questionQty
 
 
         onBackPressedDispatcher.addCallback(this@GameScreen, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 if (doubleBackToExitPressedOnce) {
-                    val gameSession = gameSessionDao.getGameSession()
                     gameSessionDao.updateGameSession(
-                        gameSession.copy(done = false)
+                        gameSession.copy(
+                            questionQty = questionQuantity,
+                            finished = false,
+                            hintEnable = gameOption.hint,
+                            hintQty = gameModel.unusedHintsCounter,
+                            score = gameModel.totalScore,
+                            answeredQuestionsQty = gameModel.answeredQuestionCounter
+                        )
                     )
                     finish()
                 }
@@ -111,11 +114,22 @@ class GameScreen : AppCompatActivity() {
             hintBtn.visibility = View.GONE
         }
 
+        if(!newGame) {
+            gameModel.hint = gameSession.hintQty
+            gameModel.score = gameSession.score
+            questionQuantity = gameSession.questionQty
+            gameModel.questionCounter = gameSession.answeredQuestionsQty
+            if(!gameSession.hintEnable) {
+                hintBtn.visibility = View.GONE
+            }
+        }
+
         hintBtn.text = gameModel.currentHintText
         questionText.text = gameModel.currentQuestionText
         questionsCounter.text = gameModel.counterText
         topicText.text = gameModel.topicText
         topicIcon.setImageResource(gameModel.topicIcon)
+
 
 
         gameModel.getAnswerOptions(mode)
@@ -187,17 +201,23 @@ class GameScreen : AppCompatActivity() {
                     gameModel.currentQuestionOptions,
                     textAnsweredQuestion
                 )
-                gameModel.scoreCounter(mode);
-                if (gameModel.answeredQuestionCounter > 9) {
+                gameModel.scoreCounter(mode)
+                if (gameModel.answeredQuestionCounter > questionQuantity - 1) {
                     val intent = Intent(this, ScoreScreen::class.java)
                     intent.putExtra(SCORE, gameModel.totalScore)
                     intent.putExtra(TOTAL_USED_HINTS, gameModel.usedHintsCounter)
                     intent.putExtra(TOTAL_UNUSED_HINTS, gameModel.unusedHintsCounter)
                     intent.putExtra(TOTAL_ANSWERS, gameModel.correctAnswersCounter)
                     CoroutineScope(Dispatchers.Main).launch {
-                        val gameSession = gameSessionDao.getGameSession()
                         gameSessionDao.updateGameSession(
-                            gameSession.copy(done = true)
+                            gameSession.copy(
+                                questionQty = questionQuantity,
+                                finished = true,
+                                hintEnable = gameOption.hint,
+                                hintQty = gameModel.unusedHintsCounter,
+                                score = gameModel.totalScore,
+                                answeredQuestionsQty = gameModel.answeredQuestionCounter
+                            )
                         )
                         delay(1000)
                         finish()

@@ -50,9 +50,9 @@ class InsertionQueries {
     )
 
     val gameSessionInsert =
-        "INSERT INTO game_session(_id, mode, question_qty, hint_qty, done) VALUES(0, 'medium', 10, 0, 1)"
+        "INSERT INTO game_session(_id, mode, question_qty, hint_enable, hint_qty, finished, score, answered_questions_qty) VALUES(0, 'medium', 10, 1, 3, 1, 0, 0)"
 
     val gameOptionInsert =
         "INSERT INTO game_option(_id, mode, question_qty, hint, cine, arte, historia, musica, ciencia, tecnologia)" +
-                " VALUES(0, 1, 10, 1, 0, 0, 0, 0, 0, 0)"
+                " VALUES(0, 1, 5, 1, 1, 1, 1, 0, 0, 0)"
 }
