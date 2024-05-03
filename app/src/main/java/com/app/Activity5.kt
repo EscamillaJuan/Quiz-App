@@ -22,7 +22,7 @@ class Activity5 : AppCompatActivity() {
         setContentView(R.layout.activity_5)
         val scoreItemDb = scoreDao.getScore()
         val scoreListView = findViewById<ListView>(R.id.listViewScore)
-        val scoreItem = ScoreItems(scoreItemDb[0].id.toString(),scoreItemDb[0].user,scoreItemDb[0].score.toString())
+//        val scoreItem = ScoreItems(scoreItemDb[0].id.toString(),scoreItemDb[0].user,scoreItemDb[0].score.toString())
 
 /*      val scoreItem2 = ScoreItems(scoreItemDb[1].id.toString(),scoreItemDb[1].user,scoreItemDb[1].score.toString())
         val scoreItem3 = ScoreItems(scoreItemDb[2].id.toString(),scoreItemDb[2].user,scoreItemDb[2].score.toString())
@@ -31,10 +31,10 @@ class Activity5 : AppCompatActivity() {
 */
 //        val scoreList = listOf(scoreItem, scoreItem2,scoreItem3,scoreItem4,scoreItem5)
 
-        val scoreList = listOf(scoreItem)
-        val adapter = scoreAdapter(this, scoreList)
+ //       val scoreList = listOf(scoreItem)
+ //       val adapter = scoreAdapter(this, scoreList)
 
-        scoreListView.adapter = adapter
+ //       scoreListView.adapter = adapter
 
 
     }
