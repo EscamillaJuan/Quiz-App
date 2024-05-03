@@ -66,11 +66,5 @@ class ScoreScreen : AppCompatActivity() {
         totalUsedHints.text = getString(R.string.used_hints_text, usedHints.toString())
         totalUnusedHints.text = getString(R.string.unused_hints_text, unusedHints.toString())
 
-
-        viewFlipper.isAutoStart = false
-
-
-
-
     }
 }

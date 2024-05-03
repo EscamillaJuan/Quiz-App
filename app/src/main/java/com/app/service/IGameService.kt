@@ -2,12 +2,11 @@ package com.app.service
 
 import android.widget.Button
 import android.widget.TextView
-import com.app.database.entity.Topic
+import com.app.database.AppDatabase
 import com.app.utils.GameQuestionModel
-import com.app.database.entity.Question
 
 interface IGameService {
-    fun shuffleQuestions(topicWithQuestions: Map<Topic, List<Question>>): List<GameQuestionModel>
+    fun getGameQuestions(db: AppDatabase, newGame: Boolean): List<GameQuestionModel>
     fun nextQuestion(index: Int, questions: List<GameQuestionModel>): Int
     fun prevQuestions(index: Int, questions: List<GameQuestionModel>): Int
     fun getOptions(
