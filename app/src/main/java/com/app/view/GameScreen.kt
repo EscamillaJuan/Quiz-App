@@ -16,6 +16,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.R
 import com.app.database.AppDatabase
+
+import com.app.database.dao.ScoreDao
+import com.app.database.entity.GameOption
+import com.app.database.entity.Score
+
 import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
@@ -32,7 +37,9 @@ class GameScreen : AppCompatActivity() {
     private val db = AppDatabase.get(this)
     private val gameSessionDao = db.gameSessionDao()
     private val gameOptionDao = db.gameOptionDao()
+    private val scoreDao = db.scoreDao()
 
+    private var lastId = 0
     private val gameService: IGameService = GameServiceImpl()
     private lateinit var rootLayout: LinearLayout
     private lateinit var textAnsweredQuestion: TextView
@@ -201,8 +208,25 @@ class GameScreen : AppCompatActivity() {
                     gameModel.currentQuestionOptions,
                     textAnsweredQuestion
                 )
+
+                gameModel.scoreCounter(mode);
+                if (gameModel.answeredQuestionCounter > 9) {
+/*
+                    if (scoreDao.getMaxId()==null) {
+                        lastId = 0
+                        scoreDao.insertScore(Score(lastId, gameModel.totalScore, "AAA" ))
+                    }
+                    else {
+                        lastId = scoreDao.getMaxId() + 1
+                        scoreDao.insertScore(Score(lastId, gameModel.totalScore, "AAA" ))
+                    }
+
+                    scoreDao.insertScore(Score(lastId, gameModel.totalScore, "AAA" ))
+*/
+
                 gameModel.scoreCounter(mode)
                 if (gameModel.answeredQuestionCounter > questionQuantity - 1) {
+
                     val intent = Intent(this, ScoreScreen::class.java)
                     intent.putExtra(SCORE, gameModel.totalScore)
                     intent.putExtra(TOTAL_USED_HINTS, gameModel.usedHintsCounter)
@@ -223,12 +247,15 @@ class GameScreen : AppCompatActivity() {
                         finish()
                         startActivity(intent)
                     }
+                }
+
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
                         delay(1000)
                         nextBtn.performClick()
                     }
                 }
+
             }
         }
     }
