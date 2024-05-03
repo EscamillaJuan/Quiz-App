@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.app.database.entity.Score
 @Dao
 interface ScoreDao {
-    @Query("SELECT * FROM score ORDER BY score")
+    @Query("SELECT * FROM score ORDER BY score DESC")
     fun getScore(): List<Score>
 
     @Insert
@@ -15,6 +15,7 @@ interface ScoreDao {
 
     @Query("SELECT MAX(_id) FROM score")
     fun getMaxId():Int
+
 }
 
 

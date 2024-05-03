@@ -10,8 +10,7 @@ import android.widget.TextView
 import com.app.R
 
 
-
-class scoreAdapter(private val mContext: Context, private val scoreListView: List<ScoreItems>):ArrayAdapter<ScoreItems>(mContext,0,scoreListView){
+class scoreAdapter(private val mContext: Context, private val scoreListView: MutableList<ScoreItems>):ArrayAdapter<ScoreItems>(mContext,0,scoreListView){
 
     override fun getView(
         position: Int,
