@@ -11,32 +11,43 @@
         android:id="@+id/posListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_weight="1"
         android:fontFamily="@font/chewy"
         android:textAlignment="center"
         android:textColor="@color/brown"
-        tools:text="1"
-        android:layout_marginStart="20dp"/>
+        tools:text="1" />
 
     <TextView
         android:id="@+id/userListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_weight="1"
         android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
-        tools:text="TextView"
         android:textAlignment="center"
-        android:layout_marginStart="20dp"/>
+        android:textColor="@color/brown"
+        tools:text="TextView" />
 
     <TextView
         android:id="@+id/scoreListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:layout_weight="1"
         android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
         android:textAlignment="center"
+        android:textColor="@color/brown"
+        tools:text="9999" />
+
+    <TextView
+        android:id="@+id/hintListView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/chewy"
+        android:textAlignment="center"
+        android:textColor="@color/brown"
         tools:text="9999" />
 </LinearLayout>

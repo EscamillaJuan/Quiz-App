@@ -1,17 +1,15 @@
-package com.app
+package com.app.view
 
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import com.app.R
 import com.app.database.AppDatabase
-import com.app.view.ScoreItems
-import com.app.view.scoreAdapter
-import java.util.Objects
 
 
-class Activity5 : AppCompatActivity() {
+class ScoreRecords : AppCompatActivity() {
 
 
     private val db = AppDatabase.get(this)
@@ -21,16 +19,16 @@ class Activity5 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_5)
+        setContentView(R.layout.score_records)
         val scoreListView = findViewById<ListView>(R.id.listViewScore)
         val scoreItemDb = scoreDao.getScore()
         val size = if (scoreItemDb.size <= 20) scoreItemDb.size else 20
-        Log.v("SIZE", size.toString())
         for (j in 0..< size){
             val item = ScoreItems(
                 pos = (j + 1).toString(),
                 user = scoreItemDb[j].user,
-                score = scoreItemDb[j].score.toString()
+                score = scoreItemDb[j].score.toString(),
+                hints = scoreItemDb[j].hints.toString()
             )
             scoreItemsList.add(item)
         }

@@ -207,11 +207,6 @@ class GameScreen : AppCompatActivity() {
                     textAnsweredQuestion
                 )
 
-
-
-
-
-
                 gameModel.scoreCounter(mode)
                 if (gameModel.answeredQuestionCounter > questionQuantity - 1) {
 
@@ -232,11 +227,12 @@ class GameScreen : AppCompatActivity() {
                             )
                         )
                         delay(1000)
+
+
+
                         finish()
                         startActivity(intent)
                     }
-
-
 
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {

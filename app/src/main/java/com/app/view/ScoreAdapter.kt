@@ -22,11 +22,11 @@ class scoreAdapter(private val mContext: Context, private val scoreListView: Mut
         val scoreItem = layout.findViewById<TextView>(R.id.scoreListView)
         val userItem = layout.findViewById<TextView>(R.id.userListView)
         val posItem = layout.findViewById<TextView>(R.id.posListView)
-        //inflate(R.layout.item_layout, false)
-
+        val hintItem = layout.findViewById<TextView>(R.id.hintListView)
         scoreItem.text = scores.score
         userItem.text = scores.user
         posItem.text = scores.pos
+        hintItem.text = scores.hints
 
         return layout
     }

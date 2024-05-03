@@ -3,6 +3,7 @@ package com.app.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import android.widget.ViewFlipper
@@ -14,6 +15,7 @@ import com.app.database.entity.Score
 import com.app.model.GameModel
 import com.app.usecases.NewGame
 import com.app.usecases.ScoreScreenFragment
+import kotlin.math.max
 
 const val SCORE = "SCORE"
 const val TOTAL_ANSWERS = "TOTAL_ANSWERS"
@@ -26,19 +28,19 @@ class ScoreScreen : AppCompatActivity() {
     private lateinit var totalUsedHints: TextView
     private lateinit var totalUnusedHints: TextView
     private lateinit var totalScore: TextView
+    private lateinit var skipBtn: Button
 
     private val db = AppDatabase.get(this)
     private val scoreDao = db.scoreDao()
-    private lateinit var gameModel: GameModel
 
 
     private var score = 0
     private var correctAnswers = 0
     private var usedHints = 0
     private var unusedHints = 0
-    private var lastId = 0
-    private val fragmentManager = supportFragmentManager
-    val fragmentTransaction = fragmentManager.beginTransaction()
+    private val maxId = scoreDao.getMaxId()
+    private var lastId = if (maxId != null) maxId + 1 else 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.score_screen)
@@ -47,6 +49,7 @@ class ScoreScreen : AppCompatActivity() {
         totalUsedHints = findViewById(R.id.total_used_hints)
         totalUnusedHints = findViewById(R.id.total_unused_hints)
         totalScore = findViewById(R.id.total_score)
+        skipBtn = findViewById(R.id.skip_btn)
 
         viewFlipper.flipInterval = 2000
         viewFlipper.isAutoStart = true
@@ -62,16 +65,15 @@ class ScoreScreen : AppCompatActivity() {
         totalUsedHints.text = getString(R.string.used_hints_text, usedHints.toString())
         totalUnusedHints.text = getString(R.string.unused_hints_text, unusedHints.toString())
 
-        scoreDao.insertScore(Score(lastId, score, "AAA" , usedHints))
-
-
-        /*
-        val scoreScreenFragment = ScoreScreenFragment()
-        fragmentTransaction.add(R.id.root_layout,scoreScreenFragment)
-        fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
-        */
-
-
+        scoreDao.insertScore(Score(lastId, score, "J", usedHints))
+        skipBtn.setOnClickListener {
+            viewFlipper.stopFlipping()
+            val fragmentManager = supportFragmentManager
+            val fragmentTransaction = fragmentManager.beginTransaction()
+            val scoreScreenFragment = ScoreScreenFragment()
+            fragmentTransaction.add(R.id.root_layout, scoreScreenFragment)
+            fragmentTransaction.addToBackStack(null)
+            fragmentTransaction.commit()
+        }
     }
 }

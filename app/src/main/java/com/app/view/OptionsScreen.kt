@@ -170,6 +170,7 @@ class OptionsScreen : AppCompatActivity() {
                     option.copy(questionQty = value.toInt())
                 )
             } else {
+                if(selectedthemes ==1)questionSlider.value = 5.toFloat()
                 questionSlider.value = 5.toFloat()
                 gameOptionDao.updateGameOption(
                     option.copy(questionQty = questionSlider.value.toInt())
