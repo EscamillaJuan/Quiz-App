@@ -211,16 +211,18 @@ class GameScreen : AppCompatActivity() {
 
                 gameModel.scoreCounter(mode);
                 if (gameModel.answeredQuestionCounter > 9) {
-
+/*
                     if (scoreDao.getMaxId()==null) {
                         lastId = 0
+                        scoreDao.insertScore(Score(lastId, gameModel.totalScore, "AAA" ))
                     }
                     else {
                         lastId = scoreDao.getMaxId() + 1
+                        scoreDao.insertScore(Score(lastId, gameModel.totalScore, "AAA" ))
                     }
 
                     scoreDao.insertScore(Score(lastId, gameModel.totalScore, "AAA" ))
-
+*/
 
                 gameModel.scoreCounter(mode)
                 if (gameModel.answeredQuestionCounter > questionQuantity - 1) {
@@ -245,7 +247,7 @@ class GameScreen : AppCompatActivity() {
                         finish()
                         startActivity(intent)
                     }
-
+                }
 
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
@@ -253,6 +255,7 @@ class GameScreen : AppCompatActivity() {
                         nextBtn.performClick()
                     }
                 }
+
             }
         }
     }
