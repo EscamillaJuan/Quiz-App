@@ -18,16 +18,16 @@ class scoreAdapter(private val mContext: Context, private val scoreListView: Lis
         convertView: View?,
         parent: ViewGroup
     ): View {
-        val score = scoreListView[position]
+        val scores = scoreListView[position]
         val layout = LayoutInflater.from(mContext).inflate(R.layout.item_layout,null)
         val scoreItem = layout.findViewById<TextView>(R.id.scoreListView)
         val userItem = layout.findViewById<TextView>(R.id.userListView)
         val posItem = layout.findViewById<TextView>(R.id.posListView)
         //inflate(R.layout.item_layout, false)
 
-        scoreItem.text = score.score
-        userItem.text = score.user
-        posItem.text = score.pos
+        scoreItem.text = scores.score
+        userItem.text = scores.user
+        posItem.text = scores.pos
 
         return layout
     }

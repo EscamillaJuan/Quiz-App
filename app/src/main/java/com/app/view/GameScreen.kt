@@ -18,7 +18,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.R
 import com.app.database.AppDatabase
+import com.app.database.dao.ScoreDao
 import com.app.database.entity.GameOption
+import com.app.database.entity.Score
 import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
@@ -36,6 +38,7 @@ class GameScreen : AppCompatActivity() {
     private val db = AppDatabase.get(this)
     private val gameSessionDao = db.gameSessionDao()
     private val gameOptionDao = db.gameOptionDao()
+    private val scoreDao = db.scoreDao()
 
     private val gameService: IGameService = GameServiceImpl()
     private lateinit var rootLayout: LinearLayout
@@ -198,6 +201,8 @@ class GameScreen : AppCompatActivity() {
                 )
                 gameModel.scoreCounter(mode);
                 if (gameModel.answeredQuestionCounter > 9) {
+
+
                     val intent = Intent(this, ScoreScreen::class.java)
                     intent.putExtra(SCORE, gameModel.totalScore)
                     intent.putExtra(TOTAL_USED_HINTS, gameModel.usedHintsCounter)
@@ -209,6 +214,8 @@ class GameScreen : AppCompatActivity() {
                         finish()
                         startActivity(intent)
                     }
+                    val lastId = scoreDao.getMaxId() + 1
+                    scoreDao.insertScore(Score(lastId, gameModel.totalScore, "AAA" ))
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
                         delay(1000)
