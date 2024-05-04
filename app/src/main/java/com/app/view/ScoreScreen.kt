@@ -67,7 +67,6 @@ class ScoreScreen : AppCompatActivity() {
 
         scoreDao.insertScore(Score(lastId, score, "J", usedHints))
         skipBtn.setOnClickListener {
-            viewFlipper.stopFlipping()
             val fragmentManager = supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             val scoreScreenFragment = ScoreScreenFragment()

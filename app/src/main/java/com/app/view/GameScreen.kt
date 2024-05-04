@@ -227,17 +227,14 @@ class GameScreen : AppCompatActivity() {
                             )
                         )
                         delay(1000)
-
-
-
                         finish()
                         startActivity(intent)
                     }
 
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
-                        delay(1000)
-                        nextBtn.performClick()
+//                        delay(1000)
+//                        nextBtn.performClick()
                     }
                 }
 

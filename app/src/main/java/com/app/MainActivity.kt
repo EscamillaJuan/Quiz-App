@@ -63,17 +63,37 @@ class MainActivity : AppCompatActivity() {
         )
 
         openBtn.setOnClickListener {
-            val gameSession = db.gameSessionDao().getGameSession()
-            if (gameSession.finished) {
-                val intent = Intent(this, GameScreen::class.java)
-                startActivity(intent)
+            val gameOptionDao = db.gameOptionDao()
+            val options = gameOptionDao.getGameOption()
+            val themes = listOf(
+                options.cine,
+                options.ciencia,
+                options.musica,
+                options.arte,
+                options.historia,
+                options.tecnologia
+            )
+            val allFalse = themes.all { !it }
+            if (allFalse) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Debes seleccionar al menos 1 tema",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                val newGameFragment = NewGame()
-                fragmentTransaction.add(R.id.root_layout, newGameFragment)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+
+                val gameSession = db.gameSessionDao().getGameSession()
+                if (gameSession.finished) {
+                    val intent = Intent(this, GameScreen::class.java)
+                    startActivity(intent)
+                } else {
+                    val fragmentManager = supportFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    val newGameFragment = NewGame()
+                    fragmentTransaction.add(R.id.root_layout, newGameFragment)
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
+                }
             }
         }
 

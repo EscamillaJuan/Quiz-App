@@ -11,6 +11,7 @@ import android.widget.Spinner
 import android.widget.Switch
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import com.app.R
 import com.app.database.AppDatabase
@@ -95,10 +96,14 @@ class OptionsScreen : AppCompatActivity() {
         }
 
         checkBox[0].setOnCheckedChangeListener { _, isChecked ->
+
             val option = gameOptionDao.getGameOption()
             gameOptionDao.updateGameOption(
                 option.copy(cine = isChecked)
             )
+            if(selectedthemes == 1) {
+                questionSlider.value = 5.toFloat()
+            }
             if (isChecked) {
                 selectedthemes++
             } else {
@@ -115,6 +120,9 @@ class OptionsScreen : AppCompatActivity() {
             } else {
                 selectedthemes--
             }
+            if(selectedthemes == 1) {
+                questionSlider.value = 5.toFloat()
+            }
         }
         checkBox[2].setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
@@ -125,6 +133,9 @@ class OptionsScreen : AppCompatActivity() {
                 selectedthemes++
             } else {
                 selectedthemes--
+            }
+            if(selectedthemes == 1) {
+                questionSlider.value = 5.toFloat()
             }
         }
         checkBox[3].setOnCheckedChangeListener { _, isChecked ->
@@ -137,6 +148,9 @@ class OptionsScreen : AppCompatActivity() {
             } else {
                 selectedthemes--
             }
+            if(selectedthemes == 1) {
+                questionSlider.value = 5.toFloat()
+            }
         }
         checkBox[4].setOnCheckedChangeListener { _, isChecked ->
             val option = gameOptionDao.getGameOption()
@@ -147,6 +161,9 @@ class OptionsScreen : AppCompatActivity() {
                 selectedthemes++
             } else {
                 selectedthemes--
+            }
+            if(selectedthemes == 1) {
+                questionSlider.value = 5.toFloat()
             }
         }
         checkBox[5].setOnCheckedChangeListener { _, isChecked ->
@@ -159,6 +176,9 @@ class OptionsScreen : AppCompatActivity() {
             } else {
                 selectedthemes--
             }
+            if(selectedthemes == 1) {
+                questionSlider.value = 5.toFloat()
+            }
         }
 
         questionSlider.addOnChangeListener { _, value, _ ->
@@ -170,7 +190,9 @@ class OptionsScreen : AppCompatActivity() {
                     option.copy(questionQty = value.toInt())
                 )
             } else {
-                if(selectedthemes ==1)questionSlider.value = 5.toFloat()
+                if(selectedthemes == 1) {
+                    questionSlider.value = 5.toFloat()
+                }
                 questionSlider.value = 5.toFloat()
                 gameOptionDao.updateGameOption(
                     option.copy(questionQty = questionSlider.value.toInt())
@@ -198,6 +220,30 @@ class OptionsScreen : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
+        onBackPressedDispatcher.addCallback(this@OptionsScreen, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                val options = gameOptionDao.getGameOption()
+                val themes = listOf(
+                    options.cine,
+                    options.ciencia,
+                    options.musica,
+                    options.arte,
+                    options.historia,
+                    options.tecnologia
+                )
+                val allFalse = themes.all { !it }
+
+                if (allFalse) {
+                    Toast.makeText(
+                        this@OptionsScreen,
+                        "Debes seleccionar al menos 1 tema",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    finish()
+                }
+            }
+        })
     }
 }
 
