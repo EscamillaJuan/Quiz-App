@@ -16,6 +16,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.app.R
 import com.app.database.AppDatabase
+
+import com.app.database.dao.ScoreDao
+import com.app.database.entity.GameOption
+import com.app.database.entity.Score
+
 import com.app.model.GameModel
 import com.app.service.IGameService
 import com.app.service.implementation.GameServiceImpl
@@ -201,8 +206,10 @@ class GameScreen : AppCompatActivity() {
                     gameModel.currentQuestionOptions,
                     textAnsweredQuestion
                 )
+
                 gameModel.scoreCounter(mode)
                 if (gameModel.answeredQuestionCounter > questionQuantity - 1) {
+
                     val intent = Intent(this, ScoreScreen::class.java)
                     intent.putExtra(SCORE, gameModel.totalScore)
                     intent.putExtra(TOTAL_USED_HINTS, gameModel.usedHintsCounter)
@@ -223,12 +230,14 @@ class GameScreen : AppCompatActivity() {
                         finish()
                         startActivity(intent)
                     }
+
                 } else {
                     CoroutineScope(Dispatchers.Main).launch {
-                        delay(1000)
-                        nextBtn.performClick()
+//                        delay(1000)
+//                        nextBtn.performClick()
                     }
                 }
+
             }
         }
     }

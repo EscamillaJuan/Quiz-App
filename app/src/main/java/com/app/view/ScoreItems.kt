@@ -1,3 +1,5 @@
 package com.app.view
 
-class ScoreItems(val pos: String, val user: String, val score: String){}
+import com.app.database.entity.Score
+
+class ScoreItems(val pos: String, val user: String, val score: String, val hints: String){}

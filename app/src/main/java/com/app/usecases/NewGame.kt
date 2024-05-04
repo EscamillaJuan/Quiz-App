@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.activity.OnBackPressedCallback
 import com.app.R
 import com.app.view.GameScreen
 import com.app.view.NEW_GAME

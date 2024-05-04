@@ -1,135 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/orange"
-    android:gravity="center"
     android:orientation="vertical"
     tools:context=".view.ScoreScreen">
 
-    <ViewFlipper
-        android:id="@+id/ViewFlipper"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:ignore="UselessParent" >
-
-        <ImageView
-            android:id="@+id/trivioText_image"
-            android:layout_width="match_parent"
-            android:layout_gravity="center"
-            android:layout_height="150dp"
-            android:contentDescription="@string/trivio_logo_description"
-            android:src="@mipmap/trivio_text_image" />
-
-        <ImageView
-            android:id="@+id/final_scoreImage"
-            android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:contentDescription="@string/score_final_image_description"
-            android:src="@drawable/marcadorfinal" />
-
-        <TextView
-            android:id="@+id/total_correct_answers"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/chewy"
-            android:gravity="center"
-            android:textColor="@color/brown"
-            android:textSize="30sp"
-            tools:text="Ha respondido 5 preguntas correctamente" />
-
-
-        <TextView
-            android:id="@+id/total_used_hints"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/chewy"
-            android:gravity="center"
-            android:textColor="@color/brown"
-            android:textSize="30sp"
-            tools:text="Ha utilizado 4 pistas" />
-
-
-        <TextView
-            android:id="@+id/total_unused_hints"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/chewy"
-            android:gravity="center"
-            android:textColor="@color/brown"
-            android:textSize="30sp"
-            tools:text="Le quedaron 3 pistas" />
-
-
-        <TextView
-            android:id="@+id/total_score"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/chewy"
-            android:gravity="center"
-            android:textColor="@color/brown"
-            android:textSize="30sp"
-            tools:text="Su puntuacion es de 20 puntos" />
-
-    </ViewFlipper>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
-        android:text="Puntuaciones más altas"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
-        />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
-        android:layout_marginStart="0dp"
-        android:text="Posición"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
-       android:layout_marginStart="65dp"
-        android:textAlignment="center"
-        android:text="Usuario"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="5dp"
-        android:layout_marginStart="65dp"
-        android:text="Puntaje"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
-        />
-    </LinearLayout>
-    <ListView
-        android:id="@+id/listViewScore"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fontFamily="@font/chewy"
-        android:textColor="@color/brown"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ViewFlipper
+            android:id="@+id/ViewFlipper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="UselessParent">
+
+            <ImageView
+                android:id="@+id/trivioText_image"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:contentDescription="@string/trivio_logo_description"
+                android:src="@mipmap/trivio_text_image" />
+
+            <ImageView
+                android:id="@+id/final_scoreImage"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:contentDescription="@string/score_final_image_description"
+                android:src="@drawable/marcadorfinal" />
+
+            <TextView
+                android:id="@+id/total_correct_answers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/chewy"
+                android:gravity="center"
+                android:textColor="@color/brown"
+                android:textSize="30sp"
+                tools:text="Ha respondido 5 preguntas correctamente" />
 
 
-        />
+            <TextView
+                android:id="@+id/total_used_hints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/chewy"
+                android:gravity="center"
+                android:textColor="@color/brown"
+                android:textSize="30sp"
+                tools:text="Ha utilizado 4 pistas" />
 
-</LinearLayout>
 
+            <TextView
+                android:id="@+id/total_unused_hints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/chewy"
+                android:gravity="center"
+                android:textColor="@color/brown"
+                android:textSize="30sp"
+                tools:text="Le quedaron 3 pistas" />
+
+
+            <TextView
+                android:id="@+id/total_score"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/chewy"
+                android:gravity="center"
+                android:textColor="@color/brown"
+                android:textSize="30sp"
+                tools:text="Su puntuacion es de 20 puntos" />
+
+        </ViewFlipper>
+
+        <Button
+            android:id="@+id/skip_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="300dp"
+            android:backgroundTint="@color/brown"
+            android:drawablePadding="8dp"
+            android:fontFamily="@font/chewy"
+            android:text="Saltar" />
+    </LinearLayout>
+</FrameLayout>

@@ -26,12 +26,12 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
     private var hintUsedCounter: Int = 0
     var questionCounter = 0
         set(value) {
-            field = if(value >= 0) value else 0
+            field = if (value >= 0) value else 0
         }
     private var usedHintsPerGame: Int = 0
     var score = 0
         set(value) {
-            field = if(value >= 0) value else 0
+            field = if (value >= 0) value else 0
         }
     private var prevAnswerIsCorrect: Boolean = false
     private var currentAnswerIsCorrect: Boolean = false
@@ -216,7 +216,7 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
                             questions[currentQuestionIndex].isCorrect = true
                             prevAnswerIsCorrect = false
                             currentAnsweredWithHint = true
-                            questionCounter++
+//                            questionCounter++
                             scoreCounter(mode)
                             gameService.setUserAnswer(
                                 currentQuestionIsAnswered,
@@ -226,7 +226,7 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
                                 currentQuestionOptions,
                                 textAnsweredQuestion
                             )
-                            if (questionCounter > questionCounter - 1) optionBtn[i].performClick()
+//                            if (answeredQuestionCounter > questionCounter - 1) optionBtn[i].performClick()
                         }
                     }
                     if (hintUsedCounter > 1) Toast.makeText(
@@ -250,7 +250,7 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
                         questions[currentQuestionIndex].isCorrect = true
                         currentAnsweredWithHint = true
                         prevAnswerIsCorrect = false
-                        questionCounter++
+//                        questionCounter++
                         scoreCounter(mode)
                         gameService.setUserAnswer(
                             currentQuestionIsAnswered,
@@ -260,7 +260,7 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
                             currentQuestionOptions,
                             textAnsweredQuestion
                         )
-                        if (questionCounter > questionCounter - 1) optionBtn[i].performClick()
+//                        if (answeredQuestionCounter > questionCounter - 1) optionBtn[i].performClick()
                     } else if (hintUsedCounter > 2) {
                         Toast.makeText(context, "pista no disponible", Toast.LENGTH_SHORT).show()
                     }
@@ -280,7 +280,7 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
                         questions[currentQuestionIndex].isCorrect = true
                         currentAnsweredWithHint = true
                         prevAnswerIsCorrect = false
-                        questionCounter++
+//                        questionCounter++
                         scoreCounter(mode)
                         gameService.setUserAnswer(
                             currentQuestionIsAnswered,
@@ -290,16 +290,14 @@ class GameModel(db: AppDatabase, newGame: Boolean) : ViewModel() {
                             currentQuestionOptions,
                             textAnsweredQuestion
                         )
-                        if (questionCounter > questionCounter - 1) optionBtn[i].performClick()
+//                        if (answeredQuestionCounter > questionCounter - 1) optionBtn[i].performClick()
                     } else if (hintUsedCounter > 3) {
                         Toast.makeText(context, "Pista no disponible", Toast.LENGTH_SHORT).show()
                     }
                 }
             }
-
         }
-        // incorrectButtonIndex.clear()
-
+        if (answeredQuestionCounter > questionCounter - 1) optionBtn[0].performClick()
     }
 
     fun scoreCounter(mode: String) {

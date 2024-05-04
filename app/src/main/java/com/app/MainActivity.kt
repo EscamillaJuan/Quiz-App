@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -14,7 +13,7 @@ import com.app.database.AppDatabase
 import com.app.usecases.NewGame
 import com.app.view.GameScreen
 import com.app.view.OptionsScreen
-import com.app.view.ScoreScreen
+import com.app.view.ScoreRecords
 
 val btnColor = Color.parseColor("#624D1B")
 val btnWrong = Color.parseColor("#CC0000")
@@ -42,7 +41,7 @@ class MainActivity : AppCompatActivity() {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     if (supportFragmentManager.backStackEntryCount > 0) {
-                        return
+                        supportFragmentManager.popBackStack()
                     } else {
                         if (doubleBackToExitPressedOnce) {
                             finish()
@@ -64,17 +63,37 @@ class MainActivity : AppCompatActivity() {
         )
 
         openBtn.setOnClickListener {
-            val gameSession = db.gameSessionDao().getGameSession()
-            if (gameSession.finished) {
-                val intent = Intent(this, GameScreen::class.java)
-                startActivity(intent)
+            val gameOptionDao = db.gameOptionDao()
+            val options = gameOptionDao.getGameOption()
+            val themes = listOf(
+                options.cine,
+                options.ciencia,
+                options.musica,
+                options.arte,
+                options.historia,
+                options.tecnologia
+            )
+            val allFalse = themes.all { !it }
+            if (allFalse) {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Debes seleccionar al menos 1 tema",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                val newGameFragment = NewGame()
-                fragmentTransaction.add(R.id.root_layout, newGameFragment)
-                fragmentTransaction.addToBackStack(null)
-                fragmentTransaction.commit()
+
+                val gameSession = db.gameSessionDao().getGameSession()
+                if (gameSession.finished) {
+                    val intent = Intent(this, GameScreen::class.java)
+                    startActivity(intent)
+                } else {
+                    val fragmentManager = supportFragmentManager
+                    val fragmentTransaction = fragmentManager.beginTransaction()
+                    val newGameFragment = NewGame()
+                    fragmentTransaction.add(R.id.root_layout, newGameFragment)
+                    fragmentTransaction.addToBackStack(null)
+                    fragmentTransaction.commit()
+                }
             }
         }
 
@@ -83,7 +102,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intentionBtn)
         }
         scoreBtn.setOnClickListener {
-            val intentionBtn = Intent(this, Activity5::class.java)
+            val intentionBtn = Intent(this, ScoreRecords::class.java)
             startActivity(intentionBtn)
         }
     }
